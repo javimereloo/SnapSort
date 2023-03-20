@@ -26,7 +26,7 @@ fastify.register(require("@fastify/view"), {
 fastify.get("/", function (request, reply) {
   // params is an object we'll pass to our handlebars template
   let params = {
-    greeting: "Hello Node!",
+    greeting: "Hello There!",
   };
   // request.query.paramName <-- a querystring example
   return reply.view("/src/pages/index.hbs", params);
