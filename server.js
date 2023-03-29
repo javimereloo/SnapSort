@@ -41,6 +41,27 @@ fastify.post("/", function (request, reply) {
   return reply.view("/src/pages/index.hbs", params);
 });
 
+//PRobando
+// Our main GET home page route, pulls from src/pages/index.hbs
+fastify.get("/try", function (request, reply) {
+  // params is an object we'll pass to our handlebars template
+  let params = {
+    content: "Aqui estás con GET!",
+  };
+  // request.query.paramName <-- a querystring example
+  return reply.view("/src/pages/try.hbs", params);
+});
+
+// A POST route to handle form submissions
+fastify.post("/try", function (request, reply) {
+  let params = {
+    content: "Aqui estás con post!",
+  };
+  // request.body.paramName <-- a form post example
+  return reply.view("/src/pages/try.hbs", params);
+});
+
+
 // Run the server and report out to the logs
 fastify.listen(
   { port: process.env.PORT, host: "0.0.0.0" },
