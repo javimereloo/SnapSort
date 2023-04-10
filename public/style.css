@@ -26,7 +26,8 @@ body {
 /*Text of the main page for unidentificated users  */
 .titles{
 /*   color: #fec39eff; */
-  color: white;
+  font-family: system-ui;
+  color: grey;
   font-weight: bold;
 }
 
