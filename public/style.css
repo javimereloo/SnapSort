@@ -4,6 +4,10 @@
 html {
   box-sizing: border-box;
   font-size: 16px;
+  background:url("images/your_image.jpg");      // Your Image URL
+  min-height : 100%;
+  min-width : 100%;
+  background-size:100% 100%;
 }
 
 *, *:before, *:after {
