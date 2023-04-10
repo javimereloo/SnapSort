@@ -26,7 +26,8 @@ fastify.register(require("@fastify/view"), {
 fastify.get("/", function (request, reply) {
   // params is an object we'll pass to our handlebars template
   let params = {
-    greeting: "Hello There!",
+    title: "Bienvenido a SnapSort",
+    subtitle: "Regístrate para visualizar tus imágenes de manera sorprendente"
   };
   // request.query.paramName <-- a querystring example
   return reply.view("/src/pages/index.hbs", params);
@@ -35,34 +36,12 @@ fastify.get("/", function (request, reply) {
 // A POST route to handle form submissions
 fastify.post("/", function (request, reply) {
   let params = {
-    greeting: "Hello Form!",
+    title: "Bienvenido a SnapSort",
+    subtitle: "Regístrate para visualizar tus imágenes de manera sorprendente"
   };
   // request.body.paramName <-- a form post example
   return reply.view("/src/pages/index.hbs", params);
 });
-
-//PRobando
-// Our main GET home page route, pulls from src/pages/index.hbs
-fastify.get("/try", function (request, reply) {
-  // params is an object we'll pass to our handlebars template
-  let params = {
-    title: "Bienvenido a SnapSort",
-    subtitle: "Regístrate para visualizar tus imágenes de manera sorprendente"
-  };
-  // request.query.paramName <-- a querystring example
-  return reply.view("/src/pages/try.hbs", params);
-});
-
-// A POST route to handle form submissions
-fastify.post("/try", function (request, reply) {
-  let params = {
-    title: "Bienvenido a SnapSort",
-    subtitle: "Regístrate para visualizar tus imágenes de manera sorprendente"
-  };
-  // request.body.paramName <-- a form post example
-  return reply.view("/src/pages/try.hbs", params);
-});
-
 
 // Run the server and report out to the logs
 fastify.listen(
