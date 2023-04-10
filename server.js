@@ -27,7 +27,7 @@ fastify.get("/", function (request, reply) {
   // params is an object we'll pass to our handlebars template
   let params = {
     title: "Bienvenido",
-    subtitle: "Regístrate para visualizar tus imágenes de manera sorprendente"
+    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes"
   };
   // request.query.paramName <-- a querystring example
   return reply.view("/src/pages/index.hbs", params);
@@ -37,7 +37,7 @@ fastify.get("/", function (request, reply) {
 fastify.post("/", function (request, reply) {
   let params = {
     title: "Bienvenido",
-    subtitle: "Regístrate para visualizar tus imágenes de manera sorprendente"
+    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes"
   };
   // request.body.paramName <-- a form post example
   return reply.view("/src/pages/index.hbs", params);
