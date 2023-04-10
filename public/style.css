@@ -27,9 +27,10 @@ body {
 .titles{
 /*   color: #fec39eff; */
   font-family: system-ui;
-  color: grey;
+  color: white;
   font-weight: bold;
 }
+
 
 /* images and videos max out at full width */
 .bgimg{
