@@ -24,7 +24,6 @@ fastify.register(require("@fastify/view"), {
 
 // Our main GET home page route, pulls from src/pages/index.hbs
 fastify.get("/", function (request, reply) {
-  // params is an object we'll pass to our handlebars template
   let params = {
     title: "Bienvenido",
     subtitle: "Regístrate o inicia sesión para visualizar tus imágenes"
