@@ -46,7 +46,8 @@ fastify.post("/", function (request, reply) {
 fastify.get("/try", function (request, reply) {
   // params is an object we'll pass to our handlebars template
   let params = {
-    content: "Aqui estás con GET!",
+    title: "Bienvenido a SnapSort",
+    subtitle: "Regístrate para visualizar tus imágenes de manera sorprendente"
   };
   // request.query.paramName <-- a querystring example
   return reply.view("/src/pages/try.hbs", params);
@@ -55,7 +56,8 @@ fastify.get("/try", function (request, reply) {
 // A POST route to handle form submissions
 fastify.post("/try", function (request, reply) {
   let params = {
-    content: "Aqui estás con post!",
+    title: "Bienvenido a SnapSort",
+    subtitle: "Regístrate para visualizar tus imágenes de manera sorprendente"
   };
   // request.body.paramName <-- a form post example
   return reply.view("/src/pages/try.hbs", params);
