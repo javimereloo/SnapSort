@@ -7,5 +7,11 @@ const userSchema = new Schema(
     user_name: String,
     mail: String,
     password: String
+  },
+  {
+    timestamps:true,
+    versionkey:false,
   }
 );
+
+module.exports = model('User', userSchema);
