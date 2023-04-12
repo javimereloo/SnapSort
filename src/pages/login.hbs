@@ -29,50 +29,38 @@
      
 
     <div
-      class="container h-100 m-0 d-flex flex-column align-items-center justify-content-center "
+      class="container h-100  d-flex flex-column align-items-center justify-content-center "
     >
-      <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="/">
-          <img
+
+      <div class="rounded  col-4  bg-light card p-4" style="--bs-bg-opacity: .9;">
+        <div class="card-body ">
+          <a href="/">
+          <img 
             src="https://cdn.glitch.global/9a5417db-bb1a-4800-b72a-a85bd7bcfce3/SnapSort3.png?v=1681311768618"
             width="100rem"
-            alt=""
+            class="aling-self-center"
           />
-        </a>
-      </nav>
-      <div class="rounded  col-6  bg-light card p-4" style="--bs-bg-opacity: .9;">
-        <div class="card-body ">
+          </a>
           <h1> Inicia sesión </h1>
           <form>
             <div class="form-outline mb-4">
               <input
-                type="email"
-                id="form2Example1"
+                type="text"
+                id="usernameInput"
                 class="form-control"
-                placeholder="username"
+                placeholder="Username"
               />
-
             </div>
 
             <div class="form-outline mb-4">
               <input
                 type="password"
-                id="form2Example2"
+                id="passwordInput"
                 class="form-control"
-                placeholder="password"
+                placeholder="Password"
               />
             </div>
-
-            <div class="row mb-4">
-
-              <div class="col">
-                <!-- Simple link -->
-                <a href="#!">Forgot password?</a>
-              </div>
-            </div>
-
-            <!-- Submit button -->
-            <button type="button" class="btn btn-dark btn-block mb-4">Sign in</button>
+            <button type="button" class="btn btn-dark col-4 btn-block mb-2">Sign in</button>
           </form>
         </div>
       </div>
