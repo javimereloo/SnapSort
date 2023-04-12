@@ -22,34 +22,6 @@ fastify.register(require("@fastify/view"), {
   },
 });
 
-// Fastify plugin for jwt
-const fp = require("fastify-plugin")
-module.exports = fp(async function(fastify, opts) {
-  fastify.register(require("@fastify/jwt"), {
-    secret: "supersecret"
-  })
-
-  fastify.decorate("authenticate", async function(request, reply) {
-    try {
-      await request.jwtVerify()
-    } catch (err) {
-      reply.send(err)
-    }
-  })
-})
-
-
-module.exports = async function(fastify, opts) {
-  fastify.get("/p", {
-      onRequest: [fastify.authenticate]
-    },
-    async function(request, reply) {
-      let contador = 45
-      return request.user
-      return reply.view("/src/pages/login.hbs", contador)
-    }
-  )
-}
 
 // Our main GET home page route, pulls from src/pages/index.hbs
 fastify.get("/", function (request, reply) {
