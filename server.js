@@ -28,6 +28,7 @@ fastify.get("/", function (request, reply) {
   let params = {
     title: "Bienvenido",
     subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
+  
   };
   // request.query.paramName <-- a querystring example
   return reply.view("/src/pages/index.hbs", params);
@@ -42,7 +43,6 @@ fastify.post("/", function (request, reply) {
   // request.body.paramName <-- a form post example
   return reply.view("/src/pages/index.hbs", params);
 });
-
 
 
 // Run the server and report out to the logs
