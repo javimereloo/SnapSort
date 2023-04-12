@@ -28,11 +28,33 @@
     <div
       class="container h-100 d-flex align-items-center justify-content-center"
     >
-      <div class="rounded bg-secondary card" style="--bs-bg-opacity: .7;">
+      <div class="rounded bg-light card p-4" style="--bs-bg-opacity: .9;">
         <div
           class="card-body d-flex p-2 flex-column align-items-center justify-content-center"
         >
-          <h1> has iniciado sesión {{contador}} </h1>
+          <h1> Inicia sesión </h1>
+          <form>
+            <div class="form-outline mb-4">
+              <input type="email" id="form2Example1" class="form-control" />
+              <label class="form-label" for="form2Example1">Email address</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="password" id="form2Example2" class="form-control" />
+              <label class="form-label" for="form2Example2">Password</label>
+            </div>
+
+            <div class="row mb-4">
+
+              <div class="col">
+                <!-- Simple link -->
+                <a href="#!">Forgot password?</a>
+              </div>
+            </div>
+
+            <!-- Submit button -->
+            <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+          </form>
         </div>
       </div>
 

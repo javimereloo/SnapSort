@@ -45,6 +45,26 @@ fastify.post("/", function (request, reply) {
 });
 
 
+fastify.get("/login", function (request, reply) {
+  let params = {
+    title: "Bienvenido",
+    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
+  
+  };
+  // request.query.paramName <-- a querystring example
+  return reply.view("/src/pages/login.hbs", params);
+});
+
+fastify.get("/signup", function (request, reply) {
+  let params = {
+    title: "Bienvenido",
+    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
+  
+  };
+  // request.query.paramName <-- a querystring example
+  return reply.view("/src/pages/register.hbs", params);
+});
+
 // Run the server and report out to the logs
 fastify.listen(
   { port: process.env.PORT, host: "0.0.0.0" },
