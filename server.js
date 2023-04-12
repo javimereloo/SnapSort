@@ -12,7 +12,6 @@ fastify.register(require("@fastify/static"), {
   prefix: "/", // optional: default '/'
 });
 
-
 // fastify-formbody lets us parse incoming forms
 fastify.register(require("@fastify/formbody"));
 
@@ -23,16 +22,16 @@ fastify.register(require("@fastify/view"), {
   },
 });
 
-// Allow us use JWT 
-fastify.register(require('@fastify/jwt'), {
-  secret: 'saliddeprisaaunanuevatierra'
-})
+// Allow us use JWT
+fastify.register(require("@fastify/jwt"), {
+  secret: "saliddeprisaaunanuevatierra",
+});
 
 // Our main GET home page route, pulls from src/pages/index.hbs
 fastify.get("/", function (request, reply) {
   let params = {
     title: "Bienvenido",
-    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes"
+    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
   };
   // request.query.paramName <-- a querystring example
   return reply.view("/src/pages/index.hbs", params);
@@ -42,7 +41,7 @@ fastify.get("/", function (request, reply) {
 fastify.post("/", function (request, reply) {
   let params = {
     title: "Bienvenido",
-    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes"
+    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
   };
   // request.body.paramName <-- a form post example
   return reply.view("/src/pages/index.hbs", params);
@@ -50,22 +49,26 @@ fastify.post("/", function (request, reply) {
 
 // A POST route that uses JWT
 fastify.post("/login", async (request, reply) => {
-  const {username, password} = request.body
-  const contador = 45
-  
-  if (username === 'usuario' && password === 'contraseña') {
-    const token = await fastify.jwt.sign({ username })
+  const { username, password } = request.body;
 
-    reply.send({ token })
+  if (username === "usuario" && password === "contraseña") {
+    const token = await fastify.jwt.sign({ username });
+
+    reply.send({ token });
   } else {
-    reply.status(401).send({ error: 'Credenciales inválidas' })
+    reply.status(401).send({ error: "Credenciales inválidas" });
   }
-   
 });
 
-fastify.get('/protegido', {
-            prevalidation: fastify.auth([fastify.jwt.verify])
-            }, (reque))
+fastify.get( "/protegido",  {
+    prevalidation: fastify.auth([fastify.jwt.verify]),
+  },
+  (request, reply) => {
+    const { username } = request.user;
+    const contador = 45;
+    return reply.view("/src/pages/login.hbs", contador);
+  }
+);
 
 // Run the server and report out to the logs
 fastify.listen(
