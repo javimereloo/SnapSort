@@ -72,14 +72,18 @@ fastify.get("/signup", function (request, reply) {
 const fastifySession = require('@fastify/session');
 const fastifyCookie = require('@fastify/cookie');
 
-// const app = fastify();
-// app.register(fastifyCookie);
-// app.register(fastifySession, {secret: 'a secret with minimum length of 32 characters'});
 
-// app.addHook('preHandler', (request, reply, next) => {
-//   request.session.user = {name: 'max'};
-//   next();
-// })
+fastify.register(fastifyCookie);
+fastify.register(fastifySession, {
+  secret: 'a secret with minimum length of 32 characters',
+  cookieName: "sessionId",
+  secure: false
+});
+
+fastify.addHook('preHandler', (request, reply, next) => {
+  request.session.user = {name: 'max'}
+  next()
+})
 
 
 
