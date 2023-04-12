@@ -12,6 +12,7 @@ fastify.register(require("@fastify/static"), {
   prefix: "/", // optional: default '/'
 });
 
+
 // fastify-formbody lets us parse incoming forms
 fastify.register(require("@fastify/formbody"));
 
@@ -21,6 +22,11 @@ fastify.register(require("@fastify/view"), {
     handlebars: require("handlebars"),
   },
 });
+
+// Allow us use JWT 
+fastify.register(require('@fastify/jwt'), {
+  secret: 'saliddeprisaaunanuevatierra'
+})
 
 // Our main GET home page route, pulls from src/pages/index.hbs
 fastify.get("/", function (request, reply) {
@@ -41,6 +47,17 @@ fastify.post("/", function (request, reply) {
   // request.body.paramName <-- a form post example
   return reply.view("/src/pages/index.hbs", params);
 });
+
+// A POST route to handle form submissions
+fastify.post("/login", async (request, reply) {
+  let params = {
+    title: "Bienvenido",
+    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes"
+  };
+  // request.body.paramName <-- a form post example
+  return reply.view("/src/pages/index.hbs", params);
+});
+
 
 // Run the server and report out to the logs
 fastify.listen(
