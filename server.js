@@ -45,15 +45,15 @@ fastify.post("/", function (request, reply) {
 });
 
 
-fastify.get("/login", function (request, reply) {
-  let params = {
-    title: "Bienvenido",
-    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
+// fastify.get("/login", function (request, reply) {
+//   let params = {
+//     title: "Bienvenido",
+//     subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
   
-  };
-  // request.query.paramName <-- a querystring example
-  return reply.view("/src/pages/login.hbs", params);
-});
+//   };
+//   // request.query.paramName <-- a querystring example
+//   return reply.view("/src/pages/login.hbs", params);
+// });
 
 fastify.get("/signup", function (request, reply) {
   let params = {
@@ -68,46 +68,20 @@ fastify.get("/signup", function (request, reply) {
 
 
 
-const fastifySession = require('fastify-session')
 
-fastify.register(fastifySession, {
-  secret: 'my-secret-key', // Cambiar por una clave segura
-  cookie: {
-    secure: true, // Cambiar a true si se usa HTTPS
-    maxAge: 7200000 // Tiempo de expiración de la cookie
-  }
-})
+const fastifySession = require('@fastify/session');
+const fastifyCookie = require('@fastify/cookie');
+
+// const app = fastify();
+// app.register(fastifyCookie);
+// app.register(fastifySession, {secret: 'a secret with minimum length of 32 characters'});
+
+// app.addHook('preHandler', (request, reply, next) => {
+//   request.session.user = {name: 'max'};
+//   next();
+// })
 
 
-fastify.get('/login', (req, reply) => {
-  // Autenticar al usuario
-  const user = authenticateUser(req.body.username, req.body.password)
-
-  if (user) {
-    // Establecer la información de sesión para el usuario
-    req.session.user = user
-    reply.send({ message: 'Inicio de sesión exitoso' })
-  } else {
-    reply.status(401).send({ message: 'Credenciales inválidas' })
-  }
-})
-
-fastify.get('/perfil', (req, reply) => {
-  // Comprobar si el usuario está autenticado
-  if (req.session.user) {
-    return reply.view("/src/pages/main.hbs");
-  } else {
-    // Redirigir al usuario a la página de inicio de sesión
-    reply.redirect('/login')
-  }
-})
-
-function authenticateUser(username, password) {
-  // Autenticar al usuario con las credenciales proporcionadas
-  // Devolver el usuario si las credenciales son válidas, null si no lo son
-  const user = ["admin", "1234"]
-  return user
-}
 
 
 
