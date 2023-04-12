@@ -22,10 +22,34 @@ fastify.register(require("@fastify/view"), {
   },
 });
 
-// Allow us use JWT
-fastify.register(require("@fastify/jwt"), {
-  secret: "saliddeprisaaunanuevatierra",
-});
+// Fastify plugin for jwt
+const fp = require("fastify-plugin")
+module.exports = fp(async function(fastify, opts) {
+  fastify.register(require("@fastify/jwt"), {
+    secret: "supersecret"
+  })
+
+  fastify.decorate("authenticate", async function(request, reply) {
+    try {
+      await request.jwtVerify()
+    } catch (err) {
+      reply.send(err)
+    }
+  })
+})
+
+
+module.exports = async function(fastify, opts) {
+  fastify.get("/p", {
+      onRequest: [fastify.authenticate]
+    },
+    async function(request, reply) {
+      let contador = 45
+      return request.user
+      return reply.view("/src/pages/login.hbs", contador)
+    }
+  )
+}
 
 // Our main GET home page route, pulls from src/pages/index.hbs
 fastify.get("/", function (request, reply) {
@@ -47,28 +71,12 @@ fastify.post("/", function (request, reply) {
   return reply.view("/src/pages/index.hbs", params);
 });
 
-// A POST route that uses JWT
-fastify.post("/login", async (request, reply) => {
-  const { username, password } = request.body;
 
-  if (username === "usuario" && password === "contraseña") {
-    const token = await fastify.jwt.sign({ username });
 
-    reply.send({ token });
-  } else {
-    reply.status(401).send({ error: "Credenciales inválidas" });
-  }
-});
 
-fastify.get( "/protegido",  {
-    prevalidation: fastify.auth([fastify.jwt.verify]),
-  },
-  (request, reply) => {
-    const { username } = request.user;
-    const contador = 45;
-    return reply.view("/src/pages/login.hbs", contador);
-  }
-);
+
+
+
 
 // Run the server and report out to the logs
 fastify.listen(
