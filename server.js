@@ -77,13 +77,10 @@ fastify.register(fastifyCookie);
 fastify.register(fastifySession, {
   secret: 'a secret with minimum length of 32 characters',
   cookieName: "sessionId",
-  secure: false
+  secure: false,
+  saveUninitialized: true,
 });
 
-fastify.addHook('preHandler', (request, reply, next) => {
-  request.session.user = {name: 'max'}
-  next()
-})
 
 
 
