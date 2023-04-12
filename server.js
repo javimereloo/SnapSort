@@ -45,42 +45,48 @@ fastify.post("/", function (request, reply) {
 });
 
 
-// fastify.get("/login", function (request, reply) {
-//   let params = {
-//     title: "Bienvenido",
-//     subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
-  
-//   };
-//   // request.query.paramName <-- a querystring example
-//   return reply.view("/src/pages/login.hbs", params);
-// });
+//Route to acccess register view
+fastify.route({
+  method:'GET',
+  url:'/signup',
+  preHandler: (request, reply, done) => {
+    // Comprobar si el usuario está autenticado
+    if (!request.session.user) {
+      // Devolver un error si el usuario no está autenticado
+      return reply.redirect("/")
 
-fastify.get("/signup", function (request, reply) {
-  let params = {
-    title: "Bienvenido",
-    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
-  
-  };
-  // request.query.paramName <-- a querystring example
-  return reply.view("/src/pages/register.hbs", params);
-});
-
-
-
+    }
+    console.log(request.session.user)
+    // Continuar con la solicitud si el usuario está autenticado
+    done()
+  },
+  handler: (req, reply) => {
+    // Manejar la solicitud del perfil del usuario
+    return reply.view("/src/pages/register.hbs");
+  }
+})
 
 
+
+
+//THING TO DO SEESSION identification
 const fastifySession = require('@fastify/session');
 const fastifyCookie = require('@fastify/cookie');
-
-
 fastify.register(fastifyCookie);
 fastify.register(fastifySession, {
   secret: 'a secret with minimum length of 32 characters',
   cookieName: "sessionId",
-  secure: false,
+  cookie: {
+    secure: true, 
+    maxAge: 7200000 // Tiempo de expiración de la cookie
+  },
   saveUninitialized: true,
-});
-
+})
+// //Hook that assigns a session user name
+// fastify.addHook('preHandler', (request, reply, next) => {
+//   request.session.user = {name: 'max'}; //TODO AQUI TIENE QUE ASIGNAR sessionID NO?
+//   next();
+// })
 
 
 
