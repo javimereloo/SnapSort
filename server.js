@@ -45,28 +45,6 @@ fastify.post("/", function (request, reply) {
 
 
 
-const AutoLoad = require('fastify-autoload')
-module.exports = async function (fastify, opts) {
-  // This loads all plugins defined in plugins
-  // those should be support plugins that are reused
-  // through your application
-  fastify.register(AutoLoad, {
-    dir: path.join(__dirname, '/src/plugins'),
-    options: Object.assign({}, opts)
-  })
-
-  // This loads all plugins defined in routes
-  // define your routes in one of these
-  fastify.register(AutoLoad, {
-    dir: path.join(__dirname, 'routes'),
-    options: Object.assign({}, opts)
-  })
-}
-
-
-
-
-
 // Run the server and report out to the logs
 fastify.listen(
   { port: process.env.PORT, host: "0.0.0.0" },
