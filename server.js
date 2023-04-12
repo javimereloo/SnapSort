@@ -48,14 +48,25 @@ fastify.post("/", function (request, reply) {
   return reply.view("/src/pages/index.hbs", params);
 });
 
-// A POST route to handle form submissions
-fastify.post("/login", async (request, reply) {
+// A get route that uses JWT
+fastify.get("/login", async (request, reply) => {
+  const {username, password} = request.body
+  
+  if (username === 'usuario' && password === 'contraseña') {
+    const token = await fastify.jwt.sign({ username })
+
+    reply.send({ token })
+  } else {
+    reply.status(401).send({ error: 'Credenciales inválidas' })
+  }
+  
   let params = {
     title: "Bienvenido",
-    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes"
+    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
+    contador: 45
   };
-  // request.body.paramName <-- a form post example
-  return reply.view("/src/pages/index.hbs", params);
+  
+  return reply.view("/src/pages/login.hbs", params);
 });
 
 
