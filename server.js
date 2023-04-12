@@ -48,9 +48,10 @@ fastify.post("/", function (request, reply) {
   return reply.view("/src/pages/index.hbs", params);
 });
 
-// A get route that uses JWT
-fastify.get("/login", async (request, reply) => {
+// A POST route that uses JWT
+fastify.post("/login", async (request, reply) => {
   const {username, password} = request.body
+  const contador = 45
   
   if (username === 'usuario' && password === 'contraseña') {
     const token = await fastify.jwt.sign({ username })
@@ -59,16 +60,12 @@ fastify.get("/login", async (request, reply) => {
   } else {
     reply.status(401).send({ error: 'Credenciales inválidas' })
   }
-  
-  let params = {
-    title: "Bienvenido",
-    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
-    contador: 45
-  };
-  
-  return reply.view("/src/pages/login.hbs", params);
+   
 });
 
+fastify.get('/protegido', {
+            prevalidation: fastify.auth([fastify.jwt.verify])
+            }, (reque))
 
 // Run the server and report out to the logs
 fastify.listen(
