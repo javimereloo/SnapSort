@@ -65,6 +65,53 @@ fastify.get("/signup", function (request, reply) {
   return reply.view("/src/pages/register.hbs", params);
 });
 
+
+
+
+const fastifySession = require('fastify-session')
+
+fastify.register(fastifySession, {
+  secret: 'my-secret-key', // Cambiar por una clave segura
+  cookie: {
+    secure: true, // Cambiar a true si se usa HTTPS
+    maxAge: 7200000 // Tiempo de expiración de la cookie
+  }
+})
+
+
+fastify.get('/login', (req, reply) => {
+  // Autenticar al usuario
+  const user = authenticateUser(req.body.username, req.body.password)
+
+  if (user) {
+    // Establecer la información de sesión para el usuario
+    req.session.user = user
+    reply.send({ message: 'Inicio de sesión exitoso' })
+  } else {
+    reply.status(401).send({ message: 'Credenciales inválidas' })
+  }
+})
+
+fastify.get('/perfil', (req, reply) => {
+  // Comprobar si el usuario está autenticado
+  if (req.session.user) {
+    return reply.view("/src/pages/main.hbs");
+  } else {
+    // Redirigir al usuario a la página de inicio de sesión
+    reply.redirect('/login')
+  }
+})
+
+function authenticateUser(username, password) {
+  // Autenticar al usuario con las credenciales proporcionadas
+  // Devolver el usuario si las credenciales son válidas, null si no lo son
+  const user = ["admin", "1234"]
+  return user
+}
+
+
+
+
 // Run the server and report out to the logs
 fastify.listen(
   { port: process.env.PORT, host: "0.0.0.0" },
