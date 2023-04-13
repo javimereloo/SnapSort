@@ -1,14 +1,17 @@
 const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
 
-// Crear una nueva base de datos en memoria
-let db = new sqlite3.Database(':memory:', (err) => {
+const dbPath = path.join(__dirname, 'sqlite3', 'SNAPSORT.sqlite');
+
+// Create a new database 
+let db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error(err.message);
   }
   console.log('Conectado a la base de datos SQLite.');
 });
 
-// Crear una tabla en la base de datos
+// Create a table for user information 
 db.run(`CREATE TABLE usuarios (
           id INTEGER PRIMARY KEY AUTOINCREMENT, 
           name TEXT, 
