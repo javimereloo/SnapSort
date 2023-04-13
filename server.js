@@ -24,7 +24,7 @@ fastify.register(require("@fastify/view"), {
 
 fastify.register(require('./src/routes/index.route.js'))
 fastify.register(require('./src/routes/login.route.js'))
-
+fastify.register(require('./src/routes/main.route.js'))
 
 //Route to acccess register view
 fastify.route({
@@ -37,7 +37,7 @@ fastify.route({
     }
      reply.session.destroy()
   },
-  handler: (req, reply) => {
+  handler: (request, reply) => {
     // Manejar la solicitud del perfil del usuario
     return reply.view("/");
   },
@@ -66,22 +66,7 @@ fastify.route({
   },
 });
 
-fastify.route({
-  method: "GET",
-  url: "/p",
-  preHandler: (request, reply, done) => {
-    // Comprobar si el usuario está autenticado
-    if (!request.session.user) {
-      // Devolver un error si el usuario no está autenticado
-      return done(new Error("No se ha iniciado sesión"));
-    }
-    // Continuar con la solicitud si el usuario está autenticado
-    done();
-  },
-  handler: (request, reply) => {
-    return reply.view("/src/pages/main.hbs");
-  },
-});
+
 
 //THINGs TO DO SEESSION identification
 const fastifySession = require("@fastify/session");
@@ -96,12 +81,7 @@ fastify.register(fastifySession, {
   },
   saveUninitialized: true,
 });
-fastify.addHook('preHandler', (request, _reply, next) => {
-  if (!request.session.sessionData) {
-    request.session.sessionData = { userId: String, name: String, email: String, password: String, loggedOn: Date }
-  }
-  next()
-})
+
 
 
 // Run the server and report out to the logs
