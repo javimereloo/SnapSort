@@ -9,7 +9,12 @@ let db = new sqlite3.Database(':memory:', (err) => {
 });
 
 // Crear una tabla en la base de datos
-db.run('CREATE TABLE usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, email TEXT, password TEXT)', (err) => {
+db.run(`CREATE TABLE usuarios (
+          id INTEGER PRIMARY KEY AUTOINCREMENT, 
+          name TEXT, 
+          email TEXT UNIQUE, 
+          password TEXT)`
+       , (err) => {
   if (err) {
     console.error(err.message);
   }
@@ -25,3 +30,5 @@ process.on('exit', () => {
     console.log('Conexión a la base de datos cerrada.');
   });
 });
+
+module.exports = db;
