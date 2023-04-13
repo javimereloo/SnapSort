@@ -6,8 +6,6 @@ module.exports = async function (fastify, opts) {
       // Comprobar si el usuario está autenticado
       if (!request.session.user) {
         // Devolver un error si el usuario no está autenticado
-        console.log("request.session.user MAIN: ")
-        console.log(request.session.user )
         return done(new Error("No se ha iniciado sesión"));
       }
       // Continuar con la solicitud si el usuario está autenticado

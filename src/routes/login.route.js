@@ -7,6 +7,7 @@ module.exports = async function (fastify, opts) {
       // Comprobar si el usuario está autenticado
       if (request.session.user) {
         // Devolver un error si el usuario no está autenticado
+        console.log(`Ya se ha iniciado sesión con ${}`)
         return done(new Error("Ya se ha iniciado sesión"));
       }
       // Continuar con la solicitud si el usuario está autenticado
@@ -36,8 +37,6 @@ module.exports = async function (fastify, opts) {
         password: request.body.password,
       };
       request.session.user = user;
-      console.log("request.session.user LOGIN: ")
-      console.log(request.session.user)
       return reply.redirect("/p", user);
     },
   });

@@ -37,7 +37,7 @@ fastify.route({
     if (!request.session.user) {
       return reply.redirect("/");
     }
-     reply.session.destroy()
+     request.session.destroy()
   },
   handler: (request, reply) => {
     // Manejar la solicitud del perfil del usuario
@@ -54,7 +54,7 @@ fastify.register(fastifySession, {
   secret: process.env.SECRET_KEY,
   cookieName: "sessionId",
   cookie: {
-    secure: true,
+    secure: false,
     maxAge: 7200000, // Tiempo de expiración de la cookie
   },
   saveUninitialized: true,
