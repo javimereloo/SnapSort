@@ -1,6 +1,6 @@
 //METHODS TO ACCESS THE DB 
 const sqlite3 = require('sqlite3').verbose()
-
+const bcrypt = require('bcrypt')
 const db = require('./db.config.js')
 
 //Get user info from ID
@@ -17,8 +17,19 @@ function getUserById(id, callback) {
 }
 
 
+//Insert a new user
+function insertUser(name, email, password){
+  
+}
+
+
+//cryptographic methods
+function crypt(){
+  
+}
+
+
 //Export the API OPERATIONS
 module.exports = {
   getUserById: getUserById,
-  
 };
