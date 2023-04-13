@@ -27,23 +27,7 @@ fastify.register(require('./src/routes/index.route.js'))
 fastify.register(require('./src/routes/login.route.js'))
 fastify.register(require('./src/routes/main.route.js'))
 fastify.register(require('./src/routes/signup.route.js'))
-
-//Route to logout a user
-fastify.route({
-  method: "GET",
-  url: "/logout",
-  preHandler: (request, reply, done) => {
-    // Comprobar si el usuario está autenticado
-    if (!request.session.user) {
-      return reply.redirect("/");
-    }
-     request.session.destroy()
-  },
-  handler: (request, reply) => {
-    // Manejar la solicitud del perfil del usuario
-    return reply.redirect("/");
-  },
-});
+fastify.register(require('./src/routes/logout.route.js'))
 
 
 //THINGs TO DO SEESSION identification
@@ -59,7 +43,6 @@ fastify.register(fastifySession, {
   },
   saveUninitialized: true,
 });
-
 
 
 // Run the server and report out to the logs
