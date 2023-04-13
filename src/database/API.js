@@ -34,6 +34,7 @@ function insertUser(name, email, password) {
 //Export the API OPERATIONS
 module.exports = {
   getUserById: getUserById,
+  insertUser: insertUser
 };
 
 //-------------------------Auxiliar cryptographic methods-----------------------
