@@ -28,22 +28,17 @@ function insertUser(name, email, password) {
         console.log(`Se ha insertado ${this.changes} fila`);
       }
     }
-  )
+  );
 }
-
-
 
 //Export the API OPERATIONS
 module.exports = {
   getUserById: getUserById,
 };
 
-
-
-
 //-------------------------Auxiliar cryptographic methods-----------------------
-//Function thats returns the hash of a password
-function crypt(password) {
+//Function that returns the hash of a password
+function cryptPassword(password) {
   bcrypt.hash(password, 10, function (err, hash) {
     if (err) {
       console.error(err.message);
@@ -53,4 +48,36 @@ function crypt(password) {
       return hash;
     }
   });
+}
+
+//Function that compares the password and his string
+function comparePassword(email, password) {
+  const storedHash = getHash(email);
+  bcrypt.compare(password, storedHash, function (err, result) {
+    if (err) {
+      console.error(err.message);
+    } else if (result) {
+      console.log("La contraseña es correcta");
+    } else {
+      console.log("La contraseña es incorrecta");
+    }
+  });
+}
+
+function getHash(email) {
+  //get the stored hash
+  const storedHash = db.get(
+    "SELECT password FROM users WHERE email = ?",
+    [email],
+    function (err, row) {
+      if (err) {
+        console.log("Error getting password");
+      } else if (!row) {
+        console.log("Can´t find this email account");
+        return null;
+      } else {
+        return storedHash;
+      }
+    }
+  );
 }
