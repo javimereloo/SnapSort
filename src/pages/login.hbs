@@ -26,22 +26,20 @@
   </head>
   <body>
 
-     
-
     <div
-      class="container h-100  d-flex flex-column align-items-center justify-content-center "
+      class="container h-100 d-flex flex-column align-items-center justify-content-center"
     >
-      <div class="rounded  col-4  bg-light card p-4" style="--bs-bg-opacity: .9;">
-        <div class="card-body ">
+      <div class="rounded col-4 bg-light card p-4" style="--bs-bg-opacity: .9;">
+        <div class="card-body">
           <a href="/">
-          <img 
-            src="https://cdn.glitch.global/9a5417db-bb1a-4800-b72a-a85bd7bcfce3/SnapSort3.png?v=1681311768618"
-            width="100rem"
-            class="aling-self-center"
-          />
+            <img
+              src="https://cdn.glitch.global/9a5417db-bb1a-4800-b72a-a85bd7bcfce3/SnapSort3.png?v=1681311768618"
+              width="100rem"
+              class="aling-self-center"
+            />
           </a>
           <h1 class="py-2"> Inicia sesión </h1>
-          <form method="POST" action="/login" enctype="multipart/form-data">
+          <form method="POST" action="/login" >
             <div class="form-outline mb-4">
               <input
                 type="text"
@@ -63,7 +61,10 @@
                 placeholder="Contraseña"
               />
             </div>
-            <button type="submit" class="btn btn-dark col-4 btn-block mb-2">Entrar</button>
+            <button
+              type="submit"
+              class="btn btn-dark col-4 btn-block mb-2"
+            >Entrar</button>
           </form>
         </div>
       </div>
