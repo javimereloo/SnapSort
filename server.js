@@ -45,6 +45,7 @@ fastify.register(fastifySession, {
 });
 
 
+
 // Run the server and report out to the logs
 fastify.listen(
   { port: process.env.PORT, host: "0.0.0.0" },
