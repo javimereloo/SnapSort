@@ -22,13 +22,11 @@ fastify.register(require("@fastify/view"), {
   },
 });
 
-
 // Our main GET home page route, pulls from src/pages/index.hbs
 fastify.get("/", function (request, reply) {
   let params = {
     title: "Bienvenido",
     subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
-  
   };
   // request.query.paramName <-- a querystring example
   return reply.view("/src/pages/index.hbs", params);
@@ -45,64 +43,105 @@ fastify.post("/", function (request, reply) {
 });
 
 fastify.route({
-  method:'GET',
-  url:'/login',
-  handler: (request, reply)=>{
-    return reply.vie
-  }
-})
-
-
-//Route to acccess register view
-fastify.route({
-  method:'GET',
-  url:'/signup',
+  method: "GET",
+  url: "/login",
   preHandler: (request, reply, done) => {
     // Comprobar si el usuario está autenticado
     if (!request.session.user) {
       // Devolver un error si el usuario no está autenticado
-      console.log("SESSION")
-    console.log(request.session)
-      return reply.redirect("/")
-
+      return done(new Error("Ya se ha iniciado sesión"));
     }
-    console.log("SESSION")
-    console.log(request.session)
     // Continuar con la solicitud si el usuario está autenticado
-    done()
+    done();
+  },
+  handler: (request, reply) => {
+    return reply.view("/src/pages/login.hbs");
+  },
+});
+
+fastify.route({
+  method: "POST",
+  url: "/login",
+  // preHandler: (request, reply, done) => {
+  //   // Comprobar si el usuario está autenticado
+  //   if (!request.session.user) {
+  //     // Devolver un error si el usuario no está autenticado
+  //      return done(new Error('Ya se ha iniciado sesión'))
+  //   }
+  //   // Continuar con la solicitud si el usuario está autenticado
+  //   done()
+  // },
+  handler: (request, reply) => {
+    const user = {
+      name: request.body.username,
+      password: request.body.password,
+    };
+    if (user) {
+      // Establecer la información de sesión para el usuario
+      request.session.user = user;
+      reply.send({ message: "Inicio de sesión exitoso" });
+    }
+  },
+});
+
+//Route to acccess register view
+fastify.route({
+  method: "GET",
+  url: "/signup",
+  preHandler: (request, reply, done) => {
+    // Comprobar si el usuario está autenticado
+    if (!request.session.user) {
+      // Devolver un error si el usuario no está autenticado
+      console.log("SESSION");
+      console.log(request.session);
+      return reply.redirect("/");
+    }
+    console.log("SESSION");
+    console.log(request.session);
+    // Continuar con la solicitud si el usuario está autenticado
+    done();
   },
   handler: (req, reply) => {
     // Manejar la solicitud del perfil del usuario
     return reply.view("/src/pages/register.hbs");
-  }
-})
+  },
+});
 
-
-
+fastify.route({
+  method: "GET",
+  url: "/p",
+  preHandler: (request, reply, done) => {
+    // Comprobar si el usuario está autenticado
+    if (!request.session.user) {
+      // Devolver un error si el usuario no está autenticado
+      return done(new Error("No se ha iniciado sesión"));
+    }
+    // Continuar con la solicitud si el usuario está autenticado
+    done();
+  },
+  handler: (request, reply) => {
+    return reply.view("/src/pages/main.hbs");
+  },
+});
 
 //THING TO DO SEESSION identification
-const fastifySession = require('@fastify/session');
-const fastifyCookie = require('@fastify/cookie');
+const fastifySession = require("@fastify/session");
+const fastifyCookie = require("@fastify/cookie");
 fastify.register(fastifyCookie);
 fastify.register(fastifySession, {
-  secret: 'a secret with minimum length of 32 characters',
+  secret: "a secret with minimum length of 32 characters",
   cookieName: "sessionId",
   cookie: {
-    secure: true, 
-    maxAge: 7200000 // Tiempo de expiración de la cookie
+    secure: true,
+    maxAge: 7200000, // Tiempo de expiración de la cookie
   },
   saveUninitialized: true,
-})
+});
 // //Hook that assigns a session user name
 // fastify.addHook('preHandler', (request, reply, next) => {
 //   request.session.user = {name: 'max'}; //TODO AQUI TIENE QUE ASIGNAR sessionID NO?
 //   next();
 // })
-
-
-
-
-
 
 // Run the server and report out to the logs
 fastify.listen(
