@@ -42,6 +42,7 @@ fastify.post("/", function (request, reply) {
   return reply.view("/src/pages/index.hbs", params);
 });
 
+//A route method that handle user login 
 fastify.route({
   method: "GET",
   url: "/login",
@@ -59,6 +60,8 @@ fastify.route({
   },
 });
 
+
+//A route method that handle user login 
 fastify.route({
   method: "POST",
   url: "/login",
