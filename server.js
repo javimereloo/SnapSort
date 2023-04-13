@@ -69,8 +69,8 @@ fastify.route({
     //TODO Comprobar usuario y contraseña
     //Cifrar contraseña
     // Comprobar si el usuario está autenticado
-    if (request.session.user) {
-       return done(new Error('Ya se ha iniciado sesión'))
+    if (request.body.username != request.body.password) {
+       return done(new Error('CREDENCIALES INCORRECTAS'))
     }
     done()
   },
@@ -155,11 +155,7 @@ fastify.register(fastifySession, {
   },
   saveUninitialized: true,
 });
-// //Hook that assigns a session user name
-// fastify.addHook('preHandler', (request, reply, next) => {
-//   request.session.user = {name: 'max'}; //TODO AQUI TIENE QUE ASIGNAR sessionID NO?
-//   next();
-// })
+
 
 // Run the server and report out to the logs
 fastify.listen(
