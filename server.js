@@ -30,7 +30,7 @@ fastify.register(require('./src/routes/signup.route.js'))
 fastify.register(require('./src/routes/logout.route.js'))
 
 
-//THINGs TO DO SEESSION identification
+//Configuration for session identification
 const fastifySession = require("@fastify/session");
 const fastifyCookie = require("@fastify/cookie");
 fastify.register(fastifyCookie);
