@@ -44,6 +44,14 @@ fastify.post("/", function (request, reply) {
   return reply.view("/src/pages/index.hbs", params);
 });
 
+fastify.route({
+  method:'GET',
+  url:'/login',
+  handler: (request, reply)=>{
+    return reply.vie
+  }
+})
+
 
 //Route to acccess register view
 fastify.route({
@@ -53,10 +61,13 @@ fastify.route({
     // Comprobar si el usuario está autenticado
     if (!request.session.user) {
       // Devolver un error si el usuario no está autenticado
+      console.log("SESSION")
+    console.log(request.session)
       return reply.redirect("/")
 
     }
-    console.log(request.session.user)
+    console.log("SESSION")
+    console.log(request.session)
     // Continuar con la solicitud si el usuario está autenticado
     done()
   },
