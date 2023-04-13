@@ -22,27 +22,8 @@ fastify.register(require("@fastify/view"), {
   },
 });
 
-fastify.register(require('/src/routes/login'))
-
-// Our main GET home page route, pulls from src/pages/index.hbs
-fastify.get("/", function (request, reply) {
-  let params = {
-    title: "Bienvenido",
-    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
-  };
-  // request.query.paramName <-- a querystring example
-  return reply.view("/src/pages/index.hbs", params);
-});
-
-// A POST route to handle form submissions
-fastify.post("/", function (request, reply) {
-  let params = {
-    title: "Bienvenido",
-    subtitle: "Regístrate o inicia sesión para visualizar tus imágenes",
-  };
-  // request.body.paramName <-- a form post example
-  return reply.view("/src/pages/index.hbs", params);
-});
+fastify.register(require('./src/routes/index.route.js'))
+fastify.register(require('./src/routes/login.route.js'))
 
 
 //Route to acccess register view
@@ -102,7 +83,7 @@ fastify.route({
   },
 });
 
-//THING TO DO SEESSION identification
+//THINGs TO DO SEESSION identification
 const fastifySession = require("@fastify/session");
 const fastifyCookie = require("@fastify/cookie");
 fastify.register(fastifyCookie);
