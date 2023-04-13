@@ -36,7 +36,7 @@ module.exports = async function (fastify, opts) {
         password: request.body.password,
       };
       request.session.user = user;
-      reply.view("/src/pages/main.hbs", user);
+      reply.redirect("/p", user);
     },
   });
 };

@@ -88,7 +88,7 @@ const fastifySession = require("@fastify/session");
 const fastifyCookie = require("@fastify/cookie");
 fastify.register(fastifyCookie);
 fastify.register(fastifySession, {
-  secret: "a secret with minimum length of 32 characters",
+  secret: process.env.SECRET_KEY,
   cookieName: "sessionId",
   cookie: {
     secure: true,
@@ -96,6 +96,12 @@ fastify.register(fastifySession, {
   },
   saveUninitialized: true,
 });
+fastify.addHook('preHandler', (request, _reply, next) => {
+  if (!request.session.sessionData) {
+    request.session.sessionData = { userId: String, name: String, email: String, password: String, loggedOn: Date }
+  }
+  next()
+})
 
 
 // Run the server and report out to the logs
