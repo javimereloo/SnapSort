@@ -28,14 +28,15 @@ module.exports = async function (fastify, opts) {
     method: "POST",
     url: "/signup",
     preHandler: async (request, reply, done) => {
-      var _username = await 
-        API.getUsername(request.body.username, (error, username) => {
+      var _username = await API.getUsername( //TODO AÑADIR PROMESAS
+        request.body.username,
+        (error, username) => {
           if (error) {
             console.log(error);
           }
           console.log("VALOR DE USERNAME: ", username);
-        });
-
+        }
+      );
       console.log("VALOR DE _USERNAME: ", _username);
 
       if (request.body.password !== request.body.repeatPassword) {
