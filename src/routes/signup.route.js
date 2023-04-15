@@ -1,3 +1,5 @@
+const DB = require('../database/db.config.js')
+
 module.exports = async function (fastify, opts) {
   //Route to acccess register view
   fastify.route({
@@ -35,6 +37,12 @@ module.exports = async function (fastify, opts) {
         name: request.body.username,
         password: request.body.password,
       };
+      DB.insertUser(request.body.username, 
+                    request.body.name, 
+                    request.body.lastname, 
+                    request.body.email, 
+                    request.body.password
+      ) 
       request.session.user = user;
       return reply.redirect("/p");
     },

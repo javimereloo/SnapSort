@@ -1,4 +1,4 @@
-//METHODS TO ACCESS THE DB
+
 const sqlite3 = require("sqlite3").verbose();
 const bcrypt = require("bcrypt");
 const db = require("./db.config.js");
@@ -6,6 +6,19 @@ const db = require("./db.config.js");
 //Get user info from ID
 function getUserById(id, callback) {
   db.get("SELECT * FROM users WHERE id = ?", [id], function (err, row) {
+    if (err) {
+      callback(err);
+    } else if (!row) {
+      callback(null, null);
+    } else {
+      callback(null, row);
+    }
+  });
+}
+
+//Get username 
+function getUsername(username, callback) {
+  db.get("SELECT username FROM users WHERE username = ?", [username], function (err, row) {
     if (err) {
       callback(err);
     } else if (!row) {

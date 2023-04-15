@@ -1,3 +1,5 @@
+const DB = require('../database/db.config.js')
+
 module.exports = async function (fastify, opts) {
   fastify.route({
     method: "GET",
@@ -12,6 +14,7 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: (request, reply) => {
+      let param = DB.
       return reply.view("/src/pages/main.hbs");
     },
   });

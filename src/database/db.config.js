@@ -6,7 +6,7 @@ const path = require('path');
 const dbPath = path.join(__dirname, 'sqlite3', 'SNAPSORT.sqlite');
 
 // Create a new database 
-let db = new sqlite3.Database(dbPath, (err) => {
+let DB = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error(err.message);
   }
@@ -14,7 +14,7 @@ let db = new sqlite3.Database(dbPath, (err) => {
 });
 
 // Create a table for user information 
-db.run(`CREATE TABLE usuario (
+DB.run(`CREATE TABLE usuario (
           username TEXT PRIMARY KEY AUTOINCREMENT, 
           name TEXT, 
           lastname TEXT, 
@@ -28,7 +28,7 @@ db.run(`CREATE TABLE usuario (
 });
 
 // Create a table for user information 
-db.run(`CREATE TABLE importacion (
+DB.run(`CREATE TABLE importacion (
           username TEXT PRIMARY KEY AUTOINCREMENT, 
           name TEXT, 
           lastname TEXT, 
@@ -45,7 +45,7 @@ db.run(`CREATE TABLE importacion (
 //TODO COMPROBAR SI ES NECESARIO
 // Cerrar la conexión a la base de datos cuando finalice el proceso
 process.on('exit', () => {
-  db.close((err) => {
+  DB.close((err) => {
     if (err) {
       console.error(err.message);
     }
@@ -54,4 +54,4 @@ process.on('exit', () => {
 });
 
 
-module.exports = db;
+module.exports = DB;
