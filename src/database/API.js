@@ -51,7 +51,7 @@ function getUserdata(username, callback) {
 //Insert a new user
 function insertUser(username, name, lastname, email, password) {
   db.run(
-    "INSERT INTO usuario (username, name, lastname, email, password) VALUES (?, ?, ?)",
+    "INSERT INTO usuario (username, name, lastname, email, password) VALUES (?, ?, ?, ?, ?)",
     [username, name, lastname, email, password],
     function (err) {
       if (err) {

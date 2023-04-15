@@ -28,20 +28,19 @@ module.exports = async function (fastify, opts) {
     method: "POST",
     url: "/signup",
     preHandler: (request, reply, done) => {
+      let userExist
       API.getUsername(request.body.username, (error, username) => {
-        console.log("\n")
-        console.log(username)
-        console.log("\n")
-        
+
         if (error) {
           console.log(error);
-        } else if(username){
-          reply.send("NOMBRE DE USUARIO YA EN USO"); //TODO manejar los errores en la vista
+        } else {
+          userExist = usernae
           console.log("\n----------------------------NOMBRE DE USUARIO YA EN USO--------------------------------------\n")
+          return reply.code(500).send("NOMBRE DE USUARIO YA EN USO"); //TODO manejar los errores en la vista
         }
       })
-      if (request.body.password !== request.body.password) {
-        reply.code(500).send("LAS CONTRASEÑAS NO COINCIDEN"); //TODO manejar los errores en la vista
+      if (request.body.password !== request.body.repeatPassword) {
+        return reply.code(500).send("LAS CONTRASEÑAS NO COINCIDEN"); //TODO manejar los errores en la vista
       }
       done();
     },
