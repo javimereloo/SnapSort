@@ -27,21 +27,6 @@ DB.run(`CREATE TABLE usuario (
   console.log('Tabla creada en la base de datos.');
 });
 
-// Create a table for user information 
-DB.run(`CREATE TABLE importacion (
-          username TEXT PRIMARY KEY AUTOINCREMENT, 
-          name TEXT, 
-          lastname TEXT, 
-          email TEXT , 
-          password TEXT)`
-       , (err) => {
-  if (err) {
-    console.error(err.message);
-  }
-  console.log('Tabla creada en la base de datos.');
-});
-
-
 //TODO COMPROBAR SI ES NECESARIO
 // Cerrar la conexión a la base de datos cuando finalice el proceso
 process.on('exit', () => {

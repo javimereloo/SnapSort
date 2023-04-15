@@ -1,4 +1,4 @@
-const DB = require('../database/db.config.js')
+const DB = require("../database/db.config.js");
 
 module.exports = async function (fastify, opts) {
   //Route to acccess register view
@@ -23,13 +23,21 @@ module.exports = async function (fastify, opts) {
       return reply.view("/src/pages/register.hbs");
     },
   });
-  
+
   fastify.route({
     method: "POST",
-    url: "/signuo",
+    url: "/signup",
     preHandler: (request, reply, done) => {
-      //TODO comprobar si el nombre usuario ya existe
-      //TODO comprobar que las contraseñas coincidan
+      DB.getUsername(request.body.username, (error, username) => {
+        if (error) {
+          console.log(error);
+        } else {
+          reply.send("NOMBRE DE USUARIO YA EN USO"); //TODO manejar los errores en la vista
+        }
+      })
+      if (request.body.password !== request.body.password) {
+        reply.send("LAS CONTRASEÑAS NO COINCIDEN"); //TODO manejar los errores en la vista
+      }
       done();
     },
     handler: (request, reply) => {
@@ -37,12 +45,13 @@ module.exports = async function (fastify, opts) {
         name: request.body.username,
         password: request.body.password,
       };
-      DB.insertUser(request.body.username, 
-                    request.body.name, 
-                    request.body.lastname, 
-                    request.body.email, 
-                    request.body.password
-      ) 
+      DB.insertUser(
+        request.body.username,
+        request.body.name,
+        request.body.lastname,
+        request.body.email,
+        request.body.password
+      );
       request.session.user = user;
       return reply.redirect("/p");
     },
