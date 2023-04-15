@@ -55,7 +55,7 @@ function insertUser(username, name, lastname, email, password) {
     [username, name, lastname, email, password],
     function (err) {
       if (err) {
-        console.error(err.message);
+        console.log(err.message);
       } else {
         console.log(`Se ha insertado ${this.changes} fila`);
       }
