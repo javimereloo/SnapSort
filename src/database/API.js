@@ -5,7 +5,7 @@ const db = require("./db.config.js");
 
 //Get user info from ID
 function getUserById(id, callback) {
-  db.get("SELECT * FROM users WHERE id = ?", [id], function (err, row) {
+  db.get("SELECT * FROM usuario WHERE id = ?", [id], function (err, row) {
     if (err) {
       callback(err);
     } else if (!row) {
@@ -18,7 +18,19 @@ function getUserById(id, callback) {
 
 //Get username 
 function getUsername(username, callback) {
-  db.get("SELECT username FROM users WHERE username = ?", [username], function (err, row) {
+  db.get("SELECT username FROM usuario WHERE username = ?", [username], function (err, row) {
+    if (err) {
+      callback(err);
+    } else if (!row) {
+      callback(null, null);
+    } else {
+      callback(null, row);
+    }
+  });
+}
+
+function getUserdata(username, callback) {
+  db.get("SELECT name, lastname FROM usuario WHERE username = ?", [username], function (err, row) {
     if (err) {
       callback(err);
     } else if (!row) {
@@ -32,7 +44,7 @@ function getUsername(username, callback) {
 //Insert a new user
 function insertUser(username, name, lastname, email, password) {
   db.run(
-    "INSERT INTO users (username, name, lastname, email, password) VALUES (?, ?, ?)",
+    "INSERT INTO usuario (username, name, lastname, email, password) VALUES (?, ?, ?)",
     [username, name, lastname, email, password],
     function (err) {
       if (err) {
@@ -75,7 +87,7 @@ function comparePassword(email, password) {
 function getHash(email) {
   //get the stored hash
   const storedHash = db.get(
-    "SELECT password FROM users WHERE email = ?",
+    "SELECT password FROM usuario WHERE email = ?",
     [email],
     function (err, row) {
       if (err) {
@@ -95,5 +107,7 @@ function getHash(email) {
 //Export the API OPERATIONS
 module.exports = {
   getUserById: getUserById,
-  insertUser: insertUser
+  insertUser: insertUser,
+  getUsername: getUsername,
+  getUserdata: getUserdata
 };
