@@ -5,12 +5,15 @@ const path = require('path');
 
 const dbPath = path.join(__dirname, 'sqlite3', 'SNAPSORT.sqlite');
 
+
 // Create a new database 
 let DB = new sqlite3.Database(dbPath, (err) => {
-  if (err) {
+  if (err && err.code == "SQLITE_CANTOPEN") {
+    createDatabase();
     console.error(err.message);
+  }else{
+    console.log('Conectado a la base de datos SQLite.');
   }
-  console.log('Conectado a la base de datos SQLite.');
 });
 
 // Create a table for user information 
