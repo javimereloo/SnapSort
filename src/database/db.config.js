@@ -14,10 +14,25 @@ let db = new sqlite3.Database(dbPath, (err) => {
 });
 
 // Create a table for user information 
-db.run(`CREATE TABLE usuarios (
-          id INTEGER PRIMARY KEY AUTOINCREMENT, 
+db.run(`CREATE TABLE usuario (
+          username TEXT PRIMARY KEY AUTOINCREMENT, 
           name TEXT, 
-          email TEXT UNIQUE, 
+          lastname TEXT, 
+          email TEXT , 
+          password TEXT)`
+       , (err) => {
+  if (err) {
+    console.error(err.message);
+  }
+  console.log('Tabla creada en la base de datos.');
+});
+
+// Create a table for user information 
+db.run(`CREATE TABLE importacion (
+          username TEXT PRIMARY KEY AUTOINCREMENT, 
+          name TEXT, 
+          lastname TEXT, 
+          email TEXT , 
           password TEXT)`
        , (err) => {
   if (err) {
