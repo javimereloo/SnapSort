@@ -26,16 +26,16 @@
   </head>
   <body>
     <div
-      class="container h-100  d-flex flex-column align-items-center justify-content-center "
+      class="container h-100 d-flex flex-column align-items-center justify-content-center"
     >
-      <div class="rounded  col-4  bg-light card p-4" style="--bs-bg-opacity: .9;">
-        <div class="card-body ">
+      <div class="rounded col-6 bg-light card p-4" style="--bs-bg-opacity: .9;">
+        <div class="card-body">
           <a href="/">
-          <img 
-            src="https://cdn.glitch.global/9a5417db-bb1a-4800-b72a-a85bd7bcfce3/SnapSort3.png?v=1681311768618"
-            width="100rem"
-            class="aling-self-center"
-          />
+            <img
+              src="https://cdn.glitch.global/9a5417db-bb1a-4800-b72a-a85bd7bcfce3/SnapSort3.png?v=1681311768618"
+              width="100rem"
+              class="aling-self-center"
+            />
           </a>
           <h1 class="py-2"> Regístrate </h1>
           <form>
@@ -48,21 +48,23 @@
                 placeholder="Nombre de usuario"
               />
             </div>
-            <div class="form-outline mb-4 ">
-              <input
-                type="text"
-                id="nameInput"
-                class="form-control"
-                placeholder="Nombre "
-              />
-            </div>
-            <div class="form-outline mb-4 ">
-              <input
-                type="text"
-                id="lastnameInput"
-                class="form-control"
-                placeholder="Apellidos "
-              />
+            <div class="row">
+              <div class="form-outline col mb-4">
+                <input
+                  type="text"
+                  id="nameInput"
+                  class="form-control"
+                  placeholder="Nombre "
+                />
+              </div>
+              <div class="form-outline col mb-4">
+                <input
+                  type="text"
+                  id="lastnameInput"
+                  class="form-control"
+                  placeholder="Apellidos "
+                />
+              </div>
             </div>
             <div class="form-outline mb-4">
               <input
@@ -72,28 +74,33 @@
                 placeholder="Email"
               />
             </div>
+            <div class="row">
 
-            <div class="form-outline mb-4">
-              <input
-                type="password"
-                id="passwordInput"
-                class="form-control"
-                required
-                placeholder="Contraseña"
-              />
+              <div class="form-outline col mb-4">
+                <input
+                  type="password"
+                  id="passwordInput"
+                  class="form-control"
+                  required
+                  placeholder="Contraseña"
+                />
+              </div>
+
+              <div class="form-outline col mb-4">
+                <input
+                  type="password"
+                  id="repetePasswordInput"
+                  class="form-control"
+                  required
+                  placeholder="Repite la contraseña"
+                />
+              </div>
             </div>
-            
-            <div class="form-outline mb-4">
-              <input
-                type="password"
-                id="repetePasswordInput"
-                class="form-control"
-                required
-                placeholder="Repite la contraseña"
-              />
-            </div>
-            
-            <button type="button" class="btn btn-dark col-6 btn-block mb-2">Registrarse</button>
+
+            <button
+              type="submit"
+              class="btn btn-dark col-6 btn-block mb-2"
+            >Registrarse</button>
           </form>
         </div>
       </div>

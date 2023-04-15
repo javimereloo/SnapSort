@@ -21,4 +21,22 @@ module.exports = async function (fastify, opts) {
       return reply.view("/src/pages/register.hbs");
     },
   });
+  
+  fastify.route({
+    method: "POST",
+    url: "/signuo",
+    preHandler: (request, reply, done) => {
+      //TODO comprobar si el nombre usuario ya existe
+      //TODO comprobar que las contraseñas coincidan
+      done();
+    },
+    handler: (request, reply) => {
+      const user = {
+        name: request.body.username,
+        password: request.body.password,
+      };
+      request.session.user = user;
+      return reply.redirect("/p");
+    },
+  });
 };

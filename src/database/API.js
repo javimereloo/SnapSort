@@ -17,10 +17,10 @@ function getUserById(id, callback) {
 }
 
 //Insert a new user
-function insertUser(name, email, password) {
+function insertUser(username, name, lastname, email, password) {
   db.run(
-    "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-    [name, email, password],
+    "INSERT INTO users (username, name, lastname, email, password) VALUES (?, ?, ?)",
+    [username, name, lastname, email, password],
     function (err) {
       if (err) {
         console.error(err.message);
@@ -30,12 +30,6 @@ function insertUser(name, email, password) {
     }
   );
 }
-
-//Export the API OPERATIONS
-module.exports = {
-  getUserById: getUserById,
-  insertUser: insertUser
-};
 
 //-------------------------Auxiliar cryptographic methods-----------------------
 //Function that returns the hash of a password
@@ -82,3 +76,11 @@ function getHash(email) {
     }
   );
 }
+
+
+
+//Export the API OPERATIONS
+module.exports = {
+  getUserById: getUserById,
+  insertUser: insertUser
+};
