@@ -1,4 +1,4 @@
-const DB = require("../database/db.config.js");
+const API = require('../database/API.js')
 
 module.exports = async function (fastify, opts) {
   //Route to acccess register view
@@ -28,10 +28,10 @@ module.exports = async function (fastify, opts) {
     method: "POST",
     url: "/signup",
     preHandler: (request, reply, done) => {
-      DB.getUsername(request.body.username, (error, username) => {
+      API.getUsername(request.body.username, (error, username) => {
         if (error) {
           console.log(error);
-        } else {
+        } else if(username){
           reply.send("NOMBRE DE USUARIO YA EN USO"); //TODO manejar los errores en la vista
         }
       })
@@ -45,7 +45,7 @@ module.exports = async function (fastify, opts) {
         name: request.body.username,
         password: request.body.password,
       };
-      DB.insertUser(
+      API.insertUser(
         request.body.username,
         request.body.name,
         request.body.lastname,

@@ -1,4 +1,3 @@
-
 const sqlite3 = require("sqlite3").verbose();
 const bcrypt = require("bcrypt");
 const db = require("./db.config.js");
@@ -16,29 +15,37 @@ function getUserById(id, callback) {
   });
 }
 
-//Get username 
+//Get username
 function getUsername(username, callback) {
-  db.get("SELECT username FROM usuario WHERE username = ?", [username], function (err, row) {
-    if (err) {
-      callback(err);
-    } else if (!row) {
-      callback(null, null);
-    } else {
-      callback(null, row);
+  db.get(
+    "SELECT username FROM usuario WHERE username = ?",
+    [username],
+    function (err, row) {
+      if (err) {
+        callback(err);
+      } else if (!row) {
+        callback(null, null);
+      } else {
+        callback(null, row);
+      }
     }
-  });
+  );
 }
 
 function getUserdata(username, callback) {
-  db.get("SELECT name, lastname FROM usuario WHERE username = ?", [username], function (err, row) {
-    if (err) {
-      callback(err);
-    } else if (!row) {
-      callback(null, null);
-    } else {
-      callback(null, row);
+  db.get(
+    "SELECT name, lastname FROM usuario WHERE username = ?",
+    [username],
+    function (err, row) {
+      if (err) {
+        callback(err);
+      } else if (!row) {
+        callback(null, null);
+      } else {
+        callback(null, row);
+      }
     }
-  });
+  );
 }
 
 //Insert a new user
@@ -102,12 +109,10 @@ function getHash(email) {
   );
 }
 
-
-
 //Export the API OPERATIONS
 module.exports = {
-  getUserById: getUserById,
-  insertUser: insertUser,
-  getUsername: getUsername,
-  getUserdata: getUserdata
+  getUserById,
+  insertUser,
+  getUsername,
+  getUserdata,
 };

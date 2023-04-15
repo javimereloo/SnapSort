@@ -1,4 +1,5 @@
 const DB = require('../database/db.config.js')
+require('../database/API.js')
 
 module.exports = async function (fastify, opts) {
   fastify.route({
