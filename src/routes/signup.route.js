@@ -28,13 +28,12 @@ module.exports = async function (fastify, opts) {
     method: "POST",
     url: "/signup",
     preHandler: async (request, reply, done) => {
-      var _username;
-      await API.getUsername(request.body.username, (error, username) => {
+      var _username = await API.getUsername(request.body.username, (error) => {
         if (error) {
           console.log(error);
         }
-         console.log('VALOR DE USERNAME: ', username)
-        _username = username
+         // console.log('VALOR DE USERNAME: ', username)
+        // _username = username
       });
       console.log('VALOR DE _USERNAME: ', _username)
       
@@ -49,7 +48,7 @@ module.exports = async function (fastify, opts) {
       
       done();
     },
-    handler: (request, reply) => {
+    handler: async (request, reply) => {
       const user = {
         name: request.body.username,
         password: request.body.password,

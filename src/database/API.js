@@ -16,21 +16,37 @@ function getUserById(id, callback) {
 }
 
 //Get username
-function getUsername(username, callback) {
-  db.get(
+async function getUsername(username, callback) {
+  await db.get(
     "SELECT username FROM usuario WHERE username = ?",
     [username],
     function (err, row) {
       if (err) {
         callback(err);
       } else if (!row) {
-        callback(null, null);
+        callback(null);
       } else {
-        callback(null, row);
+        return row;
       }
     }
   );
 }
+// async function getUsername(username, callback) {
+//   await db.get(
+//     "SELECT username FROM usuario WHERE username = ?",
+//     [username],
+//     function (err, row) {
+//       if (err) {
+//         callback(err);
+//       } else if (!row) {
+//         callback(null, null);
+//       } else {
+//         callback(null, row);
+//         return row;
+//       }
+//     }
+//   );
+// }
 
 function getUserdata(username, callback) {
   db.get(
