@@ -16,8 +16,8 @@ function getUserById(id, callback) {
 }
 
 //Get username
-async function getUsername(username, callback) {
-  await db.get(
+ function getUsername(username, callback) {
+   db.get(
     "SELECT username FROM usuario WHERE username = ?",
     [username],
     function (err, row) {
