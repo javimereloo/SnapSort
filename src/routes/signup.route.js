@@ -27,23 +27,15 @@ module.exports = async function (fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/signup",
-    handler:  (request, reply) => {
-      const username =  API.getUsername(request.body.username,
-                                             (error, username) =>{
-        if(error){
-          //CANCELAR 
-          reply.code(500).send("Nombre de usuario ya en uso")
-        }
-      })
-      
+    handler:  async (request, reply) => {
+      const username = await API.getUsername(request.body.username)
       if (username) {
-        return reply.code(500).send("NOMBRE DE USUARIO YA EN USO"); //TODO manejar los errores en la vista
+        return reply.code(500).send("NOMBRE DE USUARIO YA EN USO"); //TODO manejar los errores en la vista //TODO meter en el prehandler??
       }
             
       if (request.body.password !== request.body.repeatPassword) {
         return reply.code(500).send("LAS CONTRASEÑAS NO COINCIDEN"); //TODO manejar los errores en la vista
       }
-      
       
       const user = {
         name: request.body.username,
