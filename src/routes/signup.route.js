@@ -28,25 +28,21 @@ module.exports = async function (fastify, opts) {
     method: "POST",
     url: "/signup",
     preHandler: async (request, reply, done) => {
-      var _username = await API.getUsername( //TODO AÑADIR PROMESAS
-        request.body.username,
-        (error, username) => {
-          if (error) {
-            console.log(error);
-          }
-          console.log("VALOR DE USERNAME: ", username);
+      const username = await API.getUsername(request.body.username,
+                                             (error, username) =>{
+        if(error){
+          //CANCELAR 
+          reply.code(500).send("Nombre de usuario ya en uso")
         }
-      );
-      console.log("VALOR DE _USERNAME: ", _username);
-
+      })
+      console.log("Primer username: " ,username)
+      
+      
       if (request.body.password !== request.body.repeatPassword) {
         return reply.code(500).send("LAS CONTRASEÑAS NO COINCIDEN"); //TODO manejar los errores en la vista
       }
 
-      if (_username) {
-        return reply.code(500).send("NOMBRE DE USUARIO YA EN USO"); //TODO manejar los errores en la vista
-      }
-
+      console.log("Segundo username: " ,username)
       done();
     },
     handler: async (request, reply) => {
@@ -54,7 +50,7 @@ module.exports = async function (fastify, opts) {
         name: request.body.username,
         password: request.body.password,
       };
-      API.insertUser(
+      API.insertUser( //TODO MANEJAR EL ERROR, no devolver /p si el usuario no ha iniciado sesión 
         request.body.username,
         request.body.name,
         request.body.lastname,
