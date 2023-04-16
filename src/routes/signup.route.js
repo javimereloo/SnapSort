@@ -27,21 +27,27 @@ module.exports = async function (fastify, opts) {
   fastify.route({
     method: "POST",
     url: "/signup",
-    handler:  async (request, reply) => {
-      const username = await API.getUsername(request.body.username)
+    handler: async (request, reply) => {
+      //First we check if any error occurred 
+      const username = await API.getUsername(request.body.username);
       if (username) {
-        return reply.code(500).send("NOMBRE DE USUARIO YA EN USO"); //TODO manejar los errores en la vista //TODO meter en el prehandler??
+        const errorMessage = "NOMBRE DE USUARIO YA EN USO"
+        const templateData = { errorMessage };
+        return reply.view("/src/pages/register.hbs", templateData); //TODO manejar los errores en la vista //TODO meter en el prehandler??
       }
-            
+
       if (request.body.password !== request.body.repeatPassword) {
-        return reply.code(500).send("LAS CONTRASEÑAS NO COINCIDEN"); //TODO manejar los errores en la vista
+        const errorMessage = "LAS CONTRASEÑAS NO COINCIDEN"
+        const templateData = { errorMessage };
+        return reply.view("/src/pages/register.hbs", templateData); //TODO manejar los errores en la vista
       }
-      
+
       const user = {
         name: request.body.username,
         password: request.body.password,
       };
-      API.insertUser( //TODO MANEJAR EL ERROR, no devolver /p si el usuario no ha iniciado sesión 
+      API.insertUser(
+        //TODO MANEJAR EL ERROR, no devolver /p si el usuario no ha iniciado sesión
         request.body.username,
         request.body.name,
         request.body.lastname,
