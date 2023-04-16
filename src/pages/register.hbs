@@ -29,7 +29,9 @@
       class="container h-100 d-flex flex-column align-items-center justify-content-center"
     >
       {{#if errorMessage}}
-        <p class="error">{{errorMessage}}</p>
+        <div class="alert alert-danger" role="alert">
+          {{errorMessage}}
+        </div>
       {{/if}}
       <div class="rounded col-6 bg-light card p-4" style="--bs-bg-opacity: .9;">
         <div class="card-body">
