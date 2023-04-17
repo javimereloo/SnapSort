@@ -15,6 +15,7 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: (request, reply) => {
+      
       const param = request.query
       console.log("aqui me llega",  param)
       return reply.view("/src/pages/main.hbs",  param);

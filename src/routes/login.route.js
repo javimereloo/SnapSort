@@ -39,12 +39,10 @@ module.exports = async function (fastify, opts) {
         username: request.body.username,
         name:  userinfo.name,
         lastname: userinfo.lastname,
-        password: request.body.password,
       };
       request.session.user = user;
       console.log("USERINFO>", user)
-      return reply.redirect("/p", {query: user});
-      // return reply.view("/src/pages/main.hbs", user);
+      reply.redirect(`/p?username=${user.username}&name=${user.name}&lastname=${user.lastname}&password=${user.password}`);
     },
   });
 };
