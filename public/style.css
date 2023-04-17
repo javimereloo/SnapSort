@@ -30,15 +30,3 @@ body {
   color: white;
   font-weight: bold;
 }
-
-
-/* images and videos max out at full width */
-.bgimg{
-  opacity: 0.6;
-  object-fit: cover;
-}
-/* img,
-video {
-  height: auto;
-  max-width: 100%;
-} */
