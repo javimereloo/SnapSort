@@ -46,7 +46,7 @@
                 name="username"
                 class="form-control {{#if errorUsername}} is-invalid{{/if}}"
                 required
-                placeholder="Nombre de usuario"
+                placeholder="Nombre de usuario*"
                 value= "{{#if username}}{{username}}{{/if}}"
               />
               {{#if errorUsername}}
@@ -95,7 +95,7 @@
                   name="password"
                   class="form-control {{#if errorPassword}}is-invalid{{/if}}"
                   required
-                  placeholder="Contraseña"
+                  placeholder="Contraseña*"
                 />
                 {{#if errorPassword}}
                   <div class="invalid-feedback">
@@ -111,7 +111,7 @@
                   name="repeatPassword"
                   class="form-control {{#if errorPassword}}is-invalid{{/if}}"
                   required
-                  placeholder="Repite la contraseña"
+                  placeholder="Repite la contraseña*"
                 />
               </div>
               {{#if errorPassword}}
