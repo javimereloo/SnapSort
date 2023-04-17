@@ -33,16 +33,18 @@ module.exports = async function (fastify, opts) {
       }
       done();
     },
-    handler: async (request, reply) => {
+    handler: async  (request, reply) => {
       const userinfo = await API.getUserdata(request.body.username)
       const user = {
         username: request.body.username,
-        name:  userinfo.info,
-        lastname: userinfo.info,
+        name:  userinfo.name,
+        lastname: userinfo.lastname,
         password: request.body.password,
       };
       request.session.user = user;
-      reply.redirect("/p", {query: user});
+      console.log("USERINFO>", user)
+      return reply.redirect("/p", {query: user});
+      // return reply.view("/src/pages/main.hbs", user);
     },
   });
 };

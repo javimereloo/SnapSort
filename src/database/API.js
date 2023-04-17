@@ -58,12 +58,11 @@ function getUserdata(username) {
       (err, row) => {
         if (err) {
           reject(err);
+        }
+        if (row) {
+          resolve({ name: row.name, lastname: row.lastname });
         } else {
-          if (row) {
-            resolve({ name: row.name, lastname: row.lastname });
-          } else {
-            resolve(null);
-          }
+          resolve(null);
         }
       }
     );
