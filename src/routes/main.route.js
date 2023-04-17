@@ -15,8 +15,9 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: (request, reply) => {
-      let param = DB.getUserdata
-      return reply.view("/src/pages/main.hbs");
+      let param = request.query.body.user
+      console.log("param", param)
+      return reply.view("/src/pages/main.hbs", param);
     },
   });
 };

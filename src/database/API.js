@@ -50,28 +50,29 @@ async function checkPassword(username, password) {
   });
 }
 
-function getUserdata(username ) {
+function getUserdata(username) {
   return new Promise((resolve, reject) => {
     db.get(
-    "SELECT name, lastname FROM usuario WHERE username = ?",
-    [username],
-     (err, row) {
-      if (err) {
-        
-      } else if (!row) {
-        
-      } else {
-        
+      "SELECT name, lastname FROM usuario WHERE username = ?",
+      [username],
+      (err, row) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (row) {
+            resolve({ name: row.name, lastname: row.lastname });
+          } else {
+            resolve(null);
+          }
+        }
       }
-    }
-  );
-  })
-  
+    );
+  });
 }
 
 //Insert a new user
 async function insertUser(username, name, lastname, email, password) {
-  const hashedPassword = await cryptPassword(password)
+  const hashedPassword = await cryptPassword(password);
   db.run(
     "INSERT INTO usuario (username, name, lastname, email, password) VALUES (?, ?, ?, ?, ?)",
     [username, name, lastname, email, hashedPassword],
@@ -87,7 +88,7 @@ async function insertUser(username, name, lastname, email, password) {
 
 function deleteUser(username) {
   return new Promise((resolve, reject) => {
-    db.run('DELETE FROM usuario WHERE username = ?', [username], (err) => {
+    db.run("DELETE FROM usuario WHERE username = ?", [username], (err) => {
       if (err) {
         reject(err);
       } else {
@@ -97,11 +98,10 @@ function deleteUser(username) {
   });
 }
 
-
-const fs = require('fs');
+const fs = require("fs");
 function deleteDatabase() {
   return new Promise((resolve, reject) => {
-    fs.unlink('src/database/SNAPSORT.sqlite', (err) => {
+    fs.unlink("src/database/SNAPSORT.sqlite", (err) => {
       if (err) {
         reject(err);
       } else {
@@ -110,7 +110,6 @@ function deleteDatabase() {
     });
   });
 }
-
 
 //-------------------------Auxiliar cryptographic methods-----------------------
 //Function that returns the hash of a password

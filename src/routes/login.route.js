@@ -33,13 +33,16 @@ module.exports = async function (fastify, opts) {
       }
       done();
     },
-    handler: (request, reply) => {
+    handler: async (request, reply) => {
+      const userinfo = await API.getUserdata(request.body.username)
       const user = {
-        name: request.body.username,
+        username: request.body.username,
+        name:  userinfo.info,
+        lastname: userinfo.info,
         password: request.body.password,
       };
       request.session.user = user;
-      return reply.redirect("/p");
+      return reply.redirect("/p", {query: request.body});
     },
   });
 };
