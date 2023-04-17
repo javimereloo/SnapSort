@@ -47,7 +47,7 @@
                 class="form-control {{#if errorUsername}} is-invalid{{/if}}"
                 required
                 placeholder="Nombre de usuario"
-                value= "{{#if username}}{{username}} {{/if}}"
+                value= "{{#if username}}{{username}}{{/if}}"
               />
               {{#if errorUsername}}
               <div class="invalid-feedback">
@@ -62,8 +62,8 @@
                   id="nameInput"
                   name="name"
                   class="form-control"
-                  placeholder="{{#if name}}{{name}} {{else}} Nombre {{/if}} "
-                  value= "{{#if name}}{{name}} {{/if}}"
+                  placeholder="{{#if name}}{{name}}{{else}}Nombre{{/if}} "
+                  value= "{{#if name}}{{name}}{{/if}}"
                 />
               </div>
               <div class="form-outline col mb-4">
@@ -73,7 +73,7 @@
                   name="lastname"
                   class="form-control"
                   placeholder="Apellidos "
-                  value= "{{#if lastname}}{{lastname}} {{/if}}"
+                  value= "{{#if lastname}}{{lastname}}{{/if}}"
                 />
               </div>
             </div>
@@ -84,7 +84,7 @@
                 name="email"
                 class="form-control"
                 placeholder="Email"
-                value= "{{#if email}}{{email}} {{/if}}"
+                value= "{{#if email}}{{email}}{{/if}}"
               />
             </div>
             <div class="row">
@@ -93,7 +93,7 @@
                   type="password"
                   id="passwordInput"
                   name="password"
-                  class="form-control {{#if errorPassword}} is-invalid{{/if}}"
+                  class="form-control {{#if errorPassword}}is-invalid{{/if}}"
                   required
                   placeholder="Contraseña"
                 />
@@ -109,7 +109,7 @@
                   type="password"
                   id="repeatPasswordInput"
                   name="repeatPassword"
-                  class="form-control {{#if errorPassword}} is-invalid{{/if}}"
+                  class="form-control {{#if errorPassword}}is-invalid{{/if}}"
                   required
                   placeholder="Repite la contraseña"
                 />

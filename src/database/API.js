@@ -37,10 +37,6 @@ async function getUsername(username) {
 //Fuction to compare login password
 async function checkPassword(username, password) {
   const storedHash = await getHash(username);
-  console.log("username que llega>", username)
-  console.log("password que llega>", password)
-  console.log("storedHash que llega>", storedHash)
-
   return new Promise((resolve, reject) => {
     bcrypt.compare(password, storedHash, (err, result) => {
       if (err) {
@@ -54,20 +50,23 @@ async function checkPassword(username, password) {
   });
 }
 
-function getUserdata(username, callback) {
-  db.get(
+function getUserdata(username ) {
+  return new Promise((resolve, reject) => {
+    db.get(
     "SELECT name, lastname FROM usuario WHERE username = ?",
     [username],
-    function (err, row) {
+     (err, row) {
       if (err) {
-        callback(err);
+        
       } else if (!row) {
-        callback(null, null);
+        
       } else {
-        callback(null, row);
+        
       }
     }
   );
+  })
+  
 }
 
 //Insert a new user
@@ -142,7 +141,6 @@ function comparePassword(username, password) {
 }
 
 async function getHash(username) {
-  console.log()
   return new Promise((resolve, reject) => {
     db.get(
       "SELECT password FROM usuario WHERE username = ?",
