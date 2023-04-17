@@ -36,14 +36,12 @@ const fastifyCookie = require("@fastify/cookie");
 fastify.register(fastifyCookie);
 fastify.register(fastifySession, {
   secret: process.env.SECRET_KEY,
-  // cookieName: "sessionId",
   cookie: {
     secure: false,
-    maxAge: 7200000, // Tiempo de expiración de la cookie
+    maxAge: 14400, // Tiempo de expiración de la cookie 4h
   },
   saveUninitialized: true,
 });
-
 
 
 // Run the server and report out to the logs
