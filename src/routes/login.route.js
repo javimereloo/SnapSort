@@ -41,7 +41,6 @@ module.exports = async function (fastify, opts) {
         lastname: userinfo.lastname,
       };
       request.session.user = user;
-      console.log("USERINFO>", user)
       reply.redirect(`/p?username=${user.username}&name=${user.name}&lastname=${user.lastname}&password=${user.password}`);
     },
   });

@@ -36,7 +36,7 @@ const fastifyCookie = require("@fastify/cookie");
 fastify.register(fastifyCookie);
 fastify.register(fastifySession, {
   secret: process.env.SECRET_KEY,
-  cookieName: "sessionId",
+  // cookieName: "sessionId",
   cookie: {
     secure: false,
     maxAge: 7200000, // Tiempo de expiración de la cookie
