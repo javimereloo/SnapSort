@@ -34,7 +34,23 @@ async function getUsername(username) {
   });
 }
 
+//Fuction to compare login password
+async function checkPassword(username, password){
+  return new Promise((resolve, reject) => {
+    const storedHash = getHash(username);
+    bcrypt.compare(password, storedHash,  (err, result) => {
+    if (err) {
+      reject(err);
+    } else if (result) {
+      resolve(true)
+    } else {
+      resolve(false)
+    }
+  });
+  })
+}
 
+                     
 function getUserdata(username, callback) {
   db.get(
     "SELECT name, lastname FROM usuario WHERE username = ?",
@@ -80,10 +96,11 @@ function cryptPassword(password) {
   });
 }
 
+
 //Function that compares the password and his string
-function comparePassword(email, password) {
-  const storedHash = getHash(email);
-  bcrypt.compare(password, storedHash, function (err, result) {
+function comparePassword(username, password) {
+  const storedHash = getHash(username);
+  bcrypt.compare(password, storedHash,  (err, result) => {
     if (err) {
       console.error(err.message);
     } else if (result) {
@@ -94,11 +111,11 @@ function comparePassword(email, password) {
   });
 }
 
-function getHash(email) {
+function getHash(username) {
   //get the stored hash
   const storedHash = db.get(
-    "SELECT password FROM usuario WHERE email = ?",
-    [email],
+    "SELECT password FROM usuario WHERE username = ?",
+    [username],
     function (err, row) {
       if (err) {
         console.log("Error getting password");
@@ -118,4 +135,5 @@ module.exports = {
   insertUser,
   getUsername,
   getUserdata,
+  checkPassword,
 };
