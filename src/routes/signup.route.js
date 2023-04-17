@@ -10,7 +10,6 @@ module.exports = async function (fastify, opts) {
       if (request.session.user) {
         // Devolver un error si el usuario  está autenticado
         console.log("Usuario ya registrado");
-        console.log(request.session);
         return reply.redirect("/");
       }
       // Continuar con la solicitud si el usuario no está autenticado
@@ -38,16 +37,13 @@ module.exports = async function (fastify, opts) {
         const errorPassword = "Las contraseñas no coinciden"
         const templateData = { errorPassword, name:request.body.name, lastname:request.body.lastname, email: request.body.email };
         return reply.view("/src/pages/register.hbs", templateData); 
-      }else if(Object.keys(request.body.password).length < 6){ //Basic security
-        const errorPassword = "La contraseña debe ser mínimo de 6 caracteres"
+      }else if(Object.keys(request.body.password).length < process.env.MINIMUN_LENGTH){ //Basic security
+        const errorPassword = `La contraseña debe ser mínimo de ${process.env.MINIMUN_LENGTH} caracteres`
         const templateData = {errorPassword, username:request.body.username, name:request.body.name, lastname:request.body.lastname, email: request.body.email };
         return reply.view("/src/pages/register.hbs", templateData); 
       }
 
-      const user = {
-        name: request.body.username,
-        password: request.body.password,
-      };
+
       API.insertUser(
         //TODO MANEJAR EL ERROR, no devolver /p si el usuario no ha iniciado sesión
         request.body.username,
@@ -56,6 +52,11 @@ module.exports = async function (fastify, opts) {
         request.body.email,
         request.body.password
       );
+      const user = {
+        username: request.body.username,
+        name:  request.body.name,
+        lastname: request.body.lastname,
+      };
       request.session.user = user;
       return reply.redirect("/p");
     },
