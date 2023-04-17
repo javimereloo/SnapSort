@@ -8,7 +8,8 @@ module.exports = async function (fastify, opts) {
     preHandler: (request, reply, done) => {
       // Comprobar si el usuario está autenticado
       if (!request.session.user) {
-        return reply.redirect('/login')
+        const errorMessage = "Por favor, regístrate o inicia sesión para visualizar este contenido"
+        return reply.redirect(`/login?errorMessage=${errorMessage}`)
       }
       // Continuar con la solicitud si el usuario está autenticado
       done();
