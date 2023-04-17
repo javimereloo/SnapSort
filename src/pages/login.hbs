@@ -25,15 +25,13 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-
     <div
       class="container h-100 d-flex flex-column align-items-center justify-content-center"
     >
       {{#if errorMessage}}
-      <div class="alert alert-success">
-        <strong>Success!</strong> error">Por favor, inicia sesión para acceder a ese contenido<
+      <div class="alert col-4 alert-warning">
+        <strong>Por favor, inicia sesión para acceder a ese contenido</strong> 
       </div>
-        <p class="/p>
       {{/if}}
       <div class="rounded col-4 bg-light card p-4" style="--bs-bg-opacity: .9;">
         <div class="card-body">
@@ -73,10 +71,13 @@
                   </div>
               {{/if}}
             </div>
+            <row>
             <button
               type="submit"
               class="btn btn-dark col-4 btn-block mb-2"
             >Entrar</button>
+              <a href="/signup" class="link-primary align-self-end" style="">¿Sin cuenta? Crea una aquí</a>
+            </row>
           </form>
         </div>
       </div>
