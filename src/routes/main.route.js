@@ -1,5 +1,5 @@
 const DB = require('../database/db.config.js')
-require('../database/API.js')
+const API= require('../database/API.js')
 
 module.exports = async function (fastify, opts) {
   fastify.route({
@@ -8,7 +8,7 @@ module.exports = async function (fastify, opts) {
     preHandler: (request, reply, done) => {
       // Comprobar si el usuario está autenticado
       if (!request.session.user) {
-        const errorMessage = "Por favor, regístrate o inicia sesión para visualizar este contenido"
+        const errorMessage = true
         return reply.redirect(`/login?errorMessage=${errorMessage}`)
       }
       // Continuar con la solicitud si el usuario está autenticado

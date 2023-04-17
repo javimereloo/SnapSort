@@ -13,6 +13,10 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: (request, reply) => {
+      if(request.query){
+        const error = request.query
+        return reply.view("/src/pages/login.hbs", error);
+      }
       return reply.view("/src/pages/login.hbs");
     },
   });
