@@ -15,9 +15,10 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: (request, reply) => {
-      let param = request.query.body.user
-      console.log("param", param)
-      return reply.view("/src/pages/main.hbs", param);
+      const param = request.query
+      console.log("--------------------------------")
+      console.log("param",  param)
+      return reply.view("/src/pages/main.hbs",  param);
     },
   });
 };

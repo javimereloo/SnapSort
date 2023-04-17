@@ -42,7 +42,7 @@ module.exports = async function (fastify, opts) {
         password: request.body.password,
       };
       request.session.user = user;
-      return reply.redirect("/p", {query: request.body});
+      reply.redirect("/p", {query: user});
     },
   });
 };
