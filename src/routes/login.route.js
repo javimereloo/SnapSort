@@ -6,13 +6,10 @@ module.exports = async function (fastify, opts) {
     method: "GET",
     url: "/login",
     preHandler: (request, reply, done) => {
-      // Comprobar si el usuario está autenticado
-      // if (request.session.user) {
-      //   // Devolver un error si el usuario no está autenticado
-      //   console.log(`Ya se ha iniciado sesión con ${request.session.user}`)
-      //   return done(new Error("Ya se ha iniciado sesión"));
-      // }
-      // Continuar con la solicitud si el usuario está autenticado
+      // Logout the user before a new login
+      if (request.session.user) {
+        request.session.destroy();
+      }
       done();
     },
     handler: (request, reply) => {
@@ -25,24 +22,27 @@ module.exports = async function (fastify, opts) {
     method: "POST",
     url: "/login",
     preHandler: async (request, reply, done) => {
-      const correctCredentials = await API.checkPassword(request.body.username, request.body.password);
+      const correctCredentials = await API.checkPassword(
+        request.body.username,
+        request.body.password
+      );
       if (!correctCredentials) {
-        const errorPassword = "Credenciales incorrectas"
-        const templateData = { errorPassword, username:request.body.username};
-        return reply.view("/src/pages/login.hbs", templateData); 
+        const errorPassword = "Credenciales incorrectas";
+        const templateData = { errorPassword, username: request.body.username };
+        return reply.view("/src/pages/login.hbs", templateData);
       }
       done();
     },
-    handler: async  (request, reply) => {
-      const userinfo = await API.getUserdata(request.body.username)
+    handler: async (request, reply) => {
+      const userinfo = await API.getUserdata(request.body.username);
       const user = {
         username: request.body.username,
-        name:  userinfo.name,
+        name: userinfo.name,
         lastname: userinfo.lastname,
       };
       request.session.user = user;
       request.session.isAuthenticated = true;
-      reply.redirect('/p')
+      reply.redirect("/p");
     },
   });
 };

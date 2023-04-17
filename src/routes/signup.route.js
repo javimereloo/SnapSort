@@ -6,17 +6,13 @@ module.exports = async function (fastify, opts) {
     method: "GET",
     url: "/signup",
     preHandler: (request, reply, done) => {
-      // Comprobar si el usuario está autenticado
       if (request.session.user) {
-        // Devolver un error si el usuario  está autenticado
-        console.log("Usuario ya registrado");
-        return reply.redirect("/");
+        //Close the user session if he's authenticted 
+        request.session.destroy();
       }
-      // Continuar con la solicitud si el usuario no está autenticado
       done();
     },
     handler: (req, reply) => {
-      // Manejar la solicitud del perfil del usuario
       return reply.view("/src/pages/register.hbs");
     },
   });
@@ -25,27 +21,44 @@ module.exports = async function (fastify, opts) {
     method: "POST",
     url: "/signup",
     handler: async (request, reply) => {
-      //First we check if any error occurred 
+      //First we check if any error occurred
       const username = await API.getUsername(request.body.username);
       if (username) {
-        const errorUsername = "Nombre de usuario ya en uso"
-        const templateData = {errorUsername, name:request.body.name, lastname:request.body.lastname, email: request.body.email};
-        return reply.view("/src/pages/register.hbs", templateData);  //TODO meter en el prehandler??
+        const errorUsername = "Nombre de usuario ya en uso";
+        const templateData = {
+          errorUsername,
+          name: request.body.name,
+          lastname: request.body.lastname,
+          email: request.body.email,
+        };
+        return reply.view("/src/pages/register.hbs", templateData); //TODO meter en el prehandler??
       }
 
       if (request.body.password !== request.body.repeatPassword) {
-        const errorPassword = "Las contraseñas no coinciden"
-        const templateData = { errorPassword, name:request.body.name, lastname:request.body.lastname, email: request.body.email };
-        return reply.view("/src/pages/register.hbs", templateData); 
-      }else if(Object.keys(request.body.password).length < process.env.MINIMUN_LENGTH){ //Basic security
-        const errorPassword = `La contraseña debe ser mínimo de ${process.env.MINIMUN_LENGTH} caracteres`
-        const templateData = {errorPassword, username:request.body.username, name:request.body.name, lastname:request.body.lastname, email: request.body.email };
-        return reply.view("/src/pages/register.hbs", templateData); 
+        const errorPassword = "Las contraseñas no coinciden";
+        const templateData = {
+          errorPassword,
+          name: request.body.name,
+          lastname: request.body.lastname,
+          email: request.body.email,
+        };
+        return reply.view("/src/pages/register.hbs", templateData);
+      } else if (
+        Object.keys(request.body.password).length < process.env.MINIMUN_LENGTH
+      ) {
+        //Basic security
+        const errorPassword = `La contraseña debe ser mínimo de ${process.env.MINIMUN_LENGTH} caracteres`;
+        const templateData = {
+          errorPassword,
+          username: request.body.username,
+          name: request.body.name,
+          lastname: request.body.lastname,
+          email: request.body.email,
+        };
+        return reply.view("/src/pages/register.hbs", templateData);
       }
 
-
-      API.insertUser(
-        //TODO MANEJAR EL ERROR, no devolver /p si el usuario no ha iniciado sesión
+      API.insertUser(//TODO MANEJAR EL ERROR, no devolver /p si el usuario no ha iniciado sesión
         request.body.username,
         request.body.name,
         request.body.lastname,
@@ -54,7 +67,7 @@ module.exports = async function (fastify, opts) {
       );
       const user = {
         username: request.body.username,
-        name:  request.body.name,
+        name: request.body.name,
         lastname: request.body.lastname,
       };
       request.session.user = user;
