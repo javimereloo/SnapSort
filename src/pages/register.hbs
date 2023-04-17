@@ -47,6 +47,7 @@
                 class="form-control {{#if errorUsername}} is-invalid{{/if}}"
                 required
                 placeholder="Nombre de usuario"
+                value= "{{#if username}} {{username}} {{/if}}"
               />
               {{#if errorUsername}}
               <div class="invalid-feedback">
@@ -83,20 +84,24 @@
                 name="email"
                 class="form-control"
                 placeholder="Email"
-                value= "{{#if name}} {{name}} {{/if}}"
+                value= "{{#if email}} {{email}} {{/if}}"
               />
             </div>
             <div class="row">
-
               <div class="form-outline col mb-4">
                 <input
                   type="password"
                   id="passwordInput"
                   name="password"
-                  class="form-control"
+                  class="form-control {{#if errorPassword}} is-invalid{{/if}}"
                   required
                   placeholder="Contraseña"
                 />
+                {{#if errorPassword}}
+                  <div class="invalid-feedback">
+                    {{errorPassword}}
+                  </div>
+                {{/if}}
               </div>
 
               <div class="form-outline col mb-4">
@@ -104,13 +109,17 @@
                   type="password"
                   id="repeatPasswordInput"
                   name="repeatPassword"
-                  class="form-control"
+                  class="form-control {{#if errorPassword}} is-invalid{{/if}}"
                   required
                   placeholder="Repite la contraseña"
                 />
               </div>
+              {{#if errorPassword}}
+                  <div class="invalid-feedback">
+                    {{errorPassword}}
+                  </div>
+                {{/if}}
             </div>
-
             <button
               type="submit"
               class="btn btn-dark col-6 btn-block mb-2"

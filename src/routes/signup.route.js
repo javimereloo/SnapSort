@@ -31,15 +31,19 @@ module.exports = async function (fastify, opts) {
       //First we check if any error occurred 
       const username = await API.getUsername(request.body.username);
       if (username) {
-        const errorUsername = "NOMBRE DE USUARIO YA EN USO"
+        const errorUsername = "Nombre de usuario ya en uso"
         const templateData = {errorUsername, name:request.body.name, lastname:request.body.lastname, email: request.body.email};
-        return reply.view("/src/pages/register.hbs", templateData); //TODO manejar los errores en la vista //TODO meter en el prehandler??
+        return reply.view("/src/pages/register.hbs", templateData);  //TODO meter en el prehandler??
       }
 
       if (request.body.password !== request.body.repeatPassword) {
-        const errorMessage = "LAS CONTRASEÑAS NO COINCIDEN"
-        const templateData = { errorMessage };
-        return reply.view("/src/pages/register.hbs", templateData); //TODO manejar los errores en la vista
+        const errorPassword = "Las contraseñas no coinciden"
+        const templateData = { errorPassword, name:request.body.name, lastname:request.body.lastname, email: request.body.email };
+        return reply.view("/src/pages/register.hbs", templateData); 
+      }else if(Object.keys(request.body.password).length < 6){ //Basic security
+        const errorPassword = "La contraseña debe ser mínimo de 6 caracteres"
+        const templateData = {errorPassword, username:request.body.username, name:request.body.name, lastname:request.body.lastname, email: request.body.email };
+        return reply.view("/src/pages/register.hbs", templateData); 
       }
 
       const user = {
