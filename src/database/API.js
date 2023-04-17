@@ -36,11 +36,11 @@ async function getUsername(username) {
 
 //Fuction to compare login password
 async function checkPassword(username, password) {
-  return new Promise((resolve, reject) => {
+  const storedHash = await getHash(username);
 
-    const storedHash = getHash(username);
-    console.log("password que llega> ", password)
-    console.log("hash que llega> ", storedHash)
+  return new Promise((resolve, reject) => {
+    console.log("password que llega> ", password);
+    console.log("hash que llega> ", storedHash);
     bcrypt.compare(password, storedHash, (err, result) => {
       if (err) {
         reject(err);
@@ -70,10 +70,11 @@ function getUserdata(username, callback) {
 }
 
 //Insert a new user
-function insertUser(username, name, lastname, email, password) {
+async function insertUser(username, name, lastname, email, password) {
+  const hashedPassword = await cryptPassword(password)
   db.run(
     "INSERT INTO usuario (username, name, lastname, email, password) VALUES (?, ?, ?, ?, ?)",
-    [username, name, lastname, email, password],
+    [username, name, lastname, email, hashedPassword],
     function (err) {
       if (err) {
         console.log(err.message);
@@ -84,17 +85,30 @@ function insertUser(username, name, lastname, email, password) {
   );
 }
 
+function deleteUser(username) {
+  return new Promise((resolve, reject) => {
+    db.run('DELETE FROM usuario WHERE username = ?', [username], (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+
 //-------------------------Auxiliar cryptographic methods-----------------------
 //Function that returns the hash of a password
 function cryptPassword(password) {
-  bcrypt.hash(password, 10, function (err, hash) {
-    if (err) {
-      console.error(err.message);
-      return null;
-    } else {
-      console.log(`La contraseña cifrada es: ${hash}`);
-      return hash;
-    }
+  return new Promise((resolve, reject) => {
+    bcrypt.hash(password, 10, (err, hash) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(hash);
+      }
+    });
   });
 }
 
@@ -112,22 +126,35 @@ function comparePassword(username, password) {
   });
 }
 
-function getHash(username) {
-  //get the stored hash
-  const storedHash = db.get(
-    "SELECT password FROM usuario WHERE username = ?",
-    [username],
-    function (err, row) {
-      if (err) {
-        console.log("Error getting password");
-      } else if (!row) {
-        console.log("Can´t find this username account");
-        return null;
-      } else {
-        return row;
+async function getHash(username) {
+  return new Promise((resolve, reject) => {
+    db.get(
+      "SELECT password FROM usuario WHERE username = ?",
+      [username],
+      (err, row) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(row ? row.password : null);
+        }
       }
-    }
-  );
+    );
+  });
+  //get the stored hash
+  // const storedHash = db.get(
+  //   "SELECT password FROM usuario WHERE username = ?",
+  //   [username],
+  //   function (err, row) {
+  //     if (err) {
+  //       console.log("Error getting password");
+  //     } else if (!row) {
+  //       console.log("Can´t find this username account");
+  //       return null;
+  //     } else {
+  //       return row;
+  //     }
+  //   }
+  // );
 }
 
 //Export the API OPERATIONS
