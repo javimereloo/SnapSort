@@ -37,10 +37,11 @@ async function getUsername(username) {
 //Fuction to compare login password
 async function checkPassword(username, password) {
   const storedHash = await getHash(username);
+  console.log("username que llega>", username)
+  console.log("password que llega>", password)
+  console.log("storedHash que llega>", storedHash)
 
   return new Promise((resolve, reject) => {
-    console.log("password que llega> ", password);
-    console.log("hash que llega> ", storedHash);
     bcrypt.compare(password, storedHash, (err, result) => {
       if (err) {
         reject(err);
@@ -98,6 +99,20 @@ function deleteUser(username) {
 }
 
 
+const fs = require('fs');
+function deleteDatabase() {
+  return new Promise((resolve, reject) => {
+    fs.unlink('src/database/SNAPSORT.sqlite', (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+
 //-------------------------Auxiliar cryptographic methods-----------------------
 //Function that returns the hash of a password
 function cryptPassword(password) {
@@ -127,6 +142,7 @@ function comparePassword(username, password) {
 }
 
 async function getHash(username) {
+  console.log()
   return new Promise((resolve, reject) => {
     db.get(
       "SELECT password FROM usuario WHERE username = ?",
@@ -140,21 +156,6 @@ async function getHash(username) {
       }
     );
   });
-  //get the stored hash
-  // const storedHash = db.get(
-  //   "SELECT password FROM usuario WHERE username = ?",
-  //   [username],
-  //   function (err, row) {
-  //     if (err) {
-  //       console.log("Error getting password");
-  //     } else if (!row) {
-  //       console.log("Can´t find this username account");
-  //       return null;
-  //     } else {
-  //       return row;
-  //     }
-  //   }
-  // );
 }
 
 //Export the API OPERATIONS
@@ -164,4 +165,5 @@ module.exports = {
   getUsername,
   getUserdata,
   checkPassword,
+  deleteDatabase,
 };

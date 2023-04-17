@@ -48,6 +48,7 @@
                 required
                 class="form-control"
                 placeholder="Nombre de usuario"
+                value= "{{#if username}}{{username}} {{/if}}"
               />
             </div>
 
@@ -57,9 +58,14 @@
                 id="passwordInput"
                 name="password"
                 required
-                class="form-control"
+                class="form-control {{#if errorPassword}} is-invalid{{/if}}"
                 placeholder="Contraseña"
               />
+              {{#if errorPassword}}
+                  <div class="invalid-feedback">
+                    {{errorPassword}}
+                  </div>
+              {{/if}}
             </div>
             <button
               type="submit"

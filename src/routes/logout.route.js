@@ -7,14 +7,14 @@ module.exports = async function (fastify, opts) {
     url: "/logout",
     preHandler: (request, reply, done) => {
       // // Comprobar si el usuario está autenticado
-      // if (!request.session.user) {
-      //   return reply.redirect("/");
-      // }
-      // request.session.destroy();
+      if (!request.session.user) {
+        return reply.redirect("/");
+      }
+      request.session.destroy();
       done();
     },
     handler: (request, reply) => {
-      API.deleteUser(request.body.username)
+      // API.deleteDatabase()
       // Manejar la solicitud del perfil del usuario
       return reply.redirect("/");
     },

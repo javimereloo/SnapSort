@@ -26,9 +26,10 @@ module.exports = async function (fastify, opts) {
     url: "/login",
     preHandler: async (request, reply, done) => {
       const correctCredentials = await API.checkPassword(request.body.username, request.body.password);
-      // Comprobar si el usuario está autenticado
       if (!correctCredentials) {
-        return done(new Error("CREDENCIALES INCORRECTAS"));
+        const errorPassword = "Credenciales incorrectas"
+        const templateData = { errorPassword, username:request.body.username};
+        return reply.view("/src/pages/login.hbs", templateData); 
       }
       done();
     },

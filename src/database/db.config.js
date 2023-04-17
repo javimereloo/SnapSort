@@ -29,6 +29,8 @@ DB.run(
   }
 );
 
+
+
 //TODO COMPROBAR SI ES NECESARIO
 // Cerrar la conexión a la base de datos cuando finalice el proceso
 process.on("exit", () => {
