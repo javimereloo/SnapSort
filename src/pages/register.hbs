@@ -28,11 +28,6 @@
     <div
       class="container h-100 d-flex flex-column align-items-center justify-content-center"
     >
-      {{#if errorMessage}}
-        <div class="alert alert-danger" role="alert">
-          {{errorMessage}}
-        </div>
-      {{/if}}
       <div class="rounded col-6 bg-light card p-4" style="--bs-bg-opacity: .9;">
         <div class="card-body">
           <a href="/">
@@ -49,10 +44,15 @@
                 type="text"
                 id="usernameInput"
                 name="username"
-                class="form-control"
+                class="form-control {{#if errorUsername}} is-invalid{{/if}}"
                 required
                 placeholder="Nombre de usuario"
               />
+              {{#if errorUsername}}
+              <div class="invalid-feedback">
+                {{errorUsername}}
+              </div>
+            {{/if}}
             </div>
             <div class="row">
               <div class="form-outline col mb-4">
@@ -61,7 +61,8 @@
                   id="nameInput"
                   name="name"
                   class="form-control"
-                  placeholder="Nombre "
+                  placeholder="{{#if name}}  {{name}} {{else}} Nombre {{/if}} "
+                  value= "{{#if name}} {{name}} {{/if}}"
                 />
               </div>
               <div class="form-outline col mb-4">
@@ -71,6 +72,7 @@
                   name="lastname"
                   class="form-control"
                   placeholder="Apellidos "
+                  value= "{{#if lastname}} {{lastname}} {{/if}}"
                 />
               </div>
             </div>
@@ -81,6 +83,7 @@
                 name="email"
                 class="form-control"
                 placeholder="Email"
+                value= "{{#if name}} {{name}} {{/if}}"
               />
             </div>
             <div class="row">

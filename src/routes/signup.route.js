@@ -31,8 +31,8 @@ module.exports = async function (fastify, opts) {
       //First we check if any error occurred 
       const username = await API.getUsername(request.body.username);
       if (username) {
-        const errorMessage = "NOMBRE DE USUARIO YA EN USO"
-        const templateData = { errorMessage };
+        const errorUsername = "NOMBRE DE USUARIO YA EN USO"
+        const templateData = {errorUsername, name:request.body.name, lastname:request.body.lastname, email: request.body.email};
         return reply.view("/src/pages/register.hbs", templateData); //TODO manejar los errores en la vista //TODO meter en el prehandler??
       }
 
