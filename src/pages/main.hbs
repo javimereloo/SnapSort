@@ -21,37 +21,62 @@
     ></script>
     <title>Galería</title>
 
-    <!--     <link rel="stylesheet" href="/templates.css" /> -->
+    <!--         <link rel="stylesheet" href="/templates.css" /> -->
 
   </head>
   <body>
 
     <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="#">
-        <img
-          src=""
-          width="30"
-          height="30"
-          alt=""
-        />
-        <button
-            type="button"
-            class="navbar-toggle collapsed"
-            data-toggle="collapse"
-            data-target="#navbar"
-            aria-expanded="false"
-            aria-controls="navbar"
-          >
-            <span class="navbar-toggler-icon"></span>
-<!--             <i class="ic fa fa-bars"></i> -->
-          </button>
-          <div style="padding: 15px 0;">
-            <a href="#" id="msbo"><i class="ic fa fa-bars"></i></a>
-          </div>
-      </a>
+      <button
+        type="button"
+        class="btn btn-outline-dark mx-3 navbar-toggle collapsed"
+        data-toggle="collapse"
+        data-target="#navbar"
+        aria-expanded="false"
+        aria-controls="navbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="http://example.com"
+              id="dropdown01"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-md-0">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Search"
+            aria-label="Search"
+          />
+        </form>
+      </div>
     </nav>
-    
-<!--     <div class="mnb navbar navbar-default navbar-fixed-top">
+
+    <!--     <div class="mnb navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <button
