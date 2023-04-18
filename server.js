@@ -12,8 +12,6 @@ fastify.register(require("@fastify/static"), {
   prefix: "/", // optional: default '/'
 });
 
-// fastify-formbody lets us parse incoming forms
-fastify.register(require("@fastify/formbody"));
 
 // point-of-view is a templating manager for fastify
 fastify.register(require("@fastify/view"), {
