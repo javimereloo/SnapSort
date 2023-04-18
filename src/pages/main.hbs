@@ -20,19 +20,7 @@
       crossorigin="anonymous"
     ></script>
     <title>Galería</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <script
-      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- import the webpage's stylesheet -->
     <!--     <link rel="stylesheet" href="/style.css" /> -->
@@ -41,42 +29,31 @@
 
   </head>
   <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button
-        class="navbar-toggler toggle"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarCollapse"
-        aria-controls="navbarCollapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </nav>
-
-    <!-- Sidebar -->
-    <div class="sidebar bg-light">
-      <nav class="nav flex-column">
-        <a class="nav-link active" href="#">Home</a>
-        <a class="nav-link" href="#">Page 1</a>
-        <a class="nav-link" href="#">Page 2</a>
-        <a class="nav-link" href="#">Page 3</a>
-      </nav>
+    <div id="mySidebar" class="sidebar">
+      <a
+        href="javascript:void(0)"
+        class="closebtn"
+        onclick="closeNav()"
+      >&times;</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
     </div>
 
-    <!-- Main content area -->
-    <div class="main">
-      <h1>Bootstrap Sidebar Example</h1>
-      <p>This is an example of a Bootstrap sidebar that expands and collapses
-        with a button in the navbar.</p>
+    <div id="main">
+      <button class="openbtn" onclick="openNav()">&#9776; Open Sidebar</button>
+      <h2>Collapsed Sidebar</h2>
+      <p>Content...</p>
     </div>
+
     <script>
-      $(document).ready(function() { // Hide the sidebar on load
-      $(".sidebar").hide(); // Toggle the sidebar on click of the toggle button
-      $(".toggle").click(function() { $(".sidebar").toggle(); }); });
+      function openNav() { document.getElementById("mySidebar").style.width =
+      "250px"; document.getElementById("main").style.marginLeft = "250px"; } /*
+      Set the width of the sidebar to 0 and the left margin of the page content
+      to 0 */ function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0"; }
     </script>
 
     <!--     <div
