@@ -20,17 +20,66 @@
       crossorigin="anonymous"
     ></script>
     <title>Galería</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    ></script>
 
     <!-- import the webpage's stylesheet -->
     <!--     <link rel="stylesheet" href="/style.css" /> -->
-    <link rel="stylesheet" href="/sidebars.css" />
+    <!--     <link rel="stylesheet" href="/sidebars.css" /> -->
+    <link rel="stylesheet" href="/templates.css" />
+
   </head>
   <body>
-    
-    
-    
-    
-<!--     <div
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button
+        class="navbar-toggler toggle"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarCollapse"
+        aria-controls="navbarCollapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar bg-light">
+      <nav class="nav flex-column">
+        <a class="nav-link active" href="#">Home</a>
+        <a class="nav-link" href="#">Page 1</a>
+        <a class="nav-link" href="#">Page 2</a>
+        <a class="nav-link" href="#">Page 3</a>
+      </nav>
+    </div>
+
+    <!-- Main content area -->
+    <div class="main">
+      <h1>Bootstrap Sidebar Example</h1>
+      <p>This is an example of a Bootstrap sidebar that expands and collapses
+        with a button in the navbar.</p>
+    </div>
+    <script>
+      $(document).ready(function() { // Hide the sidebar on load
+      $(".sidebar").hide(); // Toggle the sidebar on click of the toggle button
+      $(".toggle").click(function() { $(".sidebar").toggle(); }); });
+    </script>
+
+    <!--     <div
       class="d-flex flex-column h-100 flex-shrink-0 p-3 bg-light"
       style="width: 280px;"
     >
@@ -95,6 +144,6 @@
     </div>
      -->
 
-    <script src="sidebars.js"></script>
+    <!--     <script src="sidebars.js"></script> -->
   </body>
 </html>

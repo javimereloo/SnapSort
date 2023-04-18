@@ -1,0 +1,22 @@
+/* Make the sidebar fixed and add some styles */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100; /* Make sure the sidebar is above the content */
+      padding: 48px 0 0; /* Add some padding to the top of the sidebar */
+      box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1); /* Add a shadow to the left of the sidebar */
+    }
+
+    /* Add some padding to the main content area */
+    .main {
+      padding: 0 16px;
+    }
+
+    /* Hide the toggle button on small screens */
+    @media (max-width: 767.98px) {
+      .toggle {
+        display: none;
+      }
+    }
