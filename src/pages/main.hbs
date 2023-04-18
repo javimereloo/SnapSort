@@ -27,8 +27,10 @@
     
 <!------------------------NAVBAR----------------------------------------------------------------------------------->
     <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+
       <button
-        class="navbar-toggler"
+        class="mx-3 navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarsExample01"
@@ -38,6 +40,7 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+      </div>
     </nav>
     
 <!--------------------------SIDEBAR---------------------------------------------------------------------------------->
@@ -50,7 +53,7 @@
           href="/"
           class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
         >
-          <img  src="https://cdn.glitch.global/9a5417db-bb1a-4800-b72a-a85bd7bcfce3/SnapSort4.png?v=1681151222606" style="width:50;">
+          <img  src="https://cdn.glitch.global/9a5417db-bb1a-4800-b72a-a85bd7bcfce3/SnapSortH.png?v=1681847770477" style="height:50;">
         </a>
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
@@ -81,7 +84,7 @@
             aria-expanded="false"
           >
             <img
-              src="https://github.com/mdo.png"
+              src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"
               alt=""
               width="32"
               height="32"
@@ -99,8 +102,23 @@
           </ul>
         </div>
       </div>
-
     </div>
-    <script src="sidebars.js"></script>
+         
+      <div class="container fluid">
+        <h1> HOLA {{name}}</h1>
+        <h2> CON APELLIDO {{lastname}}</h2>
+      </div>
+    
+    <script >
+      function () {
+        'use strict'
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.forEach(
+          function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl)
+          }
+        )
+      }
+    </script>
   </body>
 </html>
