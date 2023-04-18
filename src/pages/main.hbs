@@ -24,26 +24,26 @@
     <link rel="stylesheet" href="sidebars.css" />
   </head>
   <body>
-    
-<!------------------------NAVBAR----------------------------------------------------------------------------------->
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
 
-      <button
-        class="mx-3 navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarsExample01"
-        aria-controls="navbarsExample01"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <!------------------------NAVBAR----------------------------------------------------------------------------------->
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+
+        <button
+          class="mx-3 navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarsExample01"
+          aria-controls="navbarsExample01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
       </div>
     </nav>
-    
-<!--------------------------SIDEBAR---------------------------------------------------------------------------------->
+
+    <!--------------------------SIDEBAR---------------------------------------------------------------------------------->
     <div class="sidebar-collapse collapse" id="navbarsExample01">
       <div
         class="d-flex flex-column flex-shrink-0 p-3 bg-light"
@@ -51,22 +51,29 @@
       >
         <a
           href="/"
-          class=" mb-3 mb-md-0 me-md-auto link-dark "
+          class="col  mb-3 mb-md-0 me-md-auto link-dark "
         >
           <img class="" src="https://cdn.glitch.global/9a5417db-bb1a-4800-b72a-a85bd7bcfce3/SnapSortH.png?v=1681851466520" style="height:3rem;">
         </a>
-        <a>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewbox="0 0 16 16">
-          <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-        </svg>
-          </a>
+        
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
-          <span class="fs-4">Biblioteca</span>
+          <div>
+            
+            <span class="fs-4">Biblioteca</span>
+            <a 
+            href="/"
+            class="col mx-3 mb-md-0 me-md-auto link-dark text-right "
+            >  
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" >
+              <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+            </svg>
+            </a>
+          </div>
+          
           <li class="nav-item">
             <a href="#" class="nav-link active" aria-current="page">
-              
-              Home
+              Toda la galería
             </a>
           </li>
           
@@ -74,7 +81,7 @@
           <span class="fs-4">Importaciones</span>
           <li>
             <a href="#" class="nav-link link-dark">
-              Dashboard
+              Importación del 23/08
             </a>
           </li>
 
@@ -110,21 +117,16 @@
     </div>
          
   <!------------------ RESTO DE LA VISTA-------------------------------------------------------->
-      <div class="container-fluid">
-        <h1> HOLA {{name}}</h1>
-        <h2> CON APELLIDO {{lastname}}</h2>
-      </div>
-    
-    <script >
-      function () {
-        'use strict'
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        tooltipTriggerList.forEach(
-          function (tooltipTriggerEl) {
-            new bootstrap.Tooltip(tooltipTriggerEl)
-          }
-        )
-      }
+    <div class="container-fluid">
+      <h1> HOLA {{name}}</h1>
+      <h2> CON APELLIDO {{lastname}}</h2>
+    </div>
+
+    <script>
+      function () { 'use strict' var tooltipTriggerList =
+      [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      tooltipTriggerList.forEach( function (tooltipTriggerEl) { new
+      bootstrap.Tooltip(tooltipTriggerEl) } ) }
     </script>
   </body>
 </html>
