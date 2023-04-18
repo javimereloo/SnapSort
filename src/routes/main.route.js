@@ -6,12 +6,13 @@ module.exports = async function (fastify, opts) {
     method: "GET",
     url: "/p",
     preHandler: (request, reply, done) => {
+      //TODO descomentar al final
       // Comprobar si el usuario está autenticado
-      if (!request.session.user) {
-        const errorMessage = true
-        return reply.redirect(`/login?errorMessage=${errorMessage}`)
-      }
-      // Continuar con la solicitud si el usuario está autenticado
+      // if (!request.session.user) {
+      //   const errorMessage = true
+      //   return reply.redirect(`/login?errorMessage=${errorMessage}`)
+      // }
+      // // Continuar con la solicitud si el usuario está autenticado
       done();
     },
     handler: (request, reply) => {
