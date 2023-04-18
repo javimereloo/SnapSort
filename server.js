@@ -28,10 +28,6 @@ fastify.register(require('./src/routes/signup.route.js'))
 fastify.register(require('./src/routes/logout.route.js'))
 
 
-//Using partial templates
-const fs = require('fs');
-const bootstrapPartial = fs.readFileSync('','utf8')
-
 //Configuration for session identification
 const fastifySession = require("@fastify/session");
 const fastifyCookie = require("@fastify/cookie");
