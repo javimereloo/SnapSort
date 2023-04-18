@@ -26,7 +26,6 @@ module.exports = async function (fastify, opts) {
     method: "POST",
     url: "/login",
     preHandler: async (request, reply, done) => {
-      console.log("Compruebo credenciales de", request.body.username, "con contraseña", request.body.password)
       const correctCredentials = await API.checkPassword(
         request.body.username,
         request.body.password
