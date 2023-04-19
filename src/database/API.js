@@ -75,7 +75,8 @@ async function insertUser(username, name, lastname, email, password) {
   return new Promise((resolve, reject) => {
     db.run(
       "INSERT INTO usuario (username, name, lastname, email, password) VALUES (?, ?, ?, ?, ?)",
-      [username, name, lastname, email, hashedPassword], (err) => {
+      [username, name, lastname, email, hashedPassword],
+      (err) => {
         if (err) {
           reject(err);
         } else {
@@ -88,15 +89,26 @@ async function insertUser(username, name, lastname, email, password) {
 }
 
 //Insert a new importation folder
-async function insertImport(username, urlFolder){
-  return new Promise((resolve,reject) => {
-    const date = 
-    db.run(``,[], (err) => {
-      
+async function insertImport(username, urlFolder) {
+  return new Promise((resolve, reject) => {
+    const now = new Date();
+    console.log("la fecha now es ", now);
+    const currentDate = now.toISOString().slice(0, 10);
+    console.log("la fecha currentDate es ", currentDate);
+    const folderName = "importación".concat(" ", currentDate);
+    db.run(
+      `INSERT INTO importacion (username, urlFolder, date, nameFolder) VALUES (?,?,?,?)`,
+      [username, urlFolder, currentDate, folderName],
+      (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+          console.log("Nueva importación realizada por el usuario", username);
+        }
       }
     );
   });
-  
 }
 
 function deleteUser(username) {
@@ -118,7 +130,6 @@ function deleteDatabase() {
       if (err) {
         reject(err);
       } else {
-        
         resolve();
       }
     });
@@ -177,4 +188,5 @@ module.exports = {
   getUserdata,
   checkPassword,
   deleteDatabase,
+  insertImport,
 };
