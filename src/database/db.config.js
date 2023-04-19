@@ -1,4 +1,3 @@
-//THIS FILE MAY BE EXECUTED ONE TO CREATE THE INSTANCE
 //AND THE NECESSARY TABLES
 const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
@@ -28,6 +27,24 @@ DB.run(
     } 
   }
 );
+
+// Create table for importation info
+DB.run(
+  `CREATE TABLE IF NOT EXISTS importacion (
+          username TEXT, 
+          urlFolder TEXT, 
+          date DATE NOT NULL, 
+          nameFolder TEXT DEFAULT 'importación', 
+          PRIMARY KEY(username, urlFolder),
+          FOREIGN KEY(username) REFERENCES cliente(username)
+          )`,
+  (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+  }
+);
+
 
 
 

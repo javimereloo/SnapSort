@@ -87,6 +87,18 @@ async function insertUser(username, name, lastname, email, password) {
   });
 }
 
+//Insert a new importation folder
+async function insertImport(username, urlFolder){
+  return new Promise((resolve,reject) => {
+    const date = 
+    db.run(``,[], (err) => {
+      
+      }
+    );
+  });
+  
+}
+
 function deleteUser(username) {
   return new Promise((resolve, reject) => {
     db.run("DELETE FROM usuario WHERE username = ?", [username], (err) => {
