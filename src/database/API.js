@@ -72,17 +72,30 @@ function getUserdata(username) {
 //Insert a new user
 async function insertUser(username, name, lastname, email, password) {
   const hashedPassword = await cryptPassword(password);
-  db.run(
-    "INSERT INTO usuario (username, name, lastname, email, password) VALUES (?, ?, ?, ?, ?)",
-    [username, name, lastname, email, hashedPassword],
-    function (err) {
-      if (err) {
-        console.log(err.message);
-      } else {
-        console.log(`Se ha insertado ${this.changes} fila`);
+  // db.run(
+  //   "INSERT INTO usuario (username, name, lastname, email, password) VALUES (?, ?, ?, ?, ?)",
+  //   [username, name, lastname, email, hashedPassword],
+  //   function (err) {
+  //     if (err) {
+  //       console.log(err.message);
+  //     } else {
+  //       console.log(`Se ha insertado ${this.changes} fila`);
+  //     }
+  //   }
+  // );
+  return new Promise((resolve, reject) => {
+    db.run(
+      "INSERT INTO usuario (username, name, lastname, email, password) VALUES (?, ?, ?, ?, ?)",
+      [username, name, lastname, email, hashedPassword], (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+          console.log("Nuevo usuario insertado en la base de datos ");
+        }
       }
-    }
-  );
+    );
+  });
 }
 
 function deleteUser(username) {

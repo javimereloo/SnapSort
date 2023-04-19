@@ -7,7 +7,7 @@ module.exports = async function (fastify, opts) {
     url: "/signup",
     preHandler: (request, reply, done) => {
       if (request.session.user) {
-        //Close the user session if he's authenticted 
+        //Close the user session if he's authenticted
         request.session.destroy();
       }
       done();
@@ -57,21 +57,26 @@ module.exports = async function (fastify, opts) {
         };
         return reply.view("/src/pages/register.hbs", templateData);
       }
+      
+      try {
+        API.insertUser(
+          request.body.username,
+          request.body.name,
+          request.body.lastname,
+          request.body.email,
+          request.body.password
+        );
+      } catch (error) {
+        reply.code(500).send("Error al crear usuario");
+      }
 
-      API.insertUser(//TODO MANEJAR EL ERROR, no devolver /p si el usuario no ha iniciado sesión
-        request.body.username,
-        request.body.name,
-        request.body.lastname,
-        request.body.email,
-        request.body.password
-      );
       const user = {
         username: request.body.username,
         name: request.body.name,
         lastname: request.body.lastname,
       };
       request.session.user = user;
-      return reply.redirect("/p");
+      return reply.redirect("/main");
     },
   });
 };
