@@ -16,7 +16,7 @@ let DB = new sqlite3.Database(dbPath, (err) => {
 
 // Create a table for user information
 DB.run(
-  `CREATE TABLE IF NOT EXISTS usuario (
+  `CREATE TABLE usuario (
           username TEXT PRIMARY KEY, 
           name TEXT, 
           lastname TEXT, 

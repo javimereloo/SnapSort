@@ -117,6 +117,7 @@ function deleteDatabase() {
       if (err) {
         reject(err);
       } else {
+        
         resolve();
       }
     });
