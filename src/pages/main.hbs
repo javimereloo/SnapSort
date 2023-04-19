@@ -49,8 +49,9 @@
 
                           <span class="col-8 fs-4">Biblioteca</span>
                           <a 
-                          href="/"
-                          class="col mt-2 text-center link-dark "
+                            href="/new"
+                            class="col mt-2 text-center link-dark "
+                            data-toggle="tooltip" title="Haz clic aquí para añadir una nueva importación"
                           >  
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" >
                             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
@@ -121,6 +122,36 @@
                 >
                   <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="col-4 dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Ordenar por fecha
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </div>
+                <div class="col-4 dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Ordenar por fecha
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </div>
+                <div class="col-4 dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Ordenar por fecha
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </div>
               </div>
             </nav>  
             <!------------------------END NAVBAR--------------------------------------------------------------------------------->
@@ -129,11 +160,11 @@
             <div class="page-header pt-3">
                 <h2>Galería del usuario {{username}}</h2>
             </div>
-            <p class="lead">A offcanvas "push" vertical nav menu example.</p>
+            <p class="lead"> 0 imágenes</p>
             <hr>
             <div class="row">
                 <div class="col-12">
-                    <p>This is a simple collapsing sidebar menu for Bootstrap 5. Unlike the Offcanvas component that overlays the content.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam volutpat consectetur ex, nec lobortis lectus ullamcorper vehicula. Nunc vel metus ac magna eleifend bibendum. Quisque urna elit, lacinia eu ante sit amet, laoreet pretium dui. Mauris a est eget sem aliquet tincidunt nec vitae massa. Ut faucibus ligula ut lacus porttitor, vitae pretium orci ullamcorper. Phasellus commodo non est quis ultricies. Mauris et finibus lorem. Nunc pretium velit quis placerat interdum.</p>
                 </div>
             </div>
           </div>
@@ -141,5 +172,11 @@
     </div>
 </div>
 
+    <script>
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+    </script>
   </body>
 </html>
