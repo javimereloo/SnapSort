@@ -4,7 +4,7 @@ const API= require('../database/API.js')
 module.exports = async function (fastify, opts) {
   fastify.route({
     method: "GET",
-    url: "/p",
+    url: "/main",
     preHandler: (request, reply, done) => {
       //TODO descomentar al final
       // Comprobar si el usuario está autenticado
