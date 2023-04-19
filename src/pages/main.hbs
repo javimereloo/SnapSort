@@ -45,14 +45,14 @@
 
                       <hr />
                       <ul class="nav nav-pills flex-column mb-auto">
-                        <div>
+                        <div class="row">
 
-                          <span class="fs-4">Biblioteca</span>
+                          <span class="col-8 fs-4">Biblioteca</span>
                           <a 
                           href="/"
-                          class="col mx-3 mb-md-0 me-md-auto link-dark text-right "
+                          class="col mt-2 text-center link-dark "
                           >  
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" >
                             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                           </svg>
                           </a>
@@ -95,9 +95,9 @@
                           class="dropdown-menu text-small shadow"
                           aria-labelledby="dropdownUser2"
                         >
-                          <li><a class="dropdown-item" href="#">Profile</a></li>
+                          <li><a class="dropdown-item" href="/perfil">perfil</a></li>
                           <li><hr class="dropdown-divider" /></li>
-                          <li><a class="dropdown-item" href="#">Sign out</a></li>
+                          <li><a class="dropdown-item bg-danger text-white" href="/logout">Log out</a></li>
                         </ul>
                       </div>
                     </div>
@@ -124,6 +124,8 @@
               </div>
             </nav>  
             <!------------------------END NAVBAR--------------------------------------------------------------------------------->
+            <!------------------ RESTO DE LA VISTA-------------------------------------------------------->
+
             <div class="page-header pt-3">
                 <h2>Bootstrap 5 Sidebar Menu - Simple</h2>
             </div>
@@ -138,18 +140,6 @@
         </main>
     </div>
 </div>
-  <!------------------ RESTO DE LA VISTA-------------------------------------------------------->
 
-    <!--     <div class="container-fluid">
-      <h1> HOLA {{name}}</h1>
-      <h2> CON APELLIDO {{lastname}}</h2>
-    </div>
- -->
-    <!--     <script>
-      function () { 'use strict' var tooltipTriggerList =
-      [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-      tooltipTriggerList.forEach( function (tooltipTriggerEl) { new
-      bootstrap.Tooltip(tooltipTriggerEl) } ) }
-    </script> -->
   </body>
 </html>
