@@ -107,9 +107,9 @@
         </div>
        <!-------------------------- END SIDEBAR---------------------------------------------------------------------------------->
         <main class="col ps-md-2 pt-2">
-          <div class="container-fluid w-100">
+          <div class="container-fluid p-1 w-100">
           <!---------------------------NAVBAR------------------------------------------------------------------------------------>
-            <nav class="navbar navbar-light bg-light">
+            <nav class="navbar p-2 navbar-light bg-light">
               <div class="container-fluid ">
                 
                 <button
@@ -123,40 +123,32 @@
                 >
                   <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="  ">
-                <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
-                <li class="col nav-item dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDate" data-bs-toggle="dropdown" aria-expanded="false">
-                    Ordenar por fecha
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownDate">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  </ul>
-                </li>
-                <li class=" col nav-item dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownScore" data-bs-toggle="dropdown" aria-expanded="false">
-                    Ordenar por fecha
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownScore">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  </ul>
-                </li>
-                <li class="col nav-item  dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownLocation" data-bs-toggle="dropdown" aria-expanded="false">
-                    Ordenar por fecha
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownLocation">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  </ul>
-                </li>
-                </ul>
-               </div>
+                <div class="row ">
+                  <div class="col nav-item dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDate" data-bs-toggle="dropdown" aria-expanded="false">
+                      Ordenar por fecha
+                    </button>
+                    <ul class="form-select" aria-labelledby="dropdownDate">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                    </ul>
+                  </div>
+                  <div class=" col nav-item dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownScore" data-bs-toggle="dropdown" aria-expanded="false">
+                      Ordenar por score
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownScore">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                    </ul>
+                  </div>
+                  <div class="col nav-item  dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownLocation" data-bs-toggle="dropdown" aria-expanded="false">
+                       quitar
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownLocation">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </nav>  
             <!------------------------END NAVBAR--------------------------------------------------------------------------------->
