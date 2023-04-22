@@ -38,9 +38,10 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <form method="POST" action="/new" >
           <div class="modal-body">
-            <form method="POST" action="/new" >
-              <div class="row form-outline mb-4">
+            
+              <div class=" form-outline mb-4">
                 <input
                   type="text"
                   id="importationNameInput"
@@ -50,22 +51,23 @@
                 />
                 
               </div>
-              
-              <input
-                  type="text"
-                  id="urlInput"
-                  name="url"
-                  required
-                  class="form-control"
-                  placeholder="URL a la carpeta de Drive*"
-                />
-              
-            </form>
+              <div class=" form-outline mb-4">
+                <input
+                    type="text"
+                    id="urlInput"
+                    name="url"
+                    required
+                    class="form-control"
+                    placeholder="URL a la carpeta de Drive*"
+                  />
+              </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary">Importar carpeta</button>
+            <button type="submit" class="btn btn-primary">Importar carpeta</button>
           </div>
+         </form>
+
         </div>
       </div>
     </div>
