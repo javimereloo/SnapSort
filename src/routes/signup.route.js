@@ -76,7 +76,7 @@ module.exports = async function (fastify, opts) {
         lastname: request.body.lastname,
       };
       request.session.user = user;
-      return reply.redirect("/main");
+      return reply.redirect("/home");
     },
   });
 };

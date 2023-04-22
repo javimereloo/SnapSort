@@ -63,9 +63,9 @@ DB.run(
 
 // Create table image 
 DB.run(
-  `CREATE TABLE IF NOT EXISTS table (
+  `CREATE TABLE IF NOT EXISTS image (
           url TEXT, 
-          FOREIGN KEY(url ) REFERENCES imagenImpor(url)
+          FOREIGN KEY(url) REFERENCES imagenImpor(url)
           )`,
   (err) => {
     if (err) {

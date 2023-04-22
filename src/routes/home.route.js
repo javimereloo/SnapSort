@@ -4,7 +4,7 @@ const API= require('../database/API.js')
 module.exports = async function (fastify, opts) {
   fastify.route({
     method: "GET",
-    url: "/main",
+    url: "/home",
     preHandler: (request, reply, done) => {
       //TODO descomentar al final
       // Comprobar si el usuario está autenticado
@@ -17,7 +17,7 @@ module.exports = async function (fastify, opts) {
     },
     handler: (request, reply) => {
       const param = request.session.user
-      return reply.view("/src/pages/main.hbs",  param);
+      return reply.view("/src/pages/home.hbs",  param);
     },
   });
 };

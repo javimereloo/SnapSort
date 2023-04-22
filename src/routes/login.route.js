@@ -46,7 +46,7 @@ module.exports = async function (fastify, opts) {
       };
       request.session.user = user;
       request.session.isAuthenticated = true;
-      reply.redirect("/main");
+      reply.redirect("/home");
     },
   });
 };

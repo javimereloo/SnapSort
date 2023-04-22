@@ -30,6 +30,7 @@
     "glitch"
   ],
   "devDependencies": {
+    "jasmine": "^4.6.0",
     "nodemon": "^2.0.22"
   }
 }

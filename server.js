@@ -25,7 +25,7 @@ fastify.register(require("@fastify/view"), {
 //Import routes 
 fastify.register(require('./src/routes/index.route.js'))
 fastify.register(require('./src/routes/login.route.js'))
-fastify.register(require('./src/routes/main.route.js'))
+fastify.register(require('./src/routes/home.route.js'))
 fastify.register(require('./src/routes/signup.route.js'))
 fastify.register(require('./src/routes/logout.route.js'))
 
@@ -52,6 +52,6 @@ fastify.listen(
       console.error(err);
       process.exit(1);
     }
-    console.log(`Your app is listening on ${address}`);
+    console.log(`La aplicación está activa en ${address}`);
   }
 );
