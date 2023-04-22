@@ -28,25 +28,49 @@
     <link rel="stylesheet" href="sidebars.css" />
   </head>
   <body>
-     
-   
-    <div class="container-fluid">
-      <div class="modal fade" id="modalNewImport">
-      <div class="modal-dialog">
+     <!-- Modal new importation -->
+    <div class="modal fade" id="modalNewImport" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Título del Modal</h5>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h5 class="modal-title" id="modalNewImportLongTitle">Importar una carpeta</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
-            Contenido del Modal
+            <form method="POST" action="/new" >
+              <div class="row form-outline mb-4">
+                <input
+                  type="text"
+                  id="importationNameInput"
+                  name="importationName"
+                  class="form-control"
+                  placeholder="Dale un título a la importación"
+                />
+                
+              </div>
+              
+              <input
+                  type="text"
+                  id="urlInput"
+                  name="url"
+                  required
+                  class="form-control"
+                  placeholder="URL a la carpeta de Drive*"
+                />
+              
+            </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary">Importar carpeta</button>
           </div>
         </div>
       </div>
     </div>
+   
+    <div class="container-fluid">
     <div class="row vh-100 flex-nowrap">
        <!--------------------------SIDEBAR---------------------------------------------------------------------------------->
         <div class="col-auto  px-0">
@@ -70,8 +94,8 @@
                           <span class="col-8 fs-4">Biblioteca</span>
                           <a 
                             href="#"
-                            data-toggle="modal" 
-                            data-target="#modalNewImport"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#modalNewImport"
                             class="col mt-2 text-center link-dark "
                           >  
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" >
@@ -193,10 +217,10 @@
 
     <script>
 
-    $(document).ready(function(){
-      // Inicializar los modales de Bootstrap
-      $('#modalNewImport').modal();
-    });
+    // $(document).ready(function(){
+    //   // Inicializar los modales de Bootstrap
+    //   $('#modalNewImport').modal();
+    // });
       
       
     </script>
