@@ -45,8 +45,34 @@ DB.run(
   }
 );
 
+// Create table for imagenImpor that contains all images 
+// from a Drive folder 
+DB.run(
+  `CREATE TABLE IF NOT EXISTS imagenImpor(
+          url TEXT, 
+          urlFolder TEXT, 
+          PRIMARY KEY(url , urlFolder),
+          FOREIGN KEY(urlFolder ) REFERENCES importacion(urlFolder)
+          )`,
+  (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+  }
+);
 
-
+// Create table image 
+DB.run(
+  `CREATE TABLE IF NOT EXISTS table (
+          url TEXT, 
+          FOREIGN KEY(url ) REFERENCES imagenImpor(url)
+          )`,
+  (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+  }
+);
 
 //TODO COMPROBAR SI ES NECESARIO
 // Cerrar la conexión a la base de datos cuando finalice el proceso
