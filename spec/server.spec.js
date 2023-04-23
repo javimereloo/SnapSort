@@ -4,8 +4,9 @@ const fastify = require("../server.js");
 
 describe("Probando rutas servidor ", () => {
   it("should return login page", (done) => {
-    supertest(fastify).
-    get("/login").
-    expect(200);
+    supertest(fastify.server)
+    .get("/login")
+    .expect(200, done)
+    // .end((error) => { error ? done.fail(error) : done() });
   });
 });

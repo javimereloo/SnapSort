@@ -55,3 +55,5 @@ fastify.listen(
     console.log(`La aplicación está activa en ${address}`);
   }
 );
+
+module.exports = fastify; 
