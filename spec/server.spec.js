@@ -13,3 +13,7 @@ describe("Probando rutas servidor ", () => {
       });
   });
 });
+
+afterAll(() => {
+  server.close();
+});
