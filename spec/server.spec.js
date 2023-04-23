@@ -1,5 +1,6 @@
 const supertest = require("supertest");
-const server   = require("../server.js");
+const fastify   = require("../server.js");
+const server = fastify.server;
 
 describe("Probando rutas servidor ", () => {
   it("should return login page", (done) => {
