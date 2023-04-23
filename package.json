@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-     "test": "node\_modules/.bin/ava spec/\*\*/\*.spec.js --verbose"},
+    "test": "jasmine"
   },
   "dependencies": {
     "@fastify/cookie": "^8.3.0",
