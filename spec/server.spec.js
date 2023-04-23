@@ -1,12 +1,14 @@
 const supertest = require("supertest");
-const assert = require("assert");
-const fastify = require("../server.js");
+const app  = require("../server.js");
 
 describe("Probando rutas servidor ", () => {
   it("should return login page", (done) => {
-    supertest(fastify.server)
+    supertest(app)
     .get("/login")
-    .expect(200, done)
-    // .end((error) => { error ? done.fail(error) : done() });
+    .expect(200)
+    .end((err, res) => {
+        if (err) return done.fail(err);
+        done();
+      });
   });
 });
