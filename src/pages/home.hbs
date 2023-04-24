@@ -115,7 +115,7 @@
                         </li>
                         {{#each importaciones}}
                         <li>
-                          <a href="/home/{{this.[1]}}" class="nav-link link-dark {{#if (eq (toString currentPage) (toString this.[1]) )}}active{{/if}}"> 
+                          <a href="/home/{{this.[1]}}" class="nav-link link-dark {{#if (eq currentPage this.[1])}}active{{/if}}"> 
                             {{this.[1]}}
                           </a>
                         </li>
