@@ -16,11 +16,11 @@ module.exports = async function (fastify, opts) {
     },
     handler: async (request, reply) => {
       const importaciones = await API.getImportaciones(request.session.user.username);
-      console.log('EL map importaciones contiene', importaciones);
-      console.log('prueba ', importaciones.size);
       const param = { 
         user: request.session.user,
-        importaciones: importaciones 
+        importaciones: importaciones,
+        importacionesSize: importaciones.size,
+        
       };
       return reply.view("/src/pages/home.hbs", param);
     },
