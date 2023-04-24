@@ -95,9 +95,9 @@ async function insertImport(username, urlFolder) {
     console.log("la fecha now es ", now);
     const currentDate = now.toISOString().slice(0, 10);
     console.log("la fecha currentDate es ", currentDate);
-    
-    const day = now.getDate().toString().padStart(2, '0');
-    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+
+    const day = now.getDate().toString().padStart(2, "0");
+    const month = (now.getMonth() + 1).toString().padStart(2, "0");
     const dateStr = `${day}/${month}`;
     const folderName = "importación del".concat(" ", dateStr);
     db.run(
@@ -134,9 +134,9 @@ async function changeImportName(username, urlFolder, importName) {
 }
 
 //Return the importations from a user
-async function getImportaciones(username){
-  return new Promise((resolve,reject)=>{
-    db.get(
+async function getImportaciones(username) {
+  return new Promise((resolve, reject) => {
+    db.all(
       "SELECT nameFolder, urlFolder FROM importacion WHERE username = ?",
       [username],
       (err, rows) => {
@@ -144,13 +144,15 @@ async function getImportaciones(username){
           reject(err);
         }
         if (rows) {
-          const importaciones = rows.map(row => ({
-            nameFolder: row.nameFolder,
-            urlFolder: row.urlFolder
-          }));
-          resolve(importaciones);
+          // const importaciones = rows.map((row) => ({
+          //   nameFolder: row.nameFolder,
+          //   urlFolder: row.urlFolder,
+          // }));
+          // resolve(importaciones);
+          console.log('DB:' , rows.nameFolder);
+          resolve(rows.nameFolder);
         } else {
-          resolve(null);
+          resolve([]);
         }
       }
     );
@@ -236,5 +238,4 @@ module.exports = {
   deleteDatabase,
   insertImport,
   getImportaciones,
-  
 };
