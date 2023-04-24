@@ -8,28 +8,32 @@ function isActive(route) {
 module.exports = async function (fastify, opts) {
   fastify.route({
     method: "GET",
-    url: "/home",
+     url:"/home/:folderName",
     preHandler: (request, reply, done) => {
       // Comprobar si el usuario está autenticado
       if (!request.session.user) {
         const errorMessage = true;
         return reply.redirect(`/login?errorMessage=${errorMessage}`);
       }
-      // // Continuar con la solicitud si el usuario está autenticado
       done();
     },
     handler: async (request, reply) => {
       const importaciones = await API.getImportaciones(request.session.user.username);
+      const {currentPage} = request.params;
+      const value = currentPage || "Galeria";
       const param = { 
         user: request.session.user,
         importaciones: importaciones,
         importacionesSize: importaciones.size,
-        currentPage: 'Galeria',
+        currentPage: value,
       };
       return reply.view("/src/pages/home.hbs", param);
     },
   });
+  
 
+  
+  //Route to add a new importation 
   fastify.route({
     method: "POST",
     url: "/home/new",
