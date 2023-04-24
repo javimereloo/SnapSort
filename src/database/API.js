@@ -129,6 +129,26 @@ async function changeImportName(username, urlFolder, importName) {
   });
 }
 
+//Return the importations from a user
+async function getImportaciones(username){
+  return new Promise((resolve,reject)=>{
+    db.get(
+      "SELECT nameFolder, urlFolder FROM importacion WHERE username = ?",
+      [username],
+      (err, row) => {
+        if (err) {
+          reject(err);
+        }
+        if (row) {
+          resolve({ name: row.name, lastname: row.lastname });
+        } else {
+          resolve(null);
+        }
+      }
+    );
+  });
+}
+
 function deleteUser(username) {
   return new Promise((resolve, reject) => {
     db.run("DELETE FROM usuario WHERE username = ?", [username], (err) => {

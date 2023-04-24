@@ -19,6 +19,7 @@
     "fastify": "^4.15.0",
     "handlebars": "^4.7.7",
     "jest": "^29.5.0",
+    "node-notifier": "^10.0.1",
     "sqlite3": "^5.1.6"
   },
   "engines": {

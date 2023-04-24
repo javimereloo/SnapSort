@@ -44,7 +44,7 @@ module.exports = async function (fastify, opts) {
           }
         })
         .catch((err) => {
-          console.error("Ocurrió un error:", err);
+          console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
         });
       reply.redirect("/home");
     },
