@@ -33,21 +33,20 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: async (request, reply) => {
-      API.insertImport(request.body.username, request.body.url)
-        .then(()=>{
+      API.insertImport(request.session.user.username, request.body.url)
+        .then(() => {
           if (request.body.importationName) {
-        API.changeImportName(
-          request.body.importationName,
-          request.body.url,
-          request.session.user.username
-        );
-      }
+            API.changeImportName(
+              request.body.importationName,
+              request.body.url,
+              request.session.user.username
+            );
+          }
+        })
+        .catch((err) => {
+          console.error("Ocurrió un error:", err);
+        });
       reply.redirect("/home");
-      })
-      .catch((err)=>{
-        console.error("Ocurrió un error:", error);
-      })
-
     },
   });
 };

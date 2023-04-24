@@ -38,7 +38,7 @@ fastify.register(fastifySession, {
   secret: process.env.SECRET_KEY,
   cookie: {
     secure: false,
-    maxAge: 1440000, // Tiempo de expiración de la cookie 4h
+    maxAge: 14400000, // Tiempo de expiración de la cookie 4h
   },
   saveUninitialized: true,
 });
