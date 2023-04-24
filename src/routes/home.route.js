@@ -27,8 +27,6 @@ module.exports = async function (fastify, opts) {
         importacionesSize: importaciones.size,
         currentPage: value,
       };
-      console.log('Value', value);
-      console.log('folderName', folderName);
       return reply.view("/src/pages/home.hbs", param);
     },
   });
@@ -62,7 +60,7 @@ module.exports = async function (fastify, opts) {
         .catch((err) => {
           console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
         });
-      reply.redirect("/home");
+      reply.redirect("/home/");
     },
   });
 };
