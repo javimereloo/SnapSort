@@ -95,7 +95,11 @@ async function insertImport(username, urlFolder) {
     console.log("la fecha now es ", now);
     const currentDate = now.toISOString().slice(0, 10);
     console.log("la fecha currentDate es ", currentDate);
-    const folderName = "importación del".concat(" ", currentDate.d);
+    
+    const day = now.getDate().toString().padStart(2, '0');
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const dateStr = `${day}/${month}`;
+    const folderName = "importación del".concat(" ", dateStr);
     db.run(
       `INSERT INTO importacion (username, urlFolder, date, nameFolder) VALUES (?,?,?,?)`,
       [username, urlFolder, currentDate, folderName],

@@ -17,8 +17,9 @@ module.exports = async function (fastify, opts) {
     handler: async (request, reply) => {
       const importaciones = await API.getImportaciones(request.session.user.username);
       console.log('EL vector importaciones contiene', importaciones);
+      console.log('prueba ', importaciones.nameFolder)
       const param = request.session.user;
-      return reply.view("/src/pages/home.hbs", importaciones);
+      return reply.view("/src/pages/home.hbs", param, importaciones);
     },
   });
 
