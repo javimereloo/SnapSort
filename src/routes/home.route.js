@@ -19,14 +19,16 @@ module.exports = async function (fastify, opts) {
     },
     handler: async (request, reply) => {
       const importaciones = await API.getImportaciones(request.session.user.username);
-      const {currentPage} = request.params;
-      const value = currentPage || "Galeria";
+      const folderName = request.params.folderName;
+      const value = folderName || "Galeria";
       const param = { 
         user: request.session.user,
         importaciones: importaciones,
         importacionesSize: importaciones.size,
         currentPage: value,
       };
+      console.log('Value', value);
+      console.log('folderName', folderName);
       return reply.view("/src/pages/home.hbs", param);
     },
   });
