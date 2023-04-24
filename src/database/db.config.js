@@ -31,8 +31,8 @@ DB.run(
 // Create table for importation info
 DB.run(
   `CREATE TABLE IF NOT EXISTS importacion (
-          username TEXT, 
-          urlFolder TEXT, 
+          username TEXT NOT NULL, 
+          urlFolder TEXT NOT NULL, 
           date DATE NOT NULL, 
           nameFolder TEXT DEFAULT 'importación', 
           PRIMARY KEY(username, urlFolder),
@@ -49,8 +49,8 @@ DB.run(
 // from a Drive folder 
 DB.run(
   `CREATE TABLE IF NOT EXISTS imagenImpor(
-          url TEXT, 
-          urlFolder TEXT, 
+          url TEXT NOT NULL, 
+          urlFolder TEXT NOT NULL, 
           PRIMARY KEY(url , urlFolder),
           FOREIGN KEY(urlFolder ) REFERENCES importacion(urlFolder)
           )`,
