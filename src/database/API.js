@@ -144,13 +144,11 @@ async function getImportaciones(username) {
           reject(err);
         }
         if (rows) {
-          // const importaciones = rows.map((row) => ({
-          //   nameFolder: row.nameFolder,
-          //   urlFolder: row.urlFolder,
-          // }));
-          // resolve(importaciones);
-          console.log('DB:' , rows.nameFolder);
-          resolve(rows.nameFolder);
+          const importaciones = new Map();
+          rows.forEach((row) => {
+            importaciones.set(row.urlFolder, row.nameFolder);
+          });
+          resolve(importaciones);
         } else {
           resolve([]);
         }
