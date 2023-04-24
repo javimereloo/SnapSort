@@ -1,6 +1,10 @@
 const DB = require("../database/db.config.js");
 const API = require("../database/API.js");
 
+function isActive(route) {
+  return this.request.url === route;
+}
+
 module.exports = async function (fastify, opts) {
   fastify.route({
     method: "GET",
@@ -20,7 +24,7 @@ module.exports = async function (fastify, opts) {
         user: request.session.user,
         importaciones: importaciones,
         importacionesSize: importaciones.size,
-        
+        currentPage: 'home',
       };
       return reply.view("/src/pages/home.hbs", param);
     },
