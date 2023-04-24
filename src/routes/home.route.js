@@ -29,9 +29,10 @@ module.exports = async function (fastify, opts) {
         API.changeImportName(
           request.body.importationName,
           request.body.url,
-          request.body.username
+          request.session.user.username
         );
       }
+      reply.redirect("/home");
     },
   });
 };
