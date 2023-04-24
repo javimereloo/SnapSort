@@ -100,7 +100,7 @@
                         </div>
 
                         <li class="nav-item ">
-                          <a href="/home/Galeria" class="nav-link link-dark {{#if (eq currentPage 'Galeria')}}active{{/if}} ">
+                          <a href="/home/" class="nav-link link-dark {{#if (eq currentPage 'Galeria')}}active{{/if}} ">
                             Toda la galería
                           </a>
                         </li>
@@ -209,7 +209,13 @@
             <hr>
             <div class="row">
                 <div class="col-12">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam volutpat consectetur ex, nec lobortis lectus ullamcorper vehicula. Nunc vel metus ac magna eleifend bibendum. Quisque urna elit, lacinia eu ante sit amet, laoreet pretium dui. Mauris a est eget sem aliquet tincidunt nec vitae massa. Ut faucibus ligula ut lacus porttitor, vitae pretium orci ullamcorper. Phasellus commodo non est quis ultricies. Mauris et finibus lorem. Nunc pretium velit quis placerat interdum.</p>
+                    <p class=" text-center lead">
+                      {{#if (eq importacionesSize 0)}}
+                        ¡Pulsa en el icono + en la barra lateral para importar una nueva carpeta!
+                      {{else}}
+                        Mostrando tus importaciones! <br> el valor de currentPage es {{currentPage}}
+                      {{/if}}
+                    </p>
                   
                 </div>
             </div>
