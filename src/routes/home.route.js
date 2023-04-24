@@ -6,12 +6,11 @@ module.exports = async function (fastify, opts) {
     method: "GET",
     url: "/home",
     preHandler: (request, reply, done) => {
-      //TODO descomentar al final
       // Comprobar si el usuario está autenticado
-      // if (!request.session.user) {
-      //   const errorMessage = true
-      //   return reply.redirect(`/login?errorMessage=${errorMessage}`)
-      // }
+      if (!request.session.user) {
+        const errorMessage = true
+        return reply.redirect(`/login?errorMessage=${errorMessage}`)
+      }
       // // Continuar con la solicitud si el usuario está autenticado
       done();
     },
@@ -23,6 +22,12 @@ module.exports = async function (fastify, opts) {
   
   fastify.route({
     method:"POST",
-    url:""
+    url:"/home/new", 
+    handler:  async (request, reply) => {
+      API.insertImport(request.body.username, request.body.url);
+      if(request.body.url){
+        API.changeImportName();
+      }
+    }
   });
 };

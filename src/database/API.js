@@ -111,6 +111,21 @@ async function insertImport(username, urlFolder) {
   });
 }
 
+//Allows to change the importation name
+async function changeImportName(urlFolder, importName){
+  return new Promise((resolve, reject) => {
+    db.query('UPDATE importacion SET nameFolder = ? WHERE urlFolder = ?', [importName, urlFolder], 
+             (err) => {
+          if(err){
+            reject(err);
+          }else{
+            resolve();
+            modificado el nombr
+          }
+    });
+  });
+}
+
 function deleteUser(username) {
   return new Promise((resolve, reject) => {
     db.run("DELETE FROM usuario WHERE username = ?", [username], (err) => {
