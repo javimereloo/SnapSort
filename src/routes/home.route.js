@@ -20,4 +20,9 @@ module.exports = async function (fastify, opts) {
       return reply.view("/src/pages/home.hbs",  param);
     },
   });
+  
+  fastify.route({
+    method:"POST",
+    url:""
+  });
 };
