@@ -95,7 +95,7 @@ async function insertImport(username, urlFolder) {
     console.log("la fecha now es ", now);
     const currentDate = now.toISOString().slice(0, 10);
     console.log("la fecha currentDate es ", currentDate);
-    const folderName = "importación".concat(" ", currentDate);
+    const folderName = "importación del".concat(" ", currentDate.d);
     db.run(
       `INSERT INTO importacion (username, urlFolder, date, nameFolder) VALUES (?,?,?,?)`,
       [username, urlFolder, currentDate, folderName],
@@ -140,7 +140,7 @@ async function getImportaciones(username){
           reject(err);
         }
         if (row) {
-          resolve({ name: row.name, lastname: row.lastname });
+          resolve({ nameFolder: row.nameFolder, urlFolder: row.urlFolder });
         } else {
           resolve(null);
         }
@@ -227,4 +227,6 @@ module.exports = {
   checkPassword,
   deleteDatabase,
   insertImport,
+  getImportaciones,
+  
 };

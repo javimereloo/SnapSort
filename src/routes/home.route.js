@@ -14,9 +14,11 @@ module.exports = async function (fastify, opts) {
       // // Continuar con la solicitud si el usuario está autenticado
       done();
     },
-    handler: (request, reply) => {
+    handler: async (request, reply) => {
+      const importaciones = await API.getImportaciones(request.session.user.username);
+      console.log('EL vector importaciones contiene', importaciones);
       const param = request.session.user;
-      return reply.view("/src/pages/home.hbs", param);
+      return reply.view("/src/pages/home.hbs", importaciones);
     },
   });
 
