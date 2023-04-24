@@ -24,7 +24,7 @@ module.exports = async function (fastify, opts) {
         user: request.session.user,
         importaciones: importaciones,
         importacionesSize: importaciones.size,
-        currentPage: 'home',
+        currentPage: 'Galeria',
       };
       return reply.view("/src/pages/home.hbs", param);
     },

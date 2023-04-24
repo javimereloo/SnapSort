@@ -21,6 +21,11 @@ fastify.register(require("@fastify/view"), {
     handlebars: require("handlebars"),
   },
 });
+const handlebars = require('handlebars');
+
+handlebars.registerHelper('eq', function(a, b) {
+  return a === b;
+});
 
 //Import routes 
 fastify.register(require('./src/routes/index.route.js'))
