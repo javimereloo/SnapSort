@@ -21,12 +21,6 @@ module.exports = async function (fastify, opts) {
       const importaciones = await API.getImportaciones(request.session.user.username);
       const folderName = request.params.folderName;
       const value = folderName || "Galeria";
-      const param = { 
-        user: request.session.user,
-        importaciones: importaciones,
-        importacionesSize: importaciones.size,
-        currentPage: value,
-      };
       return reply.view("/src/pages/home.hbs", { 
         user: request.session.user,
         importaciones: importaciones,
