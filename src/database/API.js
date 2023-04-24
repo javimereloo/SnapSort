@@ -112,17 +112,20 @@ async function insertImport(username, urlFolder) {
 }
 
 //Allows to change the importation name
-async function changeImportName(urlFolder, importName){
+async function changeImportName(username, urlFolder, importName) {
   return new Promise((resolve, reject) => {
-    db.query('UPDATE importacion SET nameFolder = ? WHERE urlFolder = ?', [importName, urlFolder], 
-             (err) => {
-          if(err){
-            reject(err);
-          }else{
-            resolve();
-            modificado el nombr
-          }
-    });
+    db.query(
+      "UPDATE importacion SET nameFolder = ? WHERE urlFolder = ? AND username = ?",
+      [importName, urlFolder, username],
+      (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+          console.log("Modificado el nombre de una importación");
+        }
+      }
+    );
   });
 }
 
