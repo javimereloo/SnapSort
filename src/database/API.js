@@ -139,12 +139,16 @@ async function getImportaciones(username){
     db.get(
       "SELECT nameFolder, urlFolder FROM importacion WHERE username = ?",
       [username],
-      (err, row) => {
+      (err, rows) => {
         if (err) {
           reject(err);
         }
-        if (row) {
-          resolve({ nameFolder: row.nameFolder, urlFolder: row.urlFolder });
+        if (rows) {
+          const importaciones = rows.map(row => ({
+            nameFolder: row.nameFolder,
+            urlFolder: row.urlFolder
+          }));
+          resolve(importaciones);
         } else {
           resolve(null);
         }
