@@ -100,7 +100,7 @@
                         </div>
 
                         <li class="nav-item ">
-                          <a href="#" class="nav-link {{#if (eq currentPage 'Galeria')}}active{{/if}} " aria-current="page">
+                          <a href="#" class="nav-link {{#if (eq currentPage 'Galeria')}}active{{/if}} ">
                             Toda la galería
                           </a>
                         </li>
@@ -114,7 +114,9 @@
                         </li>
                         {{#each importaciones}}
                         <li>
-                          <a href="#" class="nav-link link-dark {{#if (eq currentPage 'Galeria')}}active{{/if}} ">{{this.[1]}}</a>
+                          <a href="#" class="nav-link link-dark {{#if (eq currentPage 'Galeria')}}active{{/if}}"> 
+                            {{this.[1]}}
+                          </a>
                         </li>
                         {{/each}}
 

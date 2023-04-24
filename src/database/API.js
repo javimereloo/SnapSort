@@ -118,7 +118,7 @@ async function insertImport(username, urlFolder) {
 //Allows to change the importation name
 async function changeImportName(username, urlFolder, importName) {
   return new Promise((resolve, reject) => {
-    db.query(
+    db.run(
       "UPDATE importacion SET nameFolder = ? WHERE urlFolder = ? AND username = ?",
       [importName, urlFolder, username],
       (err) => {
@@ -126,7 +126,7 @@ async function changeImportName(username, urlFolder, importName) {
           reject(err);
         } else {
           resolve();
-          console.log("Modificado el nombre de una importación");
+          console.log("Modificado el nombre de una importación a", u);
         }
       }
     );
@@ -236,4 +236,5 @@ module.exports = {
   deleteDatabase,
   insertImport,
   getImportaciones,
+  changeImportName,
 };
