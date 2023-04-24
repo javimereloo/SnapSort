@@ -115,7 +115,7 @@
                         </li>
                         {{#each importaciones}}
                         <li>
-                          <a href="/home/{{this.[1]}}" class="nav-link link-dark {{#if (eq currentPage this.[1])}}active{{/if}}"> 
+                          <a href="/home/{{this.[1]}}" class="nav-link link-dark {{#if (eq @root.currentPage this.[1])}}active{{/if}}"> 
                             {{this.[1]}}
                           </a>
                         </li>
@@ -214,7 +214,7 @@
                       {{#if (eq importacionesSize 0)}}
                         ¡Pulsa en el icono + en la barra lateral para importar una nueva carpeta!
                       {{else}}
-                        Mostrando tus importaciones! <br> el valor de currentPage es {{currentPage}}
+                        Mostrando tus importaciones! 
                       {{/if}}
                     </p>
                   

@@ -24,7 +24,6 @@ fastify.register(require("@fastify/view"), {
 const handlebars = require('handlebars');
 
 handlebars.registerHelper('eq', function(a, b) {
-  console.log('comparando' , a , 'y', b);
   return a === b;
 });
 handlebars.registerHelper('toString', function (value) {

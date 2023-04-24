@@ -19,7 +19,7 @@ module.exports = async function (fastify, opts) {
     },
     handler: async (request, reply) => {
       const importaciones = await API.getImportaciones(request.session.user.username);
-      const folderName = request.params.folderName;
+      const folderName = encodeURIComponent(request.params.folderName); 
       const value = folderName || "Galeria";
       return reply.view("/src/pages/home.hbs", { 
         user: request.session.user,
