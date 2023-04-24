@@ -21,13 +21,20 @@ fastify.register(require("@fastify/view"), {
     handlebars: require("handlebars"),
   },
 });
-const handlebars = require('handlebars');
 
+//Register handlebars necessary helpers
+const handlebars = require('handlebars');
 handlebars.registerHelper('eq', function(a, b) {
   return a === b;
 });
 handlebars.registerHelper('toString', function (value) {
   return value.toString();
+});
+handlebars.registerHelper("encodeURIComponent", function(str) {
+  return encodeURIComponent(str);
+});
+handlebars.registerHelper("decodeURIComponent", function(str) {
+  return decodeURIComponent(str);
 });
 
 //Import routes 

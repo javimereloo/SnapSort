@@ -115,7 +115,7 @@
                         </li>
                         {{#each importaciones}}
                         <li>
-                          <a href="/home/{{this.[1]}}" class="nav-link link-dark {{#if (eq @root.currentPage this.[1])}}active{{/if}}"> 
+                          <a href="/home/{{encodeURIComponent this.[1]}}" class="nav-link link-dark {{#if (eq @root.currentPage this.[1])}}active{{/if}}"> 
                             {{this.[1]}}
                           </a>
                         </li>
@@ -210,13 +210,12 @@
             <hr>
             <div class="row">
                 <div class="col-12">
-                    <p class=" text-center lead">
+                    
                       {{#if (eq importacionesSize 0)}}
-                        ¡Pulsa en el icono + en la barra lateral para importar una nueva carpeta!
+                       <p class=" text-center lead"> ¡Pulsa en el icono + en la barra lateral para importar una nueva carpeta!</p>
                       {{else}}
-                        Mostrando tus importaciones! 
+                        <p class=" text-center lead"> Mostrando tus importaciones! </p>
                       {{/if}}
-                    </p>
                   
                 </div>
             </div>
