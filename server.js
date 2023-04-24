@@ -27,6 +27,9 @@ handlebars.registerHelper('eq', function(a, b) {
   console.log('comparando' , a , 'y', b);
   return a === b;
 });
+handlebars.registerHelper('toString', function (value) {
+  return value.toString();
+});
 
 //Import routes 
 fastify.register(require('./src/routes/index.route.js'))

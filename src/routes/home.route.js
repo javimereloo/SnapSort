@@ -27,7 +27,12 @@ module.exports = async function (fastify, opts) {
         importacionesSize: importaciones.size,
         currentPage: value,
       };
-      return reply.view("/src/pages/home.hbs", param);
+      return reply.view("/src/pages/home.hbs", { 
+        user: request.session.user,
+        importaciones: importaciones,
+        importacionesSize: importaciones.size,
+        currentPage: value,
+      });
     },
   });
   
