@@ -47,9 +47,9 @@ module.exports = async function (fastify, opts) {
         .then(() => {
           if (request.body.importationName) {
             API.changeImportName(
-              request.body.importationName,
+              request.session.user.username,
               request.body.url,
-              request.session.user.username
+              request.body.importationName
             );
           }
         })

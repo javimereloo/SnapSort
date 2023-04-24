@@ -125,8 +125,7 @@ async function changeImportName(username, urlFolder, importName) {
         if (err) {
           reject(err);
         } else {
-          resolve();
-          console.log("Modificado el nombre de una importación a", u);
+          resolve({ changes: this.changes });
         }
       }
     );
