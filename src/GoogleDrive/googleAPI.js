@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { google } = require('googleapis');
+const API = require('../database/API.js');
 
 const credentials = require(process.env.GOOGLE_DRIVE_CREDENTIALS);
 const auth = new google.auth.GoogleAuth({
@@ -26,14 +27,18 @@ async function getFilesInFolder(folderUrl) {
   return res.data.files;
 }
 
-async function listFilesInFolder(urlFolder){
+async function listFilesInFolder(urlFolder, importID){
   getFilesInFolder(urlFolder)
   .then((files) => {
     console.log(files);
-    //Parsear el webContentLink
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const urlSRC = file.webContentLink.replace(/&export=download/g, '');
+      
+      console.log('DATOS DE LA IMAGEN ', importID, urlSRC, file.name)
+      // API.insertNewImage(importID, urlSRC, file.name);
+    }
     
-    //Extraer el nombre 
-    //insertar en la BD
     
   })
   .catch((err) => {

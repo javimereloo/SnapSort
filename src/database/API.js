@@ -165,6 +165,19 @@ function deleteUser(username) {
   });
 }
 
+async function insertNewImage(importID, url, title){
+  return new Promise((resolve, reject) => {
+    db.run("INSERT INTO imagen (importID , url, title) VALUES (?,?,?)", [importID, url, title], (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        console.log('Nueva imagen cargada');
+        resolve();
+      }
+    });
+  });
+}
+
 //-------------------------Auxiliar cryptographic methods-----------------------
 //Function that returns the hash of a password
 function cryptPassword(password) {
@@ -219,4 +232,5 @@ module.exports = {
   insertImport,
   getImportaciones,
   changeImportName,
+  insertNewImage
 };
