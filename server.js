@@ -58,13 +58,7 @@ fastify.register(fastifySession, {
   saveUninitialized: true,
 });
 
-//Import google API to access to folders and files
-const { google } = require('googleapis');
-const auth = new google.auth.GoogleAuth({
-  keyFile: 'credentials.json',
-  scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-});
-const drive = google.drive({ version: 'v3', auth });
+
 
 
 // Run the server and report out to the logs
@@ -79,4 +73,4 @@ fastify.listen(
   }
 );
 
-module.exports = {fastify, drive}; 
+module.exports = {fastify}; 

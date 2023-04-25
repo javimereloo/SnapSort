@@ -1,7 +1,6 @@
 const sqlite3 = require("sqlite3").verbose();
 const bcrypt = require("bcrypt");
 const db = require("./db.config.js");
-const drive = require("../server.js");
 
 //Get user info from ID
 function getUserById(id, callback) {
@@ -170,30 +169,55 @@ function deleteUser(username) {
 }
 
 //GOOGLE DRIVE API
+//Import google API to access to folders and files
+const { google } = require('googleapis');
+const auth = new google.auth.GoogleAuth({
+  keyFile: '../../credentials.json',
+  scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+});
+const drive = google.drive({ version: 'v3', auth });
 //Getting folderID
 function getFolderId(url) {
-  const start = url.indexOf('/folders/') + '/folders/'.length;
-  const end = url.indexOf('?');
+  const start = url.indexOf("/folders/") + "/folders/".length;
+  const end = url.indexOf("?");
   return url.substring(start, end);
 }
 //Getting folder files
 async function listFilesInFolder(urlFolder) {
   const folderId = getFolderId(urlFolder);
-  const res = await drive.files.list({
-    q: `'${folderId}' in parents and trashed = false`,
-    fields: 'files(name, webViewLink)',
-  });
-  const files = res.data.files;
-  if (files.length) {
-    console.log('Archivos encontrados:');
-    files.map((file) => {
-      console.log(`${file.name}: ${file.webViewLink}`);
-    });
-  } else {
-    console.log('No se encontraron archivos en la carpeta.');
-  }
-}
 
+  const folderMetadata = await drive.files.get({
+    fileId: folderId,
+    fields: "name, files(id, name, webViewLink)",
+  });
+  // Obtiene los metadatos de los ficheros dentro de la carpeta
+  const filesMetadata = await drive.files.list({
+    q: `'${folderId}' in parents and trashed = false`,
+    fields: "files(id, name, webViewLink)",
+  });
+
+  // Muestra los enlaces de los ficheros
+  console.log(
+    `Enlaces de los ficheros en la carpeta "${folderMetadata.data.name}":`
+  );
+  filesMetadata.data.files.forEach((file) => {
+    console.log(`${file.name}: ${file.webViewLink}`);
+  });
+
+  //   const res = await drive.files.list({
+  //     q: `'${folderId}' in parents and trashed = false`,
+  //     fields: "files(name, webViewLink)",
+  //   });
+  //   const files = res.data.files;
+  //   if (files.length) {
+  //     console.log("Archivos encontrados:");
+  //     files.map((file) => {
+  //       console.log(`${file.name}: ${file.webViewLink}`);
+  //     });
+  //   } else {
+  //     console.log("No se encontraron archivos en la carpeta.");
+  //   }
+}
 
 //-------------------------Auxiliar cryptographic methods-----------------------
 //Function that returns the hash of a password
