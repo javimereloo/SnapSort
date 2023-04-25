@@ -1,3 +1,26 @@
+
+//Getting folder files
+async function listFilesInFolder(urlFolder){
+  const start = urlFolder.indexOf("/folders/") + "/folders/".length;
+  const end = urlFolder.indexOf("?");
+  const folderId = urlFolder.substring(start,end);
+  
+  try {
+    const auth = await authorize();
+    const res = await drive.files.list({
+      q: `'${folderId}' in parents and trashed = false`,
+      fields: 'files(id, name)',
+      auth,
+    });
+    console.log( res.data.files);
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+
+
+//------------------------------------------------------------------------------------------
 //GOOGLE DRIVE API
 const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
@@ -9,7 +32,7 @@ const fs = require("fs");
 const credentials = {
   client_id: process.env.GOOGLE_CLIENT_ID,
   client_secret: process.env.GOOGLE_CLIENT_SECRET,
-  redirect_uris: ["https://snapsort.glitch.me/oauth2callback"],
+  redirect_uris: ["https://snapsort.glitch.me/home"],
 };
 
 // Crea un objeto OAuth2 y configura las credenciales
@@ -58,27 +81,7 @@ async function getNewToken(oAuth2Client) {
   return oAuth2Client;
 }
 
-//Getting folder files
-
-async function listFilesInFolder(urlFolder){
-  const start = urlFolder.indexOf("/folders/") + "/folders/".length;
-  const end = urlFolder.indexOf("?");
-  const folderId = urlFolder.substring(start,end);
-  
-  try {
-    const auth = await authorize();
-    const res = await drive.files.list({
-      q: `'${folderId}' in parents and trashed = false`,
-      fields: 'files(id, name)',
-      auth,
-    });
-    console.log( res.data.files);
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
-}
-
+//------------------------------------------------------------------------------------------------
 
 // //Import google API to access to folders and files
 // const { google } = require('googleapis');
