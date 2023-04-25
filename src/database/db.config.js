@@ -31,11 +31,12 @@ DB.run(
 // Create table for importation info
 DB.run(
   `CREATE TABLE IF NOT EXISTS importacion (
+          importID INT(8) ZEROFILL NOT NULL AUTO_INCREMENT,
           username TEXT NOT NULL, 
           urlFolder TEXT NOT NULL, 
           date DATE NOT NULL, 
           nameFolder TEXT DEFAULT 'importación', 
-          PRIMARY KEY(username, urlFolder),
+          PRIMARY KEY(importID),
           FOREIGN KEY(username) REFERENCES cliente(username)
           )`,
   (err) => {
@@ -45,13 +46,13 @@ DB.run(
   }
 );
 
-// Create table for imagenImpor that contains all images 
-// from a Drive folder 
+// Create table for imagen that contains all images 
 DB.run(
-  `CREATE TABLE IF NOT EXISTS imagenImpor(
-          url TEXT NOT NULL, 
+  `CREATE TABLE IF NOT EXISTS imagen(
+          imagenID INT(8) ZEROFILL NOT NULL AUTO_INCREMENT,
           urlFolder TEXT NOT NULL, 
-          PRIMARY KEY(url , urlFolder),
+          url TEXT NOT NULL, 
+          PRIMARY KEY(imagenID),
           FOREIGN KEY(urlFolder ) REFERENCES importacion(urlFolder)
           )`,
   (err) => {
@@ -61,18 +62,7 @@ DB.run(
   }
 );
 
-// Create table image 
-DB.run(
-  `CREATE TABLE IF NOT EXISTS imagen (
-          url TEXT, 
-          FOREIGN KEY(url) REFERENCES imagenImpor(url)
-          )`,
-  (err) => {
-    if (err) {
-      console.error(err.message);
-    }
-  }
-);
+
 
 //TODO COMPROBAR SI ES NECESARIO
 // Cerrar la conexión a la base de datos cuando finalice el proceso
