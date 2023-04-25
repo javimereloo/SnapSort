@@ -9,7 +9,7 @@ const fs = require("fs");
 const credentials = {
   client_id: process.env.GOOGLE_CLIENT_ID,
   client_secret: process.env.GOOGLE_CLIENT_SECRET,
-  redirect_uris: ["http://localhost:3000/oauth2callback"],
+  redirect_uris: ["https://snapsort.glitch.me/oauth2callback"],
 };
 
 // Crea un objeto OAuth2 y configura las credenciales

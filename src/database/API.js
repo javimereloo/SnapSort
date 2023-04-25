@@ -92,10 +92,7 @@ async function insertUser(username, name, lastname, email, password) {
 async function insertImport(username, urlFolder) {
   return new Promise((resolve, reject) => {
     const now = new Date();
-    console.log("la fecha now es ", now);
     const currentDate = now.toISOString().slice(0, 10);
-    console.log("la fecha currentDate es ", currentDate);
-
     const day = now.getDate().toString().padStart(2, "0");
     const month = (now.getMonth() + 1).toString().padStart(2, "0");
     const dateStr = `${day}/${month}`;
