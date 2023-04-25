@@ -1,36 +1,59 @@
 const fs = require('fs');
 const google = require('googleapis');
-const OAuth2 = google.auth.OAuth2;
 
+const credentials = require('../../credentials.json');
+const auth = new google.auth.GoogleAuth({
+  credentials: credentials,
+  scopes: ['https://www.googleapis.com/auth/drive'],
+});
+const drive = google.drive({ version: 'v3', auth });
 
-const jwtClient = new google.auth.JWT(
-  key.client_email,
-  null,
-  key.private_key,
-  ['https://www.googleapis.com/auth/drive'],
-  null
-);
+async function getFilesInFolder(folderUrl) {
+  const folderId = folderUrl.match(/[-\w]{25,}/);
 
-
-//Getting folder files
-async function listFilesInFolder(urlFolder){
-  const start = urlFolder.indexOf("/folders/") + "/folders/".length;
-  const end = urlFolder.indexOf("?");
-  const folderId = urlFolder.substring(start,end);
-  
-  try {
-    const auth = await authorize();
-    const res = await drive.files.list({
-      q: `'${folderId}' in parents and trashed = false`,
-      fields: 'files(id, name)',
-      auth,
-    });
-    console.log( res.data.files);
-  } catch (err) {
-    console.error(err);
-    return null;
+  // Si no se puede extraer el ID de la carpeta, lanza un error
+  if (!folderId) {
+    throw new Error('La URL de la carpeta es incorrecta');
   }
+
+  // Obtiene los archivos de la carpeta
+  const res = await drive.files.list({
+    q: `'${folderId}' in parents and trashed = false`,
+    fields: 'files(id, name, webContentLink)',
+  });
+
+  // Retorna la lista de archivos
+  return res.data.files;
 }
+
+async function listFilesInFolder(urlFolder){
+  getFilesInFolder(urlFolder)
+  .then((files) => {
+    console.log(files);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+  
+}
+//Getting folder files
+// async function listFilesInFolder(urlFolder){
+//   const start = urlFolder.indexOf("/folders/") + "/folders/".length;
+//   const end = urlFolder.indexOf("?");
+//   const folderId = urlFolder.substring(start,end);
+  
+//   try {
+//     const res = await drive.files.list({
+//       q: `'${folderId}' in parents and trashed = false`,
+//       fields: 'files(id, name)',
+//       auth,
+//     });
+//     console.log( res.data.files);
+//   } catch (err) {
+//     console.error(err);
+//     return null;
+//   }
+// }
 
 
 //------------------------------------------------------------------------------------------
