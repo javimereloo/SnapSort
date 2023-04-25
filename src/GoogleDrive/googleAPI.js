@@ -1,3 +1,17 @@
+const fs = require('fs');
+const google = require('googleapis');
+const OAuth2 = google.auth.OAuth2;
+const key = require('./key.json');
+
+
+const jwtClient = new google.auth.JWT(
+  key.client_email,
+  null,
+  key.private_key,
+  ['https://www.googleapis.com/auth/drive'],
+  null
+);
+
 
 //Getting folder files
 async function listFilesInFolder(urlFolder){
@@ -22,64 +36,64 @@ async function listFilesInFolder(urlFolder){
 
 //------------------------------------------------------------------------------------------
 //GOOGLE DRIVE API
-const { google } = require("googleapis");
-const { OAuth2 } = google.auth;
-const drive = google.drive("v3");
-const readline = require("readline");
-const fs = require("fs");
+// const { google } = require("googleapis");
+// const { OAuth2 } = google.auth;
+// const drive = google.drive("v3");
+// const readline = require("readline");
+// const fs = require("fs");
 
-// Define las credenciales de autenticación
-const credentials = {
-  client_id: process.env.GOOGLE_CLIENT_ID,
-  client_secret: process.env.GOOGLE_CLIENT_SECRET,
-  redirect_uris: ["https://snapsort.glitch.me/home"],
-};
+// // Define las credenciales de autenticación
+// const credentials = {
+//   client_id: process.env.GOOGLE_CLIENT_ID,
+//   client_secret: process.env.GOOGLE_CLIENT_SECRET,
+//   redirect_uris: ["https://snapsort.glitch.me/home"],
+// };
 
-// Crea un objeto OAuth2 y configura las credenciales
-const oAuth2Client = new OAuth2(
-  credentials.client_id,
-  credentials.client_secret,
-  credentials.redirect_uris[0]
-);
-// Define el alcance de autorización que necesitas
-const SCOPES = ["https://www.googleapis.com/auth/drive.readonly"];
+// // Crea un objeto OAuth2 y configura las credenciales
+// const oAuth2Client = new OAuth2(
+//   credentials.client_id,
+//   credentials.client_secret,
+//   credentials.redirect_uris[0]
+// );
+// // Define el alcance de autorización que necesitas
+// const SCOPES = ["https://www.googleapis.com/auth/drive.readonly"];
 
-// Función que maneja la autorización
-async function authorize() {
-  // Obtén el token de autorización de la cache o solicita uno nuevo
-  try {
-    const token = fs.readFileSync("TOKEN_PATH");
-    oAuth2Client.setCredentials(JSON.parse(token));
-    return oAuth2Client;
-  } catch (err) {
-    return getNewToken(oAuth2Client);
-  }
-}
+// // Función que maneja la autorización
+// async function authorize() {
+//   // Obtén el token de autorización de la cache o solicita uno nuevo
+//   try {
+//     const token = fs.readFileSync("TOKEN_PATH");
+//     oAuth2Client.setCredentials(JSON.parse(token));
+//     return oAuth2Client;
+//   } catch (err) {
+//     return getNewToken(oAuth2Client);
+//   }
+// }
 
-// Función que solicita un nuevo token de autorización
-async function getNewToken(oAuth2Client) {
-  // Crea una URL de autorización y solicita el token
-  const authUrl = oAuth2Client.generateAuthUrl({
-    access_type: "offline",
-    scope: SCOPES,
-  });
-  console.log(`Abre esta URL en tu navegador: ${authUrl}`);
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-  const code = await new Promise((resolve) => {
-    rl.question("Introduce el código de autorización: ", (code) => {
-      rl.close();
-      resolve(code);
-    });
-  });
-  const { tokens } = await oAuth2Client.getToken(code);
-  oAuth2Client.setCredentials(tokens);
-  fs.writeFileSync("TOKEN_PATH", JSON.stringify(tokens));
-  console.log("Token de autorización guardado en la cache.");
-  return oAuth2Client;
-}
+// // Función que solicita un nuevo token de autorización
+// async function getNewToken(oAuth2Client) {
+//   // Crea una URL de autorización y solicita el token
+//   const authUrl = oAuth2Client.generateAuthUrl({
+//     access_type: "offline",
+//     scope: SCOPES,
+//   });
+//   console.log(`Abre esta URL en tu navegador: ${authUrl}`);
+//   const rl = readline.createInterface({
+//     input: process.stdin,
+//     output: process.stdout,
+//   });
+//   const code = await new Promise((resolve) => {
+//     rl.question("Introduce el código de autorización: ", (code) => {
+//       rl.close();
+//       resolve(code);
+//     });
+//   });
+//   const { tokens } = await oAuth2Client.getToken(code);
+//   oAuth2Client.setCredentials(tokens);
+//   fs.writeFileSync("TOKEN_PATH", JSON.stringify(tokens));
+//   console.log("Token de autorización guardado en la cache.");
+//   return oAuth2Client;
+// }
 
 //------------------------------------------------------------------------------------------------
 
