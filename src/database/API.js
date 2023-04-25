@@ -104,9 +104,18 @@ async function insertImport(username, urlFolder) {
         if (err) {
           reject(err);
         } else {
-          await getImportID(username, urlFolder).then();
-          resolve(importID);
-          console.log("Nueva importación realizada por el usuario", username);
+          await getImportID(username, urlFolder)
+            .then((importID) => {
+              // console.log("importID_____________________________" , importID)
+              resolve(importID);
+              console.log(
+                "Nueva importación realizada por el usuario",
+                username
+              );
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         }
       }
     );
@@ -122,6 +131,7 @@ async function getImportID(username, urlFolder) {
         if (err) {
           reject(err);
         } else {
+          // console.log("ROW ID_____________________________" , row.id) //TODO SEGUIR AQUÍ SEGMENTATION FAULT
           resolve(row ? row.id : null);
         }
       }
