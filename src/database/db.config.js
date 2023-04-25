@@ -49,8 +49,9 @@ DB.run(
 DB.run(
   `CREATE TABLE IF NOT EXISTS imagen(
           imagenID INTEGER PRIMARY KEY AUTOINCREMENT,
-          url TEXT NOT NULL, 
           importID INTEGER NOT NULL,
+          url TEXT NOT NULL, 
+          title TEXT,
           FOREIGN KEY(importID ) REFERENCES importacion(importID)
           )`,
   (err) => {
