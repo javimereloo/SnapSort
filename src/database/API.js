@@ -1,6 +1,7 @@
 const sqlite3 = require("sqlite3").verbose();
 const bcrypt = require("bcrypt");
 const db = require("./db.config.js");
+const drive = require("../server.js");
 
 //Get user info from ID
 function getUserById(id, callback) {
@@ -168,18 +169,31 @@ function deleteUser(username) {
   });
 }
 
-const fs = require("fs");
-function deleteDatabase() {
-  return new Promise((resolve, reject) => {
-    fs.unlink("src/database/SNAPSORT.sqlite", (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
-  });
+//GOOGLE DRIVE API
+//Getting folderID
+function getFolderId(url) {
+  const start = url.indexOf('/folders/') + '/folders/'.length;
+  const end = url.indexOf('?');
+  return url.substring(start, end);
 }
+//Getting folder files
+async function listFilesInFolder(urlFolder) {
+  const folderId = getFolderId(urlFolder);
+  const res = await drive.files.list({
+    q: `'${folderId}' in parents and trashed = false`,
+    fields: 'files(name, webViewLink)',
+  });
+  const files = res.data.files;
+  if (files.length) {
+    console.log('Archivos encontrados:');
+    files.map((file) => {
+      console.log(`${file.name}: ${file.webViewLink}`);
+    });
+  } else {
+    console.log('No se encontraron archivos en la carpeta.');
+  }
+}
+
 
 //-------------------------Auxiliar cryptographic methods-----------------------
 //Function that returns the hash of a password
@@ -232,8 +246,8 @@ module.exports = {
   getUsername,
   getUserdata,
   checkPassword,
-  deleteDatabase,
   insertImport,
   getImportaciones,
   changeImportName,
+  listFilesInFolder,
 };

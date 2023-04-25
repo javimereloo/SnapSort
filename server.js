@@ -79,4 +79,4 @@ fastify.listen(
   }
 );
 
-module.exports = fastify; 
+module.exports = {fastify, drive}; 
