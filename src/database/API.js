@@ -172,7 +172,7 @@ function deleteUser(username) {
 //Import google API to access to folders and files
 const { google } = require('googleapis');
 const auth = new google.auth.GoogleAuth({
-  keyFile: './credential.json',
+  keyFile: process.env.GOOGLE_CREDENTIALS_PATH,
   scopes: ['https://www.googleapis.com/auth/drive.readonly'],
 });
 const drive = google.drive({ version: 'v3', auth });
