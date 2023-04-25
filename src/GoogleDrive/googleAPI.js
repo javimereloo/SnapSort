@@ -57,26 +57,28 @@ async function getNewToken(oAuth2Client) {
   console.log("Token de autorización guardado en la cache.");
   return oAuth2Client;
 }
-//Getting folderID
-function getFolderId(url) {
-  const start = url.indexOf("/folders/") + "/folders/".length;
-  const end = url.indexOf("?");
-  return url.substring(start, end);
-}
-//Getting folder files
-async function listFilesInFolder(urlFolder) {
-  const folderId = getFolderId(urlFolder);
 
-  const folderMetadata = await drive.files.get({
-    fileId: folderId,
-    fields: "name, files(id, name, webViewLink)",
-  });
-  // Obtiene los metadatos de los ficheros dentro de la carpeta
-  const filesMetadata = await drive.files.list({
-    q: `'${folderId}' in parents and trashed = false`,
-    fields: "files(id, name, webViewLink)",
-  });
+//Getting folder files
+
+async function listFilesInFolder(urlFolder){
+  const start = urlFolder.indexOf("/folders/") + "/folders/".length;
+  const end = urlFolder.indexOf("?");
+  const folderId = urlFolder.substring(start,end);
+  
+  try {
+    const auth = await authorize();
+    const res = await drive.files.list({
+      q: `'${folderId}' in parents and trashed = false`,
+      fields: 'files(id, name)',
+      auth,
+    });
+    console.log( res.data.files);
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 }
+
 
 // //Import google API to access to folders and files
 // const { google } = require('googleapis');
@@ -128,4 +130,6 @@ async function listFilesInFolder(urlFolder) {
 //   //   }
 // }
 
-module.exports = listFilesInFolder;
+module.exports = {
+  listFilesInFolder,
+};
