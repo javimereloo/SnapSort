@@ -1,5 +1,6 @@
 const DB = require("../database/db.config.js");
 const API = require("../database/API.js");
+const googleAPI = require("../GoogleDrive/googleAPI.js");
 
 function isActive(route) {
   return this.request.url === route;
@@ -59,7 +60,7 @@ module.exports = async function (fastify, opts) {
         .catch((err) => {
           console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
         });
-      API.listFilesInFolder(request.body.url);
+      googleAPI.listFilesInFolder(request.body.url);
       reply.redirect("/home/");
     },
   });
