@@ -1,7 +1,6 @@
 const fs = require('fs');
 const google = require('googleapis');
 const OAuth2 = google.auth.OAuth2;
-const key = require('./key.json');
 
 
 const jwtClient = new google.auth.JWT(
