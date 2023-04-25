@@ -10,7 +10,6 @@ const auth = new google.auth.GoogleAuth({
 const drive = google.drive({ version: 'v3', auth });
 
 async function getFilesInFolder(folderUrl) {
-  console.log('linea 13 googleAPI.js');
   const folderId = folderUrl.match(/[-\w]{25,}/);
   //If the folder ID cannot be extracted, it throws an error.
   if (!folderId) {
@@ -28,10 +27,8 @@ async function getFilesInFolder(folderUrl) {
 }
 
 async function listFilesInFolder(urlFolder, importID){
-  console.log('linea 31 googleAPI.js');
   getFilesInFolder(urlFolder)
   .then((files) => {
-    console.log(files);
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const urlSRC = file.webContentLink.replace(/&export=download/g, '');

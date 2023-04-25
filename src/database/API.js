@@ -100,24 +100,29 @@ async function insertImport(username, urlFolder) {
     db.run(
       `INSERT INTO importacion (username, urlFolder, date, nameFolder) VALUES (?,?,?,?)`,
       [username, urlFolder, currentDate, folderName],
-      (err) => {
+      async (err) => {
         if (err) {
           reject(err);
         } else {
-          const importID = db.run(
-            `SELECT importID FROM importacion WHERE username = ? AND urlFolder = ?`[
-              (username, urlFolder)
-            ],
-            (err) => {
-              if (err) {
-                reject(err);
-              } else {
-                resolve();
-              }
-            }
-          );
+          await getImportID(username, urlFolder).then();
           resolve(importID);
           console.log("Nueva importación realizada por el usuario", username);
+        }
+      }
+    );
+  });
+}
+
+async function getImportID(username, urlFolder) {
+  return new Promise((reject, resolve) => {
+    db.get(
+      `SELECT importID FROM importacion WHERE username = ? AND urlFolder = ?`,
+      [(username, urlFolder)],
+      (err, row) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(row ? row.id : null);
         }
       }
     );

@@ -50,7 +50,6 @@ module.exports = async function (fastify, opts) {
       const importID = API.insertImport(request.session.user.username, request.body.url)
         .then(() => {
           if (request.body.importationName) {
-            console.log('linea 53 home.route.js');
             API.changeImportName(
               request.session.user.username,
               request.body.url,
