@@ -61,7 +61,7 @@ module.exports = async function (fastify, opts) {
           console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
         });
       googleAPI.listFilesInFolder(request.body.url);
-      reply.redirect("/home/");
+      reply.redirect("/home/"); //TODO redirigir a la página de nueva importacion
     },
   });
 };
