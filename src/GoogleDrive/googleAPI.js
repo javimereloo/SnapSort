@@ -1,10 +1,10 @@
 const fs = require('fs');
-const google = require('googleapis');
+const { google } = require('googleapis');
 
 const credentials = require('../../credentials.json');
 const auth = new google.auth.GoogleAuth({
   credentials: credentials,
-  scopes: ['https://www.googleapis.com/auth/drive'],
+  scopes: ['https://www.googleapis.com/auth/drive.readonly']
 });
 const drive = google.drive({ version: 'v3', auth });
 
