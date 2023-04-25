@@ -31,12 +31,11 @@ DB.run(
 // Create table for importation info
 DB.run(
   `CREATE TABLE IF NOT EXISTS importacion (
-          importID INT(8) ZEROFILL NOT NULL AUTO_INCREMENT,
+          importID INTEGER PRIMARY KEY AUTOINCREMENT,
           username TEXT NOT NULL, 
           urlFolder TEXT NOT NULL, 
           date DATE NOT NULL, 
-          nameFolder TEXT DEFAULT 'importación', 
-          PRIMARY KEY(importID),
+          nameFolder TEXT, 
           FOREIGN KEY(username) REFERENCES cliente(username)
           )`,
   (err) => {
@@ -49,11 +48,10 @@ DB.run(
 // Create table for imagen that contains all images 
 DB.run(
   `CREATE TABLE IF NOT EXISTS imagen(
-          imagenID INT(8) ZEROFILL NOT NULL AUTO_INCREMENT,
-          urlFolder TEXT NOT NULL, 
+          imagenID INTEGER PRIMARY KEY AUTOINCREMENT,
           url TEXT NOT NULL, 
-          PRIMARY KEY(imagenID),
-          FOREIGN KEY(urlFolder ) REFERENCES importacion(urlFolder)
+          importID INTEGER NOT NULL,
+          FOREIGN KEY(importID ) REFERENCES importacion(importID)
           )`,
   (err) => {
     if (err) {
