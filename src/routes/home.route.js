@@ -47,20 +47,24 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: async (request, reply) => {
-      API.insertImport(request.session.user.username, request.body.url)
+      const importID = API.insertImport(request.session.user.username, request.body.url)
         .then(() => {
           if (request.body.importationName) {
+            console.log('linea 53 home.route.js');
             API.changeImportName(
               request.session.user.username,
               request.body.url,
               request.body.importationName
             );
           }
+          // console.log('El importID es', importID);
+          googleAPI.listFilesInFolder(request.body.url, importID);
+          
         })
         .catch((err) => {
           console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
         });
-      googleAPI.listFilesInFolder(request.body.url);
+      
       reply.redirect("/home/"); //TODO redirigir a la página de nueva importacion
     },
   });
