@@ -48,7 +48,7 @@ module.exports = async function (fastify, opts) {
     },
     handler: async (request, reply) => {
       const importID = API.insertImport(request.session.user.username, request.body.url)
-        .then(() => {
+        .then((importID) => {
           if (request.body.importationName) {
             API.changeImportName(
               request.session.user.username,

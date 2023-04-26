@@ -28,7 +28,7 @@ DB.run(
   }
 );
 
-// Create table for importation info
+// Create table for importation info //TODO AÑADIR EL UNIQUE 
 DB.run(
   `CREATE TABLE IF NOT EXISTS importacion (
           importID INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -97,6 +97,7 @@ async function insertImport(username, urlFolder) {
     const month = (now.getMonth() + 1).toString().padStart(2, "0");
     const dateStr = `${day}/${month}`;
     const folderName = "importación del".concat(" ", dateStr);
+    let importID;
     db.run(
       `INSERT INTO importacion (username, urlFolder, date, nameFolder) VALUES (?,?,?,?)`,
       [username, urlFolder, currentDate, folderName],
@@ -104,40 +105,30 @@ async function insertImport(username, urlFolder) {
         if (err) {
           reject(err);
         } else {
-          await getImportID(username, urlFolder)
-            .then((importID) => {
-              // console.log("importID_____________________________" , importID)
-              resolve(importID);
-              console.log(
-                "Nueva importación realizada por el usuario",
-                username
-              );
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+          importID = this.lastID;
+          resolve(importID);
         }
       }
     );
   });
 }
 
-async function getImportID(username, urlFolder) {
-  return new Promise((reject, resolve) => {
-    db.get(
-      `SELECT importID FROM importacion WHERE username = ? AND urlFolder = ?`,
-      [(username, urlFolder)],
-      (err, row) => {
-        if (err) {
-          reject(err);
-        } else {
-          // console.log("ROW ID_____________________________" , row.id) //TODO SEGUIR AQUÍ SEGMENTATION FAULT
-          resolve(row ? row.id : null);
-        }
-      }
-    );
-  });
-}
+// async function getImportID(username, urlFolder) {
+//   return new Promise((reject, resolve) => {
+//     db.get(
+//       `SELECT importID FROM importacion WHERE username = ? AND urlFolder = ?`,
+//       [(username, urlFolder)],
+//       (err, row) => {
+//         if (err) {
+//           reject(err);
+//         } else {
+//           // console.log("ROW ID_____________________________" , row.id) //TODO SEGUIR AQUÍ SEGMENTATION FAULT
+//           resolve(row ? row.id : null);
+//         }
+//       }
+//     );
+//   });
+// }
 
 //Allows to change the importation name
 async function changeImportName(username, urlFolder, importName) {
