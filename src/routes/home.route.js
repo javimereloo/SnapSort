@@ -33,7 +33,6 @@ module.exports = async function (fastify, opts) {
           .catch((err) => {
             console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
           });
-        console.log("HAY ", pics.size, "en la carpeta", folderName);
       } else {
         pics = await API.getImagesFromImport(
           request.session.user.username,
@@ -45,14 +44,13 @@ module.exports = async function (fastify, opts) {
           .catch((err) => {
             console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
           });
-        console.log("HAY ", pics.size, "en la carpeta", folderName);
       }
       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
         importaciones: importaciones,
         importacionesSize: importaciones.size,
         currentPage: value,
-        numPics: pics.size,
+        numPics: pics.length,
       });
     },
   });

@@ -100,7 +100,7 @@ async function insertImport(username, urlFolder) {
     db.run(
       `INSERT INTO importacion (username, urlFolder, date, nameFolder) VALUES (?,?,?,?)`,
       [username, urlFolder, currentDate, folderName],
-      async function (err)  {
+      async function (err) {
         if (err) {
           reject(err);
         } else {
@@ -180,9 +180,12 @@ async function insertNewImage(importID, url, title) {
   });
 }
 
-async function getAllImages(username){
+async function getAllImages(username) {
   return new Promise((resolve, reject) => {
-    console.log('PROCEDEMOS A CARGAR TODAS LAS IMAGENES DE ===================>', username);
+    console.log(
+      "PROCEDEMOS A CARGAR TODAS LAS IMAGENES DE ===================>",
+      username
+    );
     db.all(
       `SELECT i.imagenID, i.title, i.url
        FROM imagen i 
@@ -193,23 +196,26 @@ async function getAllImages(username){
         if (err) {
           reject(err);
         } else {
-          // const images = rows.map((row) => ({
-          //   imagenID: row.imagenID,
-          //   title: row.title,
-          //   url: row.url,
-          // }));
-          // console.log('Enviamos', images.size, ' imagenes')
-          // resolve(images);
-          resolve(rows);
+          const images = rows.map((row) => ({
+            id: row.id,
+            nombre: row.nombre,
+            url: row.url,
+          }));
+          resolve(JSON.stringify(images));
         }
       }
     );
   });
 }
 
-async function getImagesFromImport(username, nameFolder){
-   return new Promise((resolve, reject) => {
-     console.log('PROCEDEMOS A CARGAR  LAS IMAGENES DE ===================>', username, 'de su carpeta ====>', nameFolder);
+async function getImagesFromImport(username, nameFolder) {
+  return new Promise((resolve, reject) => {
+    console.log(
+      "PROCEDEMOS A CARGAR  LAS IMAGENES DE ===================>",
+      username,
+      "de su carpeta ====>",
+      nameFolder
+    );
     db.all(
       `SELECT imagenID, title, url FROM imagen 
        WHERE importID IN (
@@ -232,7 +238,6 @@ async function getImagesFromImport(username, nameFolder){
     );
   });
 }
-
 
 //-------------------------Auxiliar cryptographic methods-----------------------
 //Function that returns the hash of a password
