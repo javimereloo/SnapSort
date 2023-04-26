@@ -221,12 +221,9 @@
                        <p class=" text-center lead"> ¡Pulsa en el icono + en la barra lateral para importar una nueva carpeta!</p>
                      
                       {{else}}
-                      <div class="row mb-3 m-2 p-2">
+                      <div class="row mb-3 mx-2 p-2">
                         {{#each images}}
-                          {{#mod @index 3}}
-                            <div class="row">
-                          {{/mod}}
-                            <div loading="lazy" class="card col-lg-3 mx-2 " >
+                            <div  class="card col-lg-3 mx-2 mt-0 " >
                               <img 
                                    style="width:90%;"
                                    class="card-img-top mt-2"
@@ -236,12 +233,8 @@
                               <hr>
                               <h6 class="card-title">{{this.title}}</h6>
                             </div>
-                            {{#modClose @index 3}}
-                              </div>  
-                            {{/modClose}}
                         {{/each}}
                        </div>
-
                       {{/if}}
                 </div>
             </div>
