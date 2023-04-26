@@ -21,6 +21,7 @@
     ></script>
 
     <title>Galería</title>
+      <script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
 
     <link rel="stylesheet" href="{{assetPath}}/sidebars.css">
   </head>
@@ -215,11 +216,11 @@
                       {{else}}
                       <div class="row mb-3 m-2 p-2">
                         {{#each images}}
-                            <div class="card col-lg-3 mx-2 " >
+                            <div loading="lazy" class="card col-lg-3 mx-2 " >
                               <img 
                                    style="width:90%;"
-                                   class="card-img-top mt-2"
-                                   src="{{this.url}}"
+                                   class="card-img-top lazyload mt-2"
+                                   data-src="{{this.url}}"
                                    alt="{{this.title}}"
                               >
                               <hr>
