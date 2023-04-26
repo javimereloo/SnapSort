@@ -54,7 +54,7 @@ DB.run(
           importID INTEGER NOT NULL,
           url TEXT NOT NULL, 
           title TEXT,
-          FOREIGN KEY(importID ) REFERENCES importacion(importID)
+          FOREIGN KEY(importID ) REFERENCES importacion(importID) ON DELETE CASCADE
           )`,
   (err) => {
     if (err) {
