@@ -37,6 +37,7 @@ DB.run(
           date DATE NOT NULL, 
           nameFolder TEXT, 
           FOREIGN KEY(username) REFERENCES cliente(username)
+          UNIQUE(username, urlFolder)
           )`,
   (err) => {
     if (err) {

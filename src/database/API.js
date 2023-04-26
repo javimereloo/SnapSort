@@ -173,7 +173,6 @@ async function insertNewImage(importID, url, title) {
         if (err) {
           reject(err);
         } else {
-          console.log("Nueva imagen cargada");
           resolve();
         }
       }
