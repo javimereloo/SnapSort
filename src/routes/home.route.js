@@ -73,12 +73,11 @@ module.exports = async function (fastify, opts) {
     method: "POST",
     url: "/home/new",
     preHandler: (request, reply, done) => {
-      // Comprobar si el usuario está autenticado
+      // Check if the user is authenticated 
       if (!request.session.user) {
         const errorMessage = true;
         return reply.redirect(`/login?errorMessage=${errorMessage}`);
       }
-      // // Continuar con la solicitud si el usuario está autenticado
       done();
     },
     handler: async (request, reply) => {
@@ -90,15 +89,15 @@ module.exports = async function (fastify, opts) {
           if (request.body.importationName) {
             API.changeImportName(
               request.session.user.username,
-              request.body.url,
+              importID,
               request.body.importationName
             );
           }
-          // console.log('El importID es', importID);
+          //Load and add images to DB
           googleAPI.listFilesInFolder(request.body.url, importID);
         })
         .catch((err) => {
-          console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
+          console.error("Ocurrió un error", err); //TODO mostrar alerta de error
         });
 
       reply.redirect("/home/"); //TODO redirigir a la página de nueva importacion

@@ -124,11 +124,11 @@ async function deleteFolder(username, nameFolder){
 }
 
 //Allows to change the importation name
-async function changeImportName(username, urlFolder, importName) {
+async function changeImportName(username, importID, importName) {
   return new Promise((resolve, reject) => {
     db.run(
-      "UPDATE importacion SET nameFolder = ? WHERE urlFolder = ? AND username = ?",
-      [importName, urlFolder, username],
+      "UPDATE importacion SET nameFolder = ? WHERE importID = ? AND username = ?",
+      [importName, importID, username],
       (err) => {
         if (err) {
           reject(err);

@@ -21,7 +21,6 @@
     ></script>
 
     <title>Galería</title>
-      <script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
 
     <link rel="stylesheet" href="{{assetPath}}/sidebars.css">
   </head>
@@ -40,6 +39,7 @@
               <div class=" form-outline mb-4">
                 <input
                   type="text"
+                  maxlength="25"     
                   id="importationNameInput"
                   name="importationName"
                   class="form-control"
@@ -226,7 +226,7 @@
                             <div loading="lazy" class="card col-lg-3 mx-2 " >
                               <img 
                                    style="width:90%;"
-                                   class="card-img-top lazyload mt-2"
+                                   class="card-img-top mt-2"
                                    data-src="{{this.url}}"
                                    alt="{{this.title}}"
                               >
