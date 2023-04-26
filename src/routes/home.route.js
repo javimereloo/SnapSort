@@ -30,7 +30,10 @@ module.exports = async function (fastify, opts) {
         const pics = await API.getAllImages(request.session.user.username);
         images = JSON.parse(pics);
       } else {
-        const pics =  await API.getImagesFromImport(request.session.user.username, folderName);
+        const pics = await API.getImagesFromImport(
+          request.session.user.username,
+          folderName
+        );
         images = JSON.parse(pics);
       }
       return reply.view("/src/pages/home.hbs", {
@@ -41,6 +44,29 @@ module.exports = async function (fastify, opts) {
         numImages: images.length,
         images: images,
       });
+    },
+  });
+
+  fastify.route({
+    method: "GET",
+    url: "/home/delete/:folderName",
+    preHandler: (request, reply, done) => {
+      // Comprobar si el usuario está autenticado
+      if (!request.session.user) {
+        const errorMessage = true;
+        return reply.redirect(`/login?errorMessage=${errorMessage}`);
+      }
+      done();
+    },
+    handler: async (request, reply) => {
+      const folderName = decodeURIComponent(request.params.folderName);
+      API.deleteFolder(request.session.user.username, folderName)
+        .then(() => {
+          return reply.redirect("/home/");
+        })
+        .catch((error) => {
+          return reply.send("Error eliminando:", error);
+        });
     },
   });
 

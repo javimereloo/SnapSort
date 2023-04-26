@@ -111,6 +111,18 @@ async function insertImport(username, urlFolder) {
   });
 }
 
+async function deleteFolder(username, folderName){
+  return new Promise((resolve, reject) => {
+    db.run("DELETE FROM importacion WHERE username = ? AND folderName = ?", [username, folderName], (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
 //Allows to change the importation name
 async function changeImportName(username, urlFolder, importName) {
   return new Promise((resolve, reject) => {
@@ -286,4 +298,5 @@ module.exports = {
   insertNewImage,
   getImagesFromImport,
   getAllImages,
+  deleteFolder,
 };
