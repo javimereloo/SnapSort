@@ -13,6 +13,15 @@ let DB = new sqlite3.Database(dbPath, (err) => {
   }
 });
 
+
+DB.run('PRAGMA foreign_keys = ON;', (err) => {
+  if (err) {
+    console.error(err.message);
+  } else {
+    console.log('Foreign keys enabled');
+  }
+});
+
 // Create a table for user information
 DB.run(
   `CREATE TABLE IF NOT EXISTS usuario (

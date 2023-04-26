@@ -113,7 +113,8 @@ async function insertImport(username, urlFolder) {
 
 async function deleteFolder(username, nameFolder){
   return new Promise((resolve, reject) => {
-    db.run("DELETE FROM importacion WHERE username = ? AND nameFolder = ?", [username, nameFolder], (err) => {
+   // const importID
+    db.run(`DELETE FROM importacion WHERE username = ? AND nameFolder = ?`, [username, nameFolder], (err) => {
       if (err) {
         reject(err);
       } else {
