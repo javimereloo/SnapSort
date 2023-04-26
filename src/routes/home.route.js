@@ -24,39 +24,22 @@ module.exports = async function (fastify, opts) {
       );
       const folderName = decodeURIComponent(request.params.folderName);
       const value = folderName || "Galeria";
-      let pics;
+      let images = [];
+
       if (value === "Galeria") {
-        const response = await API.getAllImages(request.session.user.username);
-        pics = response.data.images;
-        const numImages = pics.length;
-        console.log(`Número de imágenes: ${numImages}`);
-        // pics = await API.getAllImages(request.session.user.username)
-        //   .then((response) => {
-        //     pics = response.data.images;
-        //     const numImages = pics.length;
-        //     console.log(`Número de imágenes: ${numImages}`);
-        //   })
-        //   .catch((err) => {
-        //     console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
-        //   });
+        const pics = await API.getAllImages(request.session.user.username);
+        images = JSON.parse(pics);
       } else {
-        pics = await API.getImagesFromImport(
-          request.session.user.username,
-          folderName
-        )
-          .then((images) => {
-            pics = images;
-          })
-          .catch((err) => {
-            console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
-          });
+        const pics =  await API.getImagesFromImport(request.session.user.username, folderName);
+        images = JSON.parse(pics);
       }
+
       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
         importaciones: importaciones,
         importacionesSize: importaciones.size,
         currentPage: value,
-        numPics: pics.length,
+        numPics: images.length,
       });
     },
   });

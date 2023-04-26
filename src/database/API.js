@@ -228,7 +228,7 @@ async function getImagesFromImport(username, nameFolder) {
             title: row.title,
             url: row.url,
           }));
-          resolve(images);
+          resolve(JSON.stringify(images));
         }
       }
     );
