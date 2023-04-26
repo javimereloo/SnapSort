@@ -61,12 +61,10 @@ module.exports = async function (fastify, opts) {
     handler: async (request, reply) => {
       const folderName = decodeURIComponent(request.params.folderName);
       API.deleteFolder(request.session.user.username, folderName)
-        .then(() => {
-          return reply.redirect("/home/");
-        })
         .catch((error) => {
-          return reply.send("Error eliminando:", error);
+           reply.send("Error eliminando:", error);
         });
+        return reply.redirect("/home/");
     },
   });
 
