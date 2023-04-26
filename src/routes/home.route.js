@@ -33,7 +33,7 @@ module.exports = async function (fastify, opts) {
         const pics =  await API.getImagesFromImport(request.session.user.username, folderName);
         images = JSON.parse(pics);
       }
-
+      console.log(images)
       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
         importaciones: importaciones,

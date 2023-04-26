@@ -193,8 +193,8 @@ async function getAllImages(username) {
           reject(err);
         } else {
           const images = rows.map((row) => ({
-            id: row.id,
-            nombre: row.nombre,
+            imagenID: row.imagenID,
+            title: row.title,
             url: row.url,
           }));
           resolve(JSON.stringify(images));
@@ -206,12 +206,6 @@ async function getAllImages(username) {
 
 async function getImagesFromImport(username, nameFolder) {
   return new Promise((resolve, reject) => {
-    console.log(
-      "PROCEDEMOS A CARGAR  LAS IMAGENES DE ===================>",
-      username,
-      "de su carpeta ====>",
-      nameFolder
-    );
     db.all(
       `SELECT imagenID, title, url FROM imagen 
        WHERE importID IN (
