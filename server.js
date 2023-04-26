@@ -43,6 +43,13 @@ handlebars.registerHelper('mod', function(index, num, options) {
     return options.inverse(this);
   }
 });
+handlebars.registerHelper('modClose', function(index, num, options) {
+  if (index % num === 2) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
+});
 
 //Import routes 
 fastify.register(require('./src/routes/index.route.js'))

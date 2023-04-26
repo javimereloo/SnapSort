@@ -207,25 +207,28 @@
             </div>
             
             <hr>
-            <div class="row">
+            <div class="row overflow-auto">
                 <div class="col-12">
-                    
                       {{#if (eq importacionesSize 0)}}
                        <p class=" text-center lead"> ¡Pulsa en el icono + en la barra lateral para importar una nueva carpeta!</p>
                      
                       {{else}}
                         {{#each images}}
-                           
+                           {{#mod @index 3}}
                                <div class="row">
-                                <div class="card col" style="width: 18rem;">
-                                  <img src="{{this.url}}" alt="{{this.name}}">
+                            {{/mod}}
+                                <div class="card col-2" style="width: 18rem; height:18rem;">
+                                  <img 
+                                       src="https://lh3.googleusercontent.com/fife/APg5EOapiu-RA2nQuIAkl4X8ffmxvZH6UIafI8ExB-j2vVH6Wc9utAXaDblKPte0krYkck-49wR3utyDZbAp6NtVOiWx6JRdmQ6JwfHaP1Tvsc6dCDY8-6ZeWQ_SEZ7ZQL9t373RwI9mu59HJLoycrOff6pNx5WgtzjYWXpJQ9towj0lc_s3eVuUv5qSbfSP1zNWQ0K_5smSaMF57bN-vj_LF1BUD9lZnhaDQ6tO_9CHoSW6qLjR0oLLZ7-zzGYpJVbBc5QNONJaD2hqoIieUp-o3QaFNRZ9srBMMbxlVHXjlxG8RwiCihwwgo3uRvH709-3jfSO7v-6V7oWU-g9tM4GKTsyCAw8pSzLcBt582-PedU7JMzYi_dCYOUDvRZHLlJ39JrvFW93GEtU94vCt4zOCbdlgAOFGCDooKDE5Jt1WExqCxy2HuDQlEyJZLycHgJPNFv6PPbvgPqBRmFBzwzQ2cC-flQFW9UNSZFUmPQvWSluPfC8eoNhYsrY84Op9jHCyj4TxeRWve4mCKRKIs-xc0UATjNzjLTWbec1a-vTPaW_QX2oE52j1Gwq021zShE5IaySIEUMyib4qkZGAA27ztRUfml2snu-QUH8emYNg7FDCDaQaOJYPoLXPJu7Vb9jCkDbkNxTsaJRGN_9LPLX3sRAqazD8-pc0Rt8AtUoAWYcZmhFiZW9iNINPufldjOtvlJYLV4gOj6eS82xzJrITwb7e1l_286Qqs_OAfix_71xOryRGWV0Tc9XfGg0WS5Q4sBr7A0lvR1us0oy7wxT21HhSe2VRLaHfNz10juRPiCLhYEvO8Y_OjMtt4F5brDvK8lcnQFapJJcid1RMQHLoiZpZBJuHbjR5MzVhTMEeXjbPNj0i3KvHTaTxJ8xahYpz5ntnSb7ftQDn8fqCGXVO1bkIQv-i9yB0vyrDoqULEm3nlXroyuK0GbI0jJTcIV50mbPoTAxH0jVYfC3V3H7FzuhQkGI7eVI6PfZmBM2zRFVsSHH_ZrYepRWABp5AUeUORWzB07MFQnBEY7qQvMpiQA_Wqjic-vtNh78AK_SMGOqHpaJsZ7MpwWvN31eZiNvUzrJ6dchHa0ztDXRr-SOHPZf8wrVGg4Krka36G3QcQ3Le4o4wu49lMVUjq3kKjsQgR5uFU4QZm_ajn9D2ygxZm0i84voHvMxDtaqtvIQHEyWIJwXZfm4jVDUTq9E09HeXVG5kAjbJcdN-rHEsQnrUT7F4c_8LV-5DrewKA_Rt4ixKDkd1NQvS61K3eawl2LkHnBMrVXn3L9jr9fjpkgNVHZPXyeA3i6tcIfJjH3vpSokUlEQvbfS9rNFdg4YxqoX5ykGz1vreE3nk1H9j1sD5Nkl_kJThUE4QVvwWRtOZy5ZtjloN5ribiR3RXM4BTpbOKDw3Kv2nbJOwGdPJ4ZUNfVcH5z4R3ZDsZmwdpZUgLKwnAc8ESwHQZ6Zl9Vcciad0Z_Yx5tE3drywkZYKfB4lhvNch_sohpodArL8KoJa05Pw6JToKYXTVddvhB1LNS5OnoBY-sNuCvJIV_Jwy97lOPeYp9WOY1dwT96Hf0n1I2fuWdQzsDRFZuiCSRIsqmyH4k3Kw5XGvadxiF7koiJGrj9BLW7RbzQxxt89RWhAaH1X_wTPKvNCk6PhtYzT5e_JB5GjQD7Cq-dqQ=w2000-h1198"
+                                       alt="{{this.name}}"
+                                  >
                                   <h5 class="card-title">{{this.name}}</h5>
                                   <div class="card-body">
                                   </div>
-
                                 </div>
-                  </div>
-     
+                              {{#modClose @index 3}}
+                               </div>
+                            {{/modClose}}     
                         {{/each}}
                       {{/if}}
                 </div>
