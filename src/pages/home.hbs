@@ -227,7 +227,7 @@
                                   <img 
                                        style="width:90%;"
                                        class="card-img-top  "
-                                       src="https://casasinhaus.com/wp-content/uploads/2022/05/casas-modulares-madrid-lujo-1.jpg"
+                                       data-src="{{this.url}}"
                                        alt="{{this.title}}"
                                   >
                                   <hr>
@@ -254,6 +254,24 @@
       $('#modalNewImport').modal();
     });
       
+      function lazyLoad() {
+      const images = document.querySelectorAll('img[data-src]');
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            observer.unobserve(img);
+          }
+        });
+      });
+
+      images.forEach((img) => {
+        observer.observe(img);
+      });
+    }
+
+    window.addEventListener('load', lazyLoad);
       
     </script>
   </body>

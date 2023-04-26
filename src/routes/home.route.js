@@ -46,6 +46,14 @@ module.exports = async function (fastify, opts) {
       });
     },
   });
+  
+  fastify.route({
+    method:"GET",
+    url:"/home",
+    handler: (request,reply)=>{
+      return reply.redirect('/home/');
+    }
+  });
 
   fastify.route({
     method: "GET",
@@ -81,7 +89,7 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: async (request, reply) => {
-      const importID = API.insertImport(
+      const importID = await API.insertImport(
         request.session.user.username,
         request.body.url
       )
@@ -99,7 +107,7 @@ module.exports = async function (fastify, opts) {
         .catch((err) => {
           console.error("Ocurrió un error", err); //TODO mostrar alerta de error
         });
-
+      
       reply.redirect("/home/"); //TODO redirigir a la página de nueva importacion
     },
   });
