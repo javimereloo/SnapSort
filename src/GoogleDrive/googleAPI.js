@@ -33,8 +33,7 @@ async function listFilesInFolder(urlFolder, importID){
       const file = files[i];
       const urlSRC = file.webContentLink.replace(/&export=download/g, '');
       
-      console.log('DATOS DE LA IMAGEN ', importID, urlSRC, file.name)
-      // API.insertNewImage(importID, urlSRC, file.name);
+      API.insertNewImage(importID, urlSRC, file.name);
     }
     
     

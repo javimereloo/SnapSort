@@ -88,7 +88,7 @@ async function insertUser(username, name, lastname, email, password) {
   });
 }
 
-//Insert a new importation folder
+//Insert a new importation folder and returns importID
 async function insertImport(username, urlFolder) {
   return new Promise((resolve, reject) => {
     const now = new Date();
@@ -97,38 +97,19 @@ async function insertImport(username, urlFolder) {
     const month = (now.getMonth() + 1).toString().padStart(2, "0");
     const dateStr = `${day}/${month}`;
     const folderName = "importación del".concat(" ", dateStr);
-    let importID;
     db.run(
       `INSERT INTO importacion (username, urlFolder, date, nameFolder) VALUES (?,?,?,?)`,
       [username, urlFolder, currentDate, folderName],
-      async (err) => {
+      async function (err)  {
         if (err) {
           reject(err);
         } else {
-          importID = this.lastID;
-          resolve(importID);
+          resolve(this.lastID);
         }
       }
     );
   });
 }
-
-// async function getImportID(username, urlFolder) {
-//   return new Promise((reject, resolve) => {
-//     db.get(
-//       `SELECT importID FROM importacion WHERE username = ? AND urlFolder = ?`,
-//       [(username, urlFolder)],
-//       (err, row) => {
-//         if (err) {
-//           reject(err);
-//         } else {
-//           // console.log("ROW ID_____________________________" , row.id) //TODO SEGUIR AQUÍ SEGMENTATION FAULT
-//           resolve(row ? row.id : null);
-//         }
-//       }
-//     );
-//   });
-// }
 
 //Allows to change the importation name
 async function changeImportName(username, urlFolder, importName) {
