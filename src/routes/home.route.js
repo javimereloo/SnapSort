@@ -36,7 +36,7 @@ module.exports = async function (fastify, opts) {
         );
         images = JSON.parse(pics);
       }
-      return reply.view("/src/pages/home.hbs", {
+       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
         importaciones: importaciones,
         importacionesSize: importaciones.size,
@@ -107,8 +107,7 @@ module.exports = async function (fastify, opts) {
         .catch((err) => {
           console.error("Ocurrió un error", err); //TODO mostrar alerta de error
         });
-      
-      reply.redirect("/home/"); //TODO redirigir a la página de nueva importacion
+      return reply.redirect(`/home/${encodeURIComponent(request.body.importationName)}`); 
     },
   });
 };

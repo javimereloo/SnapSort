@@ -31,7 +31,7 @@ module.exports = async function (fastify, opts) {
           lastname: request.body.lastname,
           email: request.body.email,
         };
-        return reply.view("/src/pages/register.hbs", templateData); //TODO meter en el prehandler??
+        return reply.view("/src/pages/register.hbs", templateData);
       }
 
       if (request.body.password !== request.body.repeatPassword) {
