@@ -26,13 +26,19 @@ module.exports = async function (fastify, opts) {
       const value = folderName || "Galeria";
       let pics;
       if (value === "Galeria") {
-        pics = await API.getAllImages(request.session.user.username)
-          .then((images) => {
-            pics = images;
-          })
-          .catch((err) => {
-            console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
-          });
+        const response = await API.getAllImages(request.session.user.username);
+        pics = response.data.images;
+        const numImages = pics.length;
+        console.log(`Número de imágenes: ${numImages}`);
+        // pics = await API.getAllImages(request.session.user.username)
+        //   .then((response) => {
+        //     pics = response.data.images;
+        //     const numImages = pics.length;
+        //     console.log(`Número de imágenes: ${numImages}`);
+        //   })
+        //   .catch((err) => {
+        //     console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
+        //   });
       } else {
         pics = await API.getImagesFromImport(
           request.session.user.username,

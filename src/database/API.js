@@ -182,10 +182,6 @@ async function insertNewImage(importID, url, title) {
 
 async function getAllImages(username) {
   return new Promise((resolve, reject) => {
-    console.log(
-      "PROCEDEMOS A CARGAR TODAS LAS IMAGENES DE ===================>",
-      username
-    );
     db.all(
       `SELECT i.imagenID, i.title, i.url
        FROM imagen i 
