@@ -19,8 +19,9 @@ async function getFilesInFolder(folderUrl) {
   // Gets the files from the folder
   const res = await drive.files.list({
     q: `'${folderId}' in parents and trashed = false`,
-    fields: 'files(id, name, webContentLink)',
+    fields: 'files(id, name, webContentLink, webViewLink)',
   });
+  console.log(res.data.file);
 
   // Returns the list of files
   return res.data.files;
