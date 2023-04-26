@@ -21,7 +21,6 @@ async function getFilesInFolder(folderUrl) {
     q: `'${folderId}' in parents and trashed = false`,
     fields: 'files(id, name, webContentLink, webViewLink)',
   });
-  console.log(res.data.file);
 
   // Returns the list of files
   return res.data.files;
