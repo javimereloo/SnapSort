@@ -19,21 +19,40 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: async (request, reply) => {
-      const importaciones = await API.getImportaciones(request.session.user.username);
+      const importaciones = await API.getImportaciones(
+        request.session.user.username
+      );
       const folderName = decodeURIComponent(request.params.folderName);
       const value = folderName || "Galeria";
       let pics;
-      if (folderName !== "Galeria") {
-        pics = await API.getImagesFromImport(request.session.user.username, folderName);
+      if (value === "Galeria") {
+        pics = await API.getAllImages(request.session.user.username)
+          .then((images) => {
+            pics = images;
+          })
+          .catch((err) => {
+            console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
+          });
+        console.log("HAY ", pics.size, "en la carpeta", folderName);
       } else {
-        pics = await API.getAllImages(request.session.user.username);
+        pics = await API.getImagesFromImport(
+          request.session.user.username,
+          folderName
+        )
+          .then((images) => {
+            pics = images;
+          })
+          .catch((err) => {
+            console.error("Ocurrió un error:", err); //TODO mostrar alerta de error
+          });
+        console.log("HAY ", pics.size, "en la carpeta", folderName);
       }
       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
         importaciones: importaciones,
         importacionesSize: importaciones.size,
         currentPage: value,
-        numPics: 10,
+        numPics: pics.size,
       });
     },
   });

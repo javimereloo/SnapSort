@@ -182,6 +182,7 @@ async function insertNewImage(importID, url, title) {
 
 async function getAllImages(username){
   return new Promise((resolve, reject) => {
+    console.log('PROCEDEMOS A CARGAR TODAS LAS IMAGENES DE ===================>', username);
     db.all(
       `SELECT i.id, i.title, i.url
        FROM imagen i 
@@ -192,7 +193,12 @@ async function getAllImages(username){
         if (err) {
           reject(err);
         } else {
-          resolve(rows);
+          const images = rows.map((row) => ({
+            id: row.imagenID,
+            title: row.title,
+            url: row.url,
+          }));
+          resolve(images);
         }
       }
     );
@@ -201,6 +207,7 @@ async function getAllImages(username){
 
 async function getImagesFromImport(username, nameFolder){
    return new Promise((resolve, reject) => {
+     console.log('PROCEDEMOS A CARGAR  LAS IMAGENES DE ===================>', username, 'de su carpeta ====>', nameFolder);
     db.all(
       `SELECT imagenID, title, url FROM imagen 
        WHERE importID IN (
@@ -280,4 +287,6 @@ module.exports = {
   getImportaciones,
   changeImportName,
   insertNewImage,
+  getImagesFromImport,
+  getAllImages,
 };
