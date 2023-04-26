@@ -184,7 +184,7 @@ async function getAllImages(username){
   return new Promise((resolve, reject) => {
     console.log('PROCEDEMOS A CARGAR TODAS LAS IMAGENES DE ===================>', username);
     db.all(
-      `SELECT i.id, i.title, i.url
+      `SELECT i.imagenID, i.title, i.url
        FROM imagen i 
        INNER JOIN importacion imp ON i.importID = imp.importID
        WHERE imp.username = ?`,
@@ -193,12 +193,14 @@ async function getAllImages(username){
         if (err) {
           reject(err);
         } else {
-          const images = rows.map((row) => ({
-            id: row.imagenID,
-            title: row.title,
-            url: row.url,
-          }));
-          resolve(images);
+          // const images = rows.map((row) => ({
+          //   imagenID: row.imagenID,
+          //   title: row.title,
+          //   url: row.url,
+          // }));
+          // console.log('Enviamos', images.size, ' imagenes')
+          // resolve(images);
+          resolve(rows);
         }
       }
     );

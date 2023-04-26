@@ -46,6 +46,7 @@ DB.run(
   }
 );
 
+//TODO ON DELETE CASCADE 
 // Create table for imagen that contains all images 
 DB.run(
   `CREATE TABLE IF NOT EXISTS imagen(
