@@ -20,6 +20,7 @@ async function getFilesInFolder(folderUrl) {
   const res = await drive.files.list({
     q: `'${folderId}' in parents and trashed = false`,
     fields: 'files(id, name, webContentLink, webViewLink)',
+    pageSize: 1000,
   });
 
   // Returns the list of files
@@ -33,7 +34,6 @@ async function listFilesInFolder(urlFolder, importID){
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const urlSRC = file.webContentLink.replace(/&export=download/g, '');
-      console.log('IMPORT VALUE', importID);
       API.insertNewImage(importID, urlSRC, file.name);
     }
     

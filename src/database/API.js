@@ -205,6 +205,7 @@ async function getAllImages(username) {
         if (err) {
           reject(err);
         } else {
+
           const images = rows.map((row) => ({
             imagenID: row.imagenID,
             title: row.title,

@@ -28,6 +28,7 @@ module.exports = async function (fastify, opts) {
 
       if (value === "Galeria") {
         const pics = await API.getAllImages(request.session.user.username);
+        images = JSON.parse(pics);
       } else {
         const pics = await API.getImagesFromImport(
           request.session.user.username,
