@@ -7,6 +7,16 @@ html {
   height: -webkit-fill-available;
 }
 
+.card {
+  width: 18rem; /* ancho fijo del card */
+  height: 20rem; /* altura fija del card */
+}
+
+.card-img-top {
+  object-fit: cover; /* ajustar la imagen al card */
+  height: 100%; /* altura del 100% del card */
+}
+
 main {
   display: flex;
   flex-wrap: nowrap;
