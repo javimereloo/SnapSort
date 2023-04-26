@@ -28,7 +28,6 @@ module.exports = async function (fastify, opts) {
 
       if (value === "Galeria") {
         const pics = await API.getAllImages(request.session.user.username);
-        images = JSON.parse(pics);
       } else {
         const pics = await API.getImagesFromImport(
           request.session.user.username,
@@ -36,6 +35,8 @@ module.exports = async function (fastify, opts) {
         );
         images = JSON.parse(pics);
       }
+      console.log(images.length, 'imágenes')
+      console.log(images)
       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
         importaciones: importaciones,
