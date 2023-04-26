@@ -203,7 +203,7 @@
 
             <div class="page-header pt-1 justify-content-between">
               <h2 class="mb-0">{{currentPage}} del usuario {{user.username}}</h2>
-              <p class="mb-0 lead" style="font-size:16px"> {{numPics}} imágenes</p>
+              <p class="mb-0 lead" style="font-size:16px"> {{numImages}} imágenes</p>
             </div>
             
             <hr>
@@ -214,8 +214,19 @@
                        <p class=" text-center lead"> ¡Pulsa en el icono + en la barra lateral para importar una nueva carpeta!</p>
                      
                       {{else}}
-                        <p class=" text-center lead"> Mostrando tus importaciones! </p>
-                   
+                        {{#each images}}
+                           
+                               <div class="row">
+                                <div class="card col" style="width: 18rem;">
+                                  <img src="{{this.url}}" alt="{{this.name}}">
+                                  <h5 class="card-title">{{this.name}}</h5>
+                                  <div class="card-body">
+                                  </div>
+
+                                </div>
+                  </div>
+     
+                        {{/each}}
                       {{/if}}
                 </div>
             </div>

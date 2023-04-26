@@ -39,7 +39,8 @@ module.exports = async function (fastify, opts) {
         importaciones: importaciones,
         importacionesSize: importaciones.size,
         currentPage: value,
-        numPics: images.length,
+        numImages: images.length,
+        images: images,
       });
     },
   });

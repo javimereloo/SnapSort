@@ -36,6 +36,13 @@ handlebars.registerHelper("encodeURIComponent", function(str) {
 handlebars.registerHelper("decodeURIComponent", function(str) {
   return decodeURIComponent(str);
 });
+handlebars.registerHelper('mod', function(index, num, options) {
+  if (index % num === 0) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
+});
 
 //Import routes 
 fastify.register(require('./src/routes/index.route.js'))
