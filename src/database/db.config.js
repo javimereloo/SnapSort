@@ -16,7 +16,7 @@ let DB = new sqlite3.Database(dbPath, (err) => {
 
 DB.run('PRAGMA foreign_keys = ON;', (err) => {
   if (err) {
-    console.error(err.message);
+    console.error('ESTE ERROR===========>' ,err.message);
   } else {
     console.log('Foreign keys enabled');
   }
@@ -45,7 +45,7 @@ DB.run(
           urlFolder TEXT NOT NULL, 
           date DATE NOT NULL, 
           nameFolder TEXT, 
-          FOREIGN KEY(username) REFERENCES cliente(username)
+          FOREIGN KEY(username) REFERENCES usuario(username)
           UNIQUE(nameFolder,username, urlFolder)
           )`,
   (err) => {

@@ -29,10 +29,11 @@ async function getFilesInFolder(folderUrl) {
 async function listFilesInFolder(urlFolder, importID){
   getFilesInFolder(urlFolder)
   .then((files) => {
+    console.log('NUMERO DE ARCHIVOS ENCONTRADOS ====>' , files.length);
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const urlSRC = file.webContentLink.replace(/&export=download/g, '');
-      
+      console.log('IMPORT VALUE', importID);
       API.insertNewImage(importID, urlSRC, file.name);
     }
     

@@ -35,8 +35,6 @@ module.exports = async function (fastify, opts) {
         );
         images = JSON.parse(pics);
       }
-      console.log(images.length, 'imágenes')
-      console.log(images)
       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
         importaciones: importaciones,
