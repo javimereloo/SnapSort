@@ -231,7 +231,7 @@
                                        loading="lazy"
                                        style="width:90%;"
                                        class="card-img-top  "
-                                       src="https://doc-04-c4-docs.googleusercontent.com/docs/securesc/32gb1fnmu817rkmrql6spa81h8vj4r6v/ne7f8v7lgn9o1ei997l7i13qan6853e2/1682607600000/00107607454692591072/05375626317048157220/1a3EikdBSClbDaT5-Mmg8KbyW3eJWv0_x?ax=ALy03A6gAElvUJMaoMJe_sOnptyLmuzAglKQtiW8pRwzI0Fm-1KtMQMMWTrEgDiQZsCI8O3gDjg_MTcuF7GmHW0FmFe2Q5iu7squ5L_v-Zg9YVIgM90Co8zn7f_LIU1LEEhVPskKc6tIjNv8cyY2s7FEynjwXHOWjYw-PMSd1hf2FsW12kGedE5vmVMtz1JKFJgr9HDodHLNZjMmWGbcLYQ5BzvIvI-RSsBxhNKMTZPYDpzyjtVMQ71CdtYZe4sKlHCCBn7h5Y5xenA-urqfAxQ-Ox1cDAWicYT93M0veNVqCSw8_c_oyl1UYKcxSSNSkiTprDoy-USh2ol-7AFTwPunkFLEzJ8PGs4tMVXmaQJiVxxfv5mRZ06RcrYDEEg7luYlCZHRKJ8oyryTug31SxR1P-AdlviukvxS6p3FU2saXs8pVWfdP4toHGaCVHItDY2bdJG1Tv3pHevpzNWr7As8JNJWv32RlVjZa-h6uWczIRXq-s_RJ4b8PZA4Sm7IfhjqE5774tnSjmM2RD-yWA1kZ198tMyiHhmj7kb2r_DbzITDu016oAf86Nky_O8zsrDrICuWje58qTE-U-7cWIEji-nSQAY5TfOOhtP4xgaV5K-22PFM_Gyc6oFKvCnGchOv1m1IEq2RJ-ACBI-2Z2QZVxZhm45A0z14udNrc5YrQpwZbirIa5Q-6T8j4u8HRn80iV6HQj2dqxs7_H_vtyKN6mUA75Dg2HAJ6M5oR5oRIHgKK2XPDGpm-3c2TLmrW3iLL46mz1-TyurlkPhbd3hB2C_UMKRvyD22f9E6pX1Fw55r5D-zAO5jl9PPmem500MMmhYwT9sWpBiWd2p5cOv4Vzh8H1g_ZyXHk2qfiNjSo1T5ofKDI-i-Y2pAy63GdqnDzsyCUwaOxEQHR3URQAwqPTQwKlnIWf0p0PG6QqZxmzZaB9-3BB2vWEETiT19dERnoDjtgtAElWWDkvkaUPxpWZ9YhokYRtx-Y0nMHDeZw6sFqNfAQoQFVXlPUy18HZCcBF5jZaN4djwqdIMQZBk5uAIKGZoQxAX28yV9RNwUdcZG9ukzvg&uuid=15ec28f6-a3e2-420c-b218-38d91ab9e47e&authuser=0&nonce=n0voen4g3489c&user=05375626317048157220&hash=lup7lsi6p8a10ldcjaguu3t1utq0ucr8"
+                                       src="{{this.url}}"
                                        alt="{{this.title}}"
                                   >
                                   <hr>
@@ -253,24 +253,29 @@
 
     <script>
 
-      function lazyLoad() {
-      const images = document.querySelectorAll('img[data-src]');
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src;
-            observer.unobserve(img);
-          }
-        });
-      });
+//     $(document).ready(function(){
+//       // Inicializar los modales de Bootstrap
+//       $('#modalNewImport').modal();
+//     });
+      
+//       function lazyLoad() {
+//       const images = document.querySelectorAll('img[data-src]');
+//       const observer = new IntersectionObserver((entries, observer) => {
+//         entries.forEach((entry) => {
+//           if (entry.isIntersecting) {
+//             const img = entry.target;
+//             img.src = img.dataset.src;
+//             observer.unobserve(img);
+//           }
+//         });
+//       });
 
-      images.forEach((img) => {
-        observer.observe(img);
-      });
-    }
+//       images.forEach((img) => {
+//         observer.observe(img);
+//       });
+//     }
 
-    window.addEventListener('load', lazyLoad);
+//     window.addEventListener('load', lazyLoad);
       
     </script>
   </body>
