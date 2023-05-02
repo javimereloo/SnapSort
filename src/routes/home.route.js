@@ -81,6 +81,7 @@ module.exports = async function (fastify, opts) {
         importaciones: importaciones,
         importacionesSize: importaciones.size,
         currentPage: importID,
+        header: importaciones.find(e => e.importID == importID).nameFolder || 'Galería',
         numImages: images.length,
         images: images,
       });

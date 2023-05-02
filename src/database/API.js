@@ -256,8 +256,8 @@ async function getImagesFromImport(username, importID) {
   return new Promise((resolve, reject) => {
     db.all(
       `SELECT imagenID, title, url FROM imagen 
-       WHERE importID = ? AND username = ?`,
-      [importID, username],
+       WHERE importID = ?`,
+      [importID],
       (err, rows) => {
         if (err) {
           reject(err);
