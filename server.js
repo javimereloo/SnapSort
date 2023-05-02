@@ -66,7 +66,22 @@ fastify.register(fastifySession, {
 
 //Image resizing with thumbor
 const ThumborUrlBuilder = require('thumbor');
-const thumbor = new ThumborUrlBuilder('http://localhost:8888');
+const thumbor = ThumborUrlBuilder({
+  server: {
+    port: 8888 // Puerto en el que se ejecutará el servidor
+  },
+  // Configurar el almacenamiento en caché (opcional)
+  cache: {
+    type: 'redis',
+    options: {
+      // Configurar la conexión a Redis
+      host: 'localhost',
+      port: 6379
+    }
+  },
+  // Configurar la clave de seguridad para firmar las URL de las imágenes
+  key: process.env.SECRET_KEY
+});
 
 
 // Run the server and report out to the logs
