@@ -26,7 +26,7 @@ fastify.register(require("@fastify/view"), {
 //Register handlebars necessary helpers
 const handlebars = require('handlebars');
 handlebars.registerHelper('eq', function(a, b) {
-  return a === b;
+  return a == b;
 });
 handlebars.registerHelper('toString', function (value) {
   return value.toString();

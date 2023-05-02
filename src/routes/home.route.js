@@ -62,10 +62,10 @@ module.exports = async function (fastify, opts) {
         await API.getImportaciones(request.session.user.username)
       );
 
-      const importID = decodeURIComponent(request.params.importID);
+      const importID = decodeURIComponent(request.params.importID) ;
       let images = [];
 
-      if (importID === "") {
+      if (importID === '') {
         const pics = await API.getAllImages(request.session.user.username);
         images = JSON.parse(pics);
       } else {
@@ -75,15 +75,17 @@ module.exports = async function (fastify, opts) {
         );
         images = JSON.parse(pics);
       }
-      const pageHeader = (importaciones.find(elemento => elemento.importID === 17)) || 'Galería';
-      console.log(importaciones.nameFolder)
+      // const pageHeader = importID ? (importaciones.find(elemento => elemento.importID === importID)).nameFolder : 'Galería';
+      const pageHeader =  'Galería';
+      console.log(importID);
+      console.log(importaciones);
       console.log('==========>', pageHeader );
       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
         importaciones: importaciones,
         importacionesSize: importaciones.size,
         currentPage: importID,
-        header: pageHeader,
+        currentPageHeader: pageHeader,
         numImages: images.length,
         images: images,
       });

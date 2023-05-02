@@ -119,7 +119,7 @@
                         {{#each importaciones}}
                         <li class="row ">
                           <a href="/home/{{encodeURIComponent this.importID}}" class=" nav-link link-dark {{#if (eq @root.currentPage this.importID)}}col-10 active{{/if}}"> 
-                            {{this.nameFolder}}
+                            {{this.nameFolder}} 
                           </a>
                           {{#if (eq @root.currentPage this.importID)}}
                           <a class="col mt-4 active text-center " href="/home/delete/{{encodeURIComponent this.nameFolder}}">
@@ -213,7 +213,7 @@
             <!------------------ RESTO DE LA VISTA-------------------------------------------------------->
 
             <div class="row page-header pt-1 justify-content-between">
-              <h2 class="col-10 mb-0">{{header}} </h2>
+              <h2 class="col-10 mb-0">{{currentPageHeader}} </h2>
               <p class="col mb-0 lead" style="font-size:16px"> {{numImages}} imágenes</p>
             </div>
             
