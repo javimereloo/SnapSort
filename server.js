@@ -36,19 +36,10 @@ handlebars.registerHelper("encodeURIComponent", function(str) {
 handlebars.registerHelper("decodeURIComponent", function(str) {
   return decodeURIComponent(str);
 });
-handlebars.registerHelper('mod', function(index, num, options) {
-  if (index % num === 0) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
-});
-handlebars.registerHelper('modClose', function(index, num, options) {
-  if (index % num === 2) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
+handlebars.registerHelper('thumbor', function (path, options) {
+  const { width, height } = options.hash;
+  const url = thumbor.setImagePath(path).resize(width, height).buildUrl();
+  return new handlebars.SafeString(url);
 });
 
 //Import routes 
@@ -73,6 +64,9 @@ fastify.register(fastifySession, {
 });
 
 
+//Image resizing with thumbor
+const ThumborUrlBuilder = require('thumbor');
+const thumbor = new ThumborUrlBuilder('http://localhost:8888');
 
 
 // Run the server and report out to the logs
