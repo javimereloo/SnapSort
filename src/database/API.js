@@ -111,16 +111,20 @@ async function insertImport(username, urlFolder) {
   });
 }
 
-async function deleteFolder(username, nameFolder){
+async function deleteFolder(username, nameFolder) {
   return new Promise((resolve, reject) => {
-   // const importID
-    db.run(`DELETE FROM importacion WHERE username = ? AND nameFolder = ?`, [username, nameFolder], (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
+    // const importID
+    db.run(
+      `DELETE FROM importacion WHERE username = ? AND nameFolder = ?`,
+      [username, nameFolder],
+      (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
       }
-    });
+    );
   });
 }
 
@@ -152,11 +156,17 @@ async function getImportaciones(username) {
           reject(err);
         }
         if (rows) {
-          const importaciones = new Map();
-          rows.forEach((row) => {
-            importaciones.set(row.urlFolder, row.nameFolder);
-          });
-          resolve(importaciones);
+          // const importaciones = new Map();
+          // rows.forEach((row) => {
+          //   importaciones.set(row.urlFolder, row.nameFolder, row.importID);
+          // });
+          // resolve(importaciones);
+          const importaciones = rows.map((row) => ({
+            urlFolder: row.urlFolder,
+            nameFolder: row.nameFolder,
+            importID: row.importID,
+          }));
+          resolve(JSON.stringify(importaciones));
         } else {
           resolve([]);
         }
@@ -205,7 +215,6 @@ async function getAllImages(username) {
         if (err) {
           reject(err);
         } else {
-
           const images = rows.map((row) => ({
             imagenID: row.imagenID,
             title: row.title,
@@ -221,9 +230,9 @@ async function getAllImages(username) {
 // async function getImagesFromImport(username, nameFolder) {
 //   return new Promise((resolve, reject) => {
 //     db.all(
-//       `SELECT imagenID, title, url FROM imagen 
+//       `SELECT imagenID, title, url FROM imagen
 //        WHERE importID IN (
-//          SELECT importID FROM importacion 
+//          SELECT importID FROM importacion
 //          WHERE username = ? AND nameFolder = ?
 //        )`,
 //       [username, nameFolder],
