@@ -11,7 +11,6 @@ module.exports = async function (fastify, opts) {
     method: "GET",
     url: "/home/:folderName",
     preHandler: (request, reply, done) => {
-      // Comprobar si el usuario está autenticado
       if (!request.session.user) {
         const errorMessage = true;
         return reply.redirect(`/login?errorMessage=${errorMessage}`);
