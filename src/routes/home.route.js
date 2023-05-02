@@ -2,6 +2,7 @@ const DB = require("../database/db.config.js");
 const API = require("../database/API.js");
 const googleAPI = require("../GoogleDrive/googleAPI.js");
 
+//Returns is the recieved route is the actual route 
 function isActive(route) {
   return this.request.url === route;
 }
