@@ -26,15 +26,21 @@ module.exports = async function (fastify, opts) {
     method: "POST",
     url: "/login",
     preHandler: async (request, reply, done) => {
-      const correctCredentials = await API.checkPassword(
+      await API.checkPassword(
         request.body.username,
         request.body.password
-      );
-      if (!correctCredentials) {
+      ).then((correctCredentials)=>{
+        if(!correctCredentials){
+          const errorPassword = "Credenciales incorrectas";
+          const templateData = { errorPassword, username: request.body.username};
+          return reply.view("/src/pages/login.hbs", templateData);
+        }
+      })
+      .catch((error) => {
         const errorPassword = "Credenciales incorrectas";
-        const templateData = { errorPassword, username: request.body.username };
+        const templateData = { errorPassword };
         return reply.view("/src/pages/login.hbs", templateData);
-      }
+      });
       done();
     },
     handler: async (request, reply) => {
