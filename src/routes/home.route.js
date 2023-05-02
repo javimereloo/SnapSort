@@ -75,13 +75,15 @@ module.exports = async function (fastify, opts) {
         );
         images = JSON.parse(pics);
       }
-      console.log(importaciones.Size, "AQUI============>", importaciones);
+      const pageHeader = (importaciones.find(elemento => elemento.importID === 17)) || 'Galería';
+      console.log(importaciones.nameFolder)
+      console.log('==========>', pageHeader );
       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
         importaciones: importaciones,
         importacionesSize: importaciones.size,
         currentPage: importID,
-        header: importaciones.find(e => e.importID == importID).nameFolder || 'Galería',
+        header: pageHeader,
         numImages: images.length,
         images: images,
       });
