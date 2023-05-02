@@ -8,9 +8,48 @@ function isActive(route) {
 }
 
 module.exports = async function (fastify, opts) {
-  fastify.route({
+//   fastify.route({
+//     method: "GET",
+//     url: "/home/:folderName",
+//     preHandler: (request, reply, done) => {
+//       if (!request.session.user) {
+//         const errorMessage = true;
+//         return reply.redirect(`/login?errorMessage=${errorMessage}`);
+//       }
+//       done();
+//     },
+//     handler: async (request, reply) => {
+//       const importaciones = await API.getImportaciones(
+//         request.session.user.username
+//       );
+//       const folderName = decodeURIComponent(request.params.folderName);
+//       const value = folderName || "Galeria";
+//       let images = [];
+
+//       if (value === "Galeria") {
+//         const pics = await API.getAllImages(request.session.user.username);
+//         images = JSON.parse(pics);
+//       } else {
+//         const pics = await API.getImagesFromImport(
+//           request.session.user.username,
+//           folderName
+//         );
+//         images = JSON.parse(pics);
+//       }
+//        return reply.view("/src/pages/home.hbs", {
+//         user: request.session.user,
+//         importaciones: importaciones,
+//         importacionesSize: importaciones.size,
+//         currentPage: value,
+//         numImages: images.length,
+//         images: images,
+//       });
+//     },
+//   });
+  
+    fastify.route({
     method: "GET",
-    url: "/home/:folderName",
+    url: "/home/:importID",
     preHandler: (request, reply, done) => {
       if (!request.session.user) {
         const errorMessage = true;
@@ -22,17 +61,16 @@ module.exports = async function (fastify, opts) {
       const importaciones = await API.getImportaciones(
         request.session.user.username
       );
-      const folderName = decodeURIComponent(request.params.folderName);
-      const value = folderName || "Galeria";
+      const importID = decodeURIComponent(request.params.importID);
       let images = [];
 
-      if (value === "Galeria") {
+      if (importID === "") {
         const pics = await API.getAllImages(request.session.user.username);
         images = JSON.parse(pics);
       } else {
         const pics = await API.getImagesFromImport(
           request.session.user.username,
-          folderName
+          importID
         );
         images = JSON.parse(pics);
       }
@@ -40,7 +78,7 @@ module.exports = async function (fastify, opts) {
         user: request.session.user,
         importaciones: importaciones,
         importacionesSize: importaciones.size,
-        currentPage: value,
+        currentPage: importID,
         numImages: images.length,
         images: images,
       });

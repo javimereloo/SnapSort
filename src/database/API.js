@@ -145,7 +145,7 @@ async function changeImportName(username, importID, importName) {
 async function getImportaciones(username) {
   return new Promise((resolve, reject) => {
     db.all(
-      "SELECT nameFolder, urlFolder FROM importacion WHERE username = ?",
+      "SELECT nameFolder, urlFolder, importID FROM importacion WHERE username = ?",
       [username],
       (err, rows) => {
         if (err) {
@@ -218,15 +218,37 @@ async function getAllImages(username) {
   });
 }
 
-async function getImagesFromImport(username, nameFolder) {
+// async function getImagesFromImport(username, nameFolder) {
+//   return new Promise((resolve, reject) => {
+//     db.all(
+//       `SELECT imagenID, title, url FROM imagen 
+//        WHERE importID IN (
+//          SELECT importID FROM importacion 
+//          WHERE username = ? AND nameFolder = ?
+//        )`,
+//       [username, nameFolder],
+//       (err, rows) => {
+//         if (err) {
+//           reject(err);
+//         } else {
+//           const images = rows.map((row) => ({
+//             id: row.imagenID,
+//             title: row.title,
+//             url: row.url,
+//           }));
+//           resolve(JSON.stringify(images));
+//         }
+//       }
+//     );
+//   });
+// }
+
+async function getImagesFromImport(username, importID) {
   return new Promise((resolve, reject) => {
     db.all(
       `SELECT imagenID, title, url FROM imagen 
-       WHERE importID IN (
-         SELECT importID FROM importacion 
-         WHERE username = ? AND nameFolder = ?
-       )`,
-      [username, nameFolder],
+       WHERE importID = ? AND username = ?`,
+      [importID, username],
       (err, rows) => {
         if (err) {
           reject(err);
