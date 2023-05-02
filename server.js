@@ -1,3 +1,4 @@
+// vrivas: Añado comentario para saber que los dos podemos actualizar el código.
 const path = require("path");
 
 // Require the fastify framework and instantiate it
