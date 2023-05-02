@@ -36,11 +36,7 @@ handlebars.registerHelper("encodeURIComponent", function(str) {
 handlebars.registerHelper("decodeURIComponent", function(str) {
   return decodeURIComponent(str);
 });
-handlebars.registerHelper('thumbor', function (path, options) {
-  const { width, height } = options.hash;
-  const url = thumbor.setImagePath(path).resize(width, height).buildUrl();
-  return new handlebars.SafeString(url);
-});
+
 
 //Import routes 
 fastify.register(require('./src/routes/index.route.js'))
@@ -61,26 +57,6 @@ fastify.register(fastifySession, {
     maxAge: 14400000, // Tiempo de expiración de la cookie 4h
   },
   saveUninitialized: true,
-});
-
-
-//Image resizing with thumbor
-const ThumborUrlBuilder = require('thumbor');
-const thumbor = ThumborUrlBuilder({
-  server: {
-    port: 8888 // Puerto en el que se ejecutará el servidor
-  },
-  // Configurar el almacenamiento en caché (opcional)
-  cache: {
-    type: 'redis',
-    options: {
-      // Configurar la conexión a Redis
-      host: 'localhost',
-      port: 6379
-    }
-  },
-  // Configurar la clave de seguridad para firmar las URL de las imágenes
-  key: process.env.SECRET_KEY
 });
 
 
