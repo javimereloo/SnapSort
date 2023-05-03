@@ -135,7 +135,7 @@ async function getOwner(imagenID) {
 async function getImageInfo(imagenID){
   return new Promise((resolve,reject) => {
     db.get(
-      `SELECT importID, url, title, score, topic WHERE imagenID = ?`,
+      `SELECT importID, url, title, score, topic FROM imagen  WHERE imagenID = ?`,
       [imagenID],
       (err,row)=>{
         if(err){
