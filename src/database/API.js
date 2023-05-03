@@ -111,12 +111,29 @@ async function insertImport(username, urlFolder) {
   });
 }
 
-async function getOwner(imagenID){
-  return new Promise((resolve, rejecte) =>{
+//Function that returns the owner of the image
+async function getOwner(imagenID) {
+  return new Promise((resolve, reject) => {
     db.get(
-    
+      `SELECT username FROM importacion WHERE importID IN (SELECT importID FROM imagen WHERE imagenID = ?)`,
+      [imagenID],
+      (err, row) => {
+        if (err) {
+          reject(err);
+        }
+        if (row) {
+          resolve(row);
+        } else {
+          resolve([]);
+        }
+      }
     );
   });
+}
+
+//Returns image information
+async function getImageInfo(imagenID){
+  
 }
 
 //Deletes a folder
@@ -316,4 +333,6 @@ module.exports = {
   getImagesFromImport,
   getAllImages,
   deleteFolder,
+  getOwner,
+  getImageInfo,
 };
