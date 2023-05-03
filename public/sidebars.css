@@ -18,6 +18,10 @@ html {
   object-position: center;
 }
 
+.modal {
+  overflow: hidden;
+}
+
 main {
   display: flex;
   flex-wrap: nowrap;
