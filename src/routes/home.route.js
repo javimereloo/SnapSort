@@ -1,4 +1,3 @@
-const DB = require("../database/db.config.js");
 const API = require("../database/API.js");
 const googleAPI = require("../GoogleDrive/googleAPI.js");
 
@@ -11,7 +10,7 @@ module.exports = async function (fastify, opts) {
   fastify.route({
     method: "GET",
     url: "/home/:importID",
-    preHandler: (request, reply, done) => {
+    preHandler: (request, reply, done) => { //TODO COMPROBAR QUE EL IMPORTID CORRESPONDA AL USUARIO
       if (!request.session.user) {
         const errorMessage = true;
         return reply.redirect(`/login?errorMessage=${errorMessage}`);
@@ -95,14 +94,18 @@ module.exports = async function (fastify, opts) {
     },
     handler: async (request, reply) => {
       let url;
-      try{
-         url = new URL(request.body.url);
-      }catch(error){
-        return reply.code(400).send('No se ha proporcionado una URL válida', error);
+      try {
+        url = new URL(request.body.url);
+      } catch (error) {
+        return reply
+          .code(400)
+          .send("No se ha proporcionado una URL válida", error);
       }
-      
-      if (url.hostname !== 'drive.google.com') {
-        return reply.code(400).send('La url proporcionada no corresponde a Google Drive');
+
+      if (url.hostname !== "drive.google.com") {
+        return reply
+          .code(400)
+          .send("La url proporcionada no corresponde a Google Drive");
       } else {
         const importID = await API.insertImport(
           request.session.user.username,
@@ -119,14 +122,16 @@ module.exports = async function (fastify, opts) {
             const clientIp = request.headers["x-forwarded-for"] || request.ip;
             console.log("CLIENT IP====>", clientIp);
             //Load and add images to DB
-            await googleAPI.listFilesInFolder(request.body.url, importID, clientIp);
+            await googleAPI.listFilesInFolder(
+              request.body.url,
+              importID,
+              clientIp
+            );
           })
           .catch((err) => {
             console.error("Ocurrió un error", err); //TODO mostrar alerta de error
           });
-        return reply.redirect(
-          `/home/${encodeURIComponent(importID)}`
-        );
+        return reply.redirect(`/home/${encodeURIComponent(importID)}`);
       }
     },
   });

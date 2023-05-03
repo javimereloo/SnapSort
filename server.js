@@ -45,6 +45,7 @@ fastify.register(require('./src/routes/login.route.js'))
 fastify.register(require('./src/routes/home.route.js'))
 fastify.register(require('./src/routes/signup.route.js'))
 fastify.register(require('./src/routes/logout.route.js'))
+fastify.register(require('./src/routes/edit.route.js'))
 
 
 //Configuration for session identification
