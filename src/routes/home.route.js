@@ -106,8 +106,10 @@ module.exports = async function (fastify, opts) {
               request.body.importationName
             );
           }
+           const clientIp = request.headers['x-forwarded-for'] || request.ip;
+          console.log('CLIENT IP====>' , clientIp);
           //Load and add images to DB
-          googleAPI.listFilesInFolder(request.body.url, importID);
+          googleAPI.listFilesInFolder(request.body.url, importID, clientIp);
         })
         .catch((err) => {
           console.error("Ocurrió un error", err); //TODO mostrar alerta de error
