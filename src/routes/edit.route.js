@@ -13,6 +13,7 @@ module.exports = async function (fastify, opts) {
       if (!API.getOwner(imagenID) === request.session.user.username) {
         return reply.redirect("/home");
       }
+      //TODO imagenID == null => home
       done();
     },
     handler: async (request, reply) => {

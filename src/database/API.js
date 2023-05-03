@@ -143,7 +143,7 @@ async function getImageInfo(imagenID){
         }
         if(row){
           const imageInfo ={
-            importId: row.imporID,
+            importID: row.imporID,
             url: row.url,
             title: row.title,
             score: row.score,
@@ -282,7 +282,7 @@ async function getImagesFromImport(username, importID) {
           reject(err);
         } else {
           const images = rows.map((row) => ({
-            id: row.imagenID,
+            imagenID: row.imagenID,
             title: row.title,
             url: row.url,
           }));

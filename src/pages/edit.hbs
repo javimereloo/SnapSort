@@ -28,10 +28,11 @@
     <div
       class="container-fluid p-0 h-100 d-flex aling-items-center justify-concent-center" >
       <div class="row mw-100">
-        <div class="col-md-8 bg-dark text-center d-flex justify-content-center align-items-center">
+        <div class="col-md-8 mh-100 bg-dark text-center d-flex justify-content-center align-items-center">
           <img
             style="object-fit:  contain; max-height: 90%; max-width: 90%;"
             src="{{imagenInfo.url}}"
+            onerror="this.onerror=null; this.src='https://cdn.glitch.global/9a5417db-bb1a-4800-b72a-a85bd7bcfce3/bg_image2.png?v=1681142808505';"
           />
         </div>
 
@@ -48,9 +49,13 @@
           </div>
           <div class="row mb-3">
             <div class="col">
-              <p>Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing
-                elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus
-                diam. Sed nisi.</p>
+              <p>
+                {{#if imagenInfo.topic}}
+                  Temática: {{imagenInfo.topic}}
+                {{else}}
+                  Fotografía sin temática registrada
+                {{/if}}
+              </p>
             </div>
           </div>
           <div class="row">

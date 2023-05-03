@@ -38,6 +38,7 @@ module.exports = async function (fastify, opts) {
 
       const actualImport = importaciones.find((e) => e.importID == importID);
       const pageHeader = actualImport ? actualImport.nameFolder : "Galería";
+      console.log('images en home@route', images)
       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
         importaciones: importaciones,
