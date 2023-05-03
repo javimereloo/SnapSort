@@ -94,9 +94,10 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: async (request, reply) => {
-      const validUrlRegex = /^(https):\/\/[^ "]+$/;
-      if (!validUrlRegex.test(request.body.url)) {
-        return reply.badRequest('La url proporcionada no existe');
+      const url = new URL(request.body.url);
+      console.log('url hostname======>', url.hostname)
+      if (url.hostdrive.google.com)) {
+        return reply.code(400).send('La url proporcionada no existe');
       } else {
         const importID = await API.insertImport(
           request.session.user.username,
@@ -119,7 +120,7 @@ module.exports = async function (fastify, opts) {
             console.error("Ocurrió un error", err); //TODO mostrar alerta de error
           });
         return reply.redirect(
-          `/home/${encodeURIComponent(request.body.importationName)}`
+          `/home/${encodeURIComponent(importID)}`
         );
       }
     },
