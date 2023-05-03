@@ -108,7 +108,7 @@ module.exports = async function (fastify, opts) {
           request.session.user.username,
           request.body.url
         )
-          .then((importID) => {
+          .then(async (importID) => {
             if (request.body.importationName) {
               API.changeImportName(
                 request.session.user.username,
@@ -119,7 +119,7 @@ module.exports = async function (fastify, opts) {
             const clientIp = request.headers["x-forwarded-for"] || request.ip;
             console.log("CLIENT IP====>", clientIp);
             //Load and add images to DB
-            googleAPI.listFilesInFolder(request.body.url, importID, clientIp);
+            await googleAPI.listFilesInFolder(request.body.url, importID, clientIp);
           })
           .catch((err) => {
             console.error("Ocurrió un error", err); //TODO mostrar alerta de error
