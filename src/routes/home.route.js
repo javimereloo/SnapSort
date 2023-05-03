@@ -60,7 +60,7 @@ module.exports = async function (fastify, opts) {
 
   fastify.route({
     method: "GET",
-    url: "/home/delete/:folderName",
+    url: "/home/delete/:importID",
     preHandler: (request, reply, done) => {
       // Comprobar si el usuario está autenticado
       if (!request.session.user) {
@@ -70,8 +70,8 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: async (request, reply) => {
-      const folderName = decodeURIComponent(request.params.folderName);
-      API.deleteFolder(request.session.user.username, folderName).catch(
+      const importID = decodeURIComponent(request.params.importID);
+      API.deleteFolder(request.session.user.username, importID).catch(
         (error) => {
           reply.send("Error eliminando:", error);
         }

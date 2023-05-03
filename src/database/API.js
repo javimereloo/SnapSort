@@ -111,12 +111,21 @@ async function insertImport(username, urlFolder) {
   });
 }
 
-async function deleteFolder(username, nameFolder) {
+async function getOwner(imagenID){
+  return new Promise((resolve, rejecte) =>{
+    db.get(
+    
+    );
+  });
+}
+
+//Deletes a folder
+async function deleteFolder(username, importID) {
   return new Promise((resolve, reject) => {
     // const importID
     db.run(
-      `DELETE FROM importacion WHERE username = ? AND nameFolder = ?`,
-      [username, nameFolder],
+      `DELETE FROM importacion WHERE username = ? AND importID = ?`,
+      [username, importID],
       (err) => {
         if (err) {
           reject(err);

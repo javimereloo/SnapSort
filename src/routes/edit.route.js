@@ -9,6 +9,7 @@ module.exports = async function (fastify, opts) {
         const errorMessage = true;
         return reply.redirect(`/login?errorMessage=${errorMessage}`);
       }
+      
       done();
     },
     handler: async (request, reply) => {
