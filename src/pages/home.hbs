@@ -225,17 +225,17 @@
                       {{else}}
                       <div class="row row-cols-4 mb-3 row-cols-md-3 g-4 mx-2 mt-1">
                         {{#each images}}
-                            <div  class="card justify-content-center col-lg-3 mx-2 mt-2" >
+                            <div  class="card justify-content-end aling-items-center col-lg-3 mx-2 mt-2" >
                               <img 
                                        loading="lazy"
-                                       class="card-img-top mh-75 mt-2"
-                                       src="{{this.url}}"
+                                       class="card-img-top  "
+                                       src="https://cdn.glitch.global/9a5417db-bb1a-4800-b72a-a85bd7bcfce3/IMG_3147.jpg?v=1683097176877"
                                        alt="{{this.title}}"
                                   >
                               
-                              <div class="card-body mh-25  px-0">
-                                <h6 class=" card-title mx-0">{{this.title}}</h6>
-                              </div>
+<!--                               <div class="card-body  my-0 px-0" style="max-height: 25%;"> -->
+                                <h6 class=" card-title mt-2 mx-0">{{this.title}}</h6>
+<!--                               </div> -->
                             </div>
                         {{/each}}
                        </div>
