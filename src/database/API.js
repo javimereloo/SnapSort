@@ -133,6 +133,29 @@ async function getOwner(imagenID) {
 
 //Returns image information
 async function getImageInfo(imagenID){
+  return new Promise((resolve,reject) => {
+    db.get(
+      `SELECT importID, url, title, score, topic WHERE imagenID = ?`,
+      [imagenID],
+      (err,row)=>{
+        if(err){
+          reject(err);
+        }
+        if(row){
+          const imageInfo ={
+            importId: row.imporID,
+            url: row.url,
+            title: row.title,
+            score: row.score,
+            topic: row.topic
+          } 
+          resolve(imageInfo);
+        }else{
+          resolve([]);
+        }
+      }
+    );
+  });
   
 }
 
@@ -182,11 +205,6 @@ async function getImportaciones(username) {
           reject(err);
         }
         if (rows) {
-          // const importaciones = new Map();
-          // rows.forEach((row) => {
-          //   importaciones.set(row.urlFolder, row.nameFolder, row.importID);
-          // });
-          // resolve(importaciones);
           const importaciones = rows.map((row) => ({
             urlFolder: row.urlFolder,
             nameFolder: row.nameFolder,

@@ -62,7 +62,9 @@ DB.run(
           imagenID INTEGER PRIMARY KEY AUTOINCREMENT,
           importID INTEGER NOT NULL,
           url TEXT NOT NULL, 
-          title TEXT,
+          title TEXT, 
+          score INTEGER CHECK(score >= 0 AND score <= 5), 
+          topic TEXT CHECK(length(topic) <= 25),
           FOREIGN KEY(importID ) REFERENCES importacion(importID) ON DELETE CASCADE
           )`,
   (err) => {

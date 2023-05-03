@@ -17,10 +17,10 @@ module.exports = async function (fastify, opts) {
     },
     handler: async (request, reply) => {
       const imagenID = decodeURIComponent(request.params.imagenID);
-      const imagenInfo = API.getImageInfo(imagenID);
+      const imageInfo = API.getImageInfo(imagenID);
       return reply.view("/src/pages/edit.hbs", {
         user: request.session.user,
-        imagenInfo:imagenInfo,
+        imagenInfo:imageInfo,
       });
     },
   });
