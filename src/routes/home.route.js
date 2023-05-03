@@ -94,10 +94,15 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: async (request, reply) => {
-      const url = new URL(request.body.url);
-      console.log('url hostname======>', url.hostname)
-      if (url.hostdrive.google.com)) {
-        return reply.code(400).send('La url proporcionada no existe');
+      let url;
+      try{
+         url = new URL(request.body.url);
+      }catch(error){
+        return reply.code(400).send('No se ha proporcionado una URL válida', error);
+      }
+      
+      if (url.hostname !== 'drive.google.com') {
+        return reply.code(400).send('La url proporcionada no corresponde a Google Drive');
       } else {
         const importID = await API.insertImport(
           request.session.user.username,
