@@ -14,7 +14,7 @@ html {
 
 .card-img-top {
   object-fit:  cover; /* ajustar la imagen al card */
-  max-height: 75%; /* altura del 100% del card */
+  max-height: 85%; /* altura del 100% del card */
   object-position: center;
 }
 

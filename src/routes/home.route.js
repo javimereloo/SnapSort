@@ -23,10 +23,10 @@ module.exports = async function (fastify, opts) {
         await API.getImportaciones(request.session.user.username)
       );
 
-      const importID = decodeURIComponent(request.params.importID) ;
+      const importID = decodeURIComponent(request.params.importID);
       let images = [];
 
-      if (importID === '') {
+      if (importID === "") {
         const pics = await API.getAllImages(request.session.user.username);
         images = JSON.parse(pics);
       } else {
@@ -36,9 +36,9 @@ module.exports = async function (fastify, opts) {
         );
         images = JSON.parse(pics);
       }
-      
-      const actualImport = (importaciones.find(e => e.importID == importID));
-      const pageHeader = actualImport ? actualImport.nameFolder :'Galería';
+
+      const actualImport = importaciones.find((e) => e.importID == importID);
+      const pageHeader = actualImport ? actualImport.nameFolder : "Galería";
       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
         importaciones: importaciones,
@@ -94,29 +94,34 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: async (request, reply) => {
-      const importID = await API.insertImport(
-        request.session.user.username,
-        request.body.url
-      )
-        .then((importID) => {
-          if (request.body.importationName) {
-            API.changeImportName(
-              request.session.user.username,
-              importID,
-              request.body.importationName
-            );
-          }
-           const clientIp = request.headers['x-forwarded-for'] || request.ip;
-          console.log('CLIENT IP====>' , clientIp);
-          //Load and add images to DB
-          googleAPI.listFilesInFolder(request.body.url, importID, clientIp);
-        })
-        .catch((err) => {
-          console.error("Ocurrió un error", err); //TODO mostrar alerta de error
-        });
-      return reply.redirect(
-        `/home/${encodeURIComponent(request.body.importationName)}`
-      );
+      const validUrlRegex = /^(https):\/\/[^ "]+$/;
+      if (!validUrlRegex.test(request.body.url)) {
+        return reply.badRequest('La url proporcionada no existe');
+      } else {
+        const importID = await API.insertImport(
+          request.session.user.username,
+          request.body.url
+        )
+          .then((importID) => {
+            if (request.body.importationName) {
+              API.changeImportName(
+                request.session.user.username,
+                importID,
+                request.body.importationName
+              );
+            }
+            const clientIp = request.headers["x-forwarded-for"] || request.ip;
+            console.log("CLIENT IP====>", clientIp);
+            //Load and add images to DB
+            googleAPI.listFilesInFolder(request.body.url, importID, clientIp);
+          })
+          .catch((err) => {
+            console.error("Ocurrió un error", err); //TODO mostrar alerta de error
+          });
+        return reply.redirect(
+          `/home/${encodeURIComponent(request.body.importationName)}`
+        );
+      }
     },
   });
 };
