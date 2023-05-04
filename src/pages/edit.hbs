@@ -53,7 +53,7 @@
           <div class="row mb-3">
             <div class="col">
               <p>
-                Temática: <span id="temaImagen" data-editable> "{{imagenInfo.topic}} " </span>
+                Temática: <span id="temaImagen" data-editable> "{{imagenInfo.topic}}" </span>
                 
               </p>
             </div>
@@ -100,18 +100,17 @@
   
   
     function postData(imagenID){
-      console.log('pa allá que te va')
-      console.log(imagenID)
     const newData ={
-     tituloImagen : document.getElementById("tituloImagen").innerHTML,
-     puntuacionImagen : document.getElementById("puntuacionImagen").innerHTML,
-     temaImagen : document.getElementById("temaImagen").innerHTML,
+     tituloImagen : document.getElementById("tituloImagen").textContent.trim(),
+     puntuacionImagen : document.getElementById("puntuacionImagen").textContent.trim(),
+     temaImagen : document.getElementById("temaImagen").textContent.trim(),
     }
-    console.log('new data', newData)
+    const JSONDATA= JSON.stringify(newData)
+    console.log('new data', JSONDATA)
     fetch(`/edit/${imagenID}`,
     {
       method: 'POST',
-      body: newData
+      body: JSONDATA
     })
     .catch(error => {
       console.error('Error al hacer la petición:', error);

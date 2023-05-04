@@ -53,9 +53,9 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: async (request, reply) => {
-      console.error('ha llegado un post', request.body.newData);
+      console.error('ha llegado un post', JSON.parse(request.body));
       const imagenID = decodeURIComponent(request.params.imagenID);
-      const imagenInfo = request.body.newData;
+      const imagenInfo = JSON.parse(request.body.newData);
       await API.changeImagenInfo(
         imagenID,
         imagenInfo.tituloImagen,

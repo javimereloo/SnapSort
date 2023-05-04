@@ -143,6 +143,7 @@ async function getImageInfo(imagenID){
         }
         if(row){
           const imageInfo ={
+            imagenID: imagenID,
             importID: row.imporID,
             url: row.url,
             title: row.title,
