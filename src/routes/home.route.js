@@ -6,15 +6,13 @@ function orderImagesBy(imagenes, orderBy) {
     return imagenes.sort((a, b) => b.score - a.score);
   } else if (orderBy === "topic") {
     return imagenes.sort((a, b) => a.topic.localeCompare(b.topic));
-  } else {
-    return imagenes.sort(() => Math.random() - 0.5);
-  }
+  } 
 }
 
 module.exports = async function (fastify, opts) {
   fastify.route({
     method: "GET",
-    url: "/home/:importID/:orderBy",
+    url: "/home/:importID/:orderBy?",
     preHandler: (request, reply, done) => {
       //TODO COMPROBAR QUE EL IMPORTID CORRESPONDA AL USUARIO
       if (!request.session.user) {
@@ -47,7 +45,11 @@ module.exports = async function (fastify, opts) {
 
       //Order images
       const orderBy = decodeURIComponent(request.params.orderBy);
-      images = orderImagesBy(images, orderBy);
+      console.log('orderBy',orderBy)
+      if(orderBy){
+        images = orderImagesBy(images, orderBy);
+      }
+      
 
       console.log("IMAGENES------------", images);
       return reply.view("/src/pages/home.hbs", {
@@ -62,13 +64,13 @@ module.exports = async function (fastify, opts) {
     },
   });
 
-  fastify.route({
-    method: "GET",
-    url: "/home",
-    handler: (request, reply) => {
-      return reply.redirect("/home/");
-    },
-  });
+  // fastify.route({
+  //   method: "GET",
+  //   url: "/home/",
+  //   handler: (request, reply) => {
+  //     return reply.redirect("/home/");
+  //   },
+  // });
 
   fastify.route({
     method: "GET",

@@ -240,14 +240,12 @@
     </div>
 </div>
      <script>
+       const importID = {{{currentPage}}}
         const selectOrderBy = document.getElementById("selectOrder");
-        
         selectOrderBy.onchange = function(){
           const selectedValue = this.value;
-            window.location.href = `/home/?selectedValue=${selectedValue}`;
-
+            window.location.href = `/home/${importID}/?orderBy=${selectedValue}`;
         }
-      
     </script> 
   </body>
 </html>
