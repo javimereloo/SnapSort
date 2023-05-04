@@ -240,29 +240,14 @@
     </div>
 </div>
      <script>
-      function ordenarImagenes() {
-        // Obtenemos el valor seleccionado en el menú desplegable
-        const orderBy = document.getElementById("selectOrder").value;
+        const selectOrderBy = document.getElementById("selectOrder");
+        
+        selectOrderBy.onchange = function(){
+          const selectedValue = this.value;
+            window.location.href = `/home/?selectedValue=${selectedValue}`;
 
-//         // Creamos una copia del objeto 'images' recibido a través de Handlebars
-//         const imagenes = {{{json images}}};
-
-//         // Ordenamos las imágenes según el criterio seleccionado
-//         if (orderBy === "score") {
-//           imagenes.sort((a, b) => b.score - a.score);
-//         } else if (orderBy === "topic") {
-//           imagenes.sort((a, b) => a.topic.localeCompare(b.topic));
-//         } else { // orderBy === "random"
-//           imagenes.sort(() => Math.random() - 0.5);
-//         }
-
-//         // Volvemos a renderizar la vista home con las imágenes ordenadas
-//         const template = handlebars.compile(document.getElementById("home-template").innerHTML);
-//         const context = { images: imagenes };
-//         const html = template(context);
-//         document.getElementById("content").innerHTML = html;
-//       }
-
+        }
+      
     </script> 
   </body>
 </html>

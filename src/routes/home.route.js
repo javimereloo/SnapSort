@@ -1,15 +1,22 @@
 const API = require("../database/API.js");
 const googleAPI = require("../GoogleDrive/googleAPI.js");
 
-function orderImagesBy(){
-  
+function orderImagesBy(imagenes, orderBy) {
+  if (orderBy === "score") {
+    return imagenes.sort((a, b) => b.score - a.score);
+  } else if (orderBy === "topic") {
+    return imagenes.sort((a, b) => a.topic.localeCompare(b.topic));
+  } else {
+    return imagenes.sort(() => Math.random() - 0.5);
+  }
 }
 
 module.exports = async function (fastify, opts) {
   fastify.route({
     method: "GET",
     url: "/home/:importID/:orderBy",
-    preHandler: (request, reply, done) => { //TODO COMPROBAR QUE EL IMPORTID CORRESPONDA AL USUARIO
+    preHandler: (request, reply, done) => {
+      //TODO COMPROBAR QUE EL IMPORTID CORRESPONDA AL USUARIO
       if (!request.session.user) {
         const errorMessage = true;
         return reply.redirect(`/login?errorMessage=${errorMessage}`);
@@ -37,11 +44,12 @@ module.exports = async function (fastify, opts) {
 
       const actualImport = importaciones.find((e) => e.importID == importID);
       const pageHeader = actualImport ? actualImport.nameFolder : "Galería";
-      
+
       //Order images
-      if()
-      
-      console.log('IMAGENES------------',images)
+      const orderBy = decodeURIComponent(request.params.orderBy);
+      images = orderImagesBy(images, orderBy);
+
+      console.log("IMAGENES------------", images);
       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
         importaciones: importaciones,
@@ -57,21 +65,6 @@ module.exports = async function (fastify, opts) {
   fastify.route({
     method: "GET",
     url: "/home",
-    handler: (request, reply) => {
-      return reply.redirect("/home/");
-    },
-  });
-  
-  fastify.route({
-    method: "POST",
-    url: "/home/:importID",
-    preHandler: (request, reply, done) => { //TODO COMPROBAR QUE EL IMPORTID CORRESPONDA AL USUARIO
-      if (!request.session.user) {
-        const errorMessage = true;
-        return reply.redirect(`/login?errorMessage=${errorMessage}`);
-      }
-      done();
-    },
     handler: (request, reply) => {
       return reply.redirect("/home/");
     },
