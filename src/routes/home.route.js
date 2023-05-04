@@ -47,9 +47,9 @@ module.exports = async function (fastify, opts) {
       //Order images
       const orderBy = decodeURIComponent(request.query.orderBy);
       console.log('orderBy ------------- ',orderBy)
-      // if(orderBy){
-      //   images = orderImagesBy(images, orderBy);
-      // }
+      if(orderBy){
+        images = orderImagesBy(images, orderBy);
+      }
       
 
       // console.log("IMAGENES------------", images);
