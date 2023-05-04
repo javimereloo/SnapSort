@@ -112,7 +112,7 @@ async function insertImport(username, urlFolder) {
 }
 
 //Function that returns the owner of the image
-async function getOwner(imagenID) {
+async function getImageOwner(imagenID) {
   return new Promise((resolve, reject) => {
     db.get(
       `SELECT username FROM importacion WHERE importID IN (SELECT importID FROM imagen WHERE imagenID = ?)`,
@@ -351,6 +351,6 @@ module.exports = {
   getImagesFromImport,
   getAllImages,
   deleteFolder,
-  getOwner,
+  getImageOwner,
   getImageInfo,
 };

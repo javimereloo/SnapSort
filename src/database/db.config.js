@@ -46,7 +46,7 @@ DB.run(
           date DATE NOT NULL, 
           nameFolder TEXT, 
           FOREIGN KEY(username) REFERENCES usuario(username)
-          UNIQUE(nameFolder,username, urlFolder)
+          UNIQUE(username, urlFolder)
           )`,
   (err) => {
     if (err) {

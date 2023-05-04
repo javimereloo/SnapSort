@@ -10,7 +10,7 @@ module.exports = async function (fastify, opts) {
         const errorMessage = true;
         return reply.redirect(`/login?errorMessage=${errorMessage}`);
       }
-      if (!API.getOwner(imagenID) === request.session.user.username || !) {
+      if (!API.getImageOwner(imagenID) === request.session.user.username || !imagenID) {
         return reply.redirect("/home");
       }
   
@@ -42,10 +42,9 @@ module.exports = async function (fastify, opts) {
         const errorMessage = true;
         return reply.redirect(`/login?errorMessage=${errorMessage}`);
       }
-      if (!API.getOwner(imagenID) === request.session.user.username) {
+      if (!API.getImageOwner(imagenID) === request.session.user.username || !imagenID) {
         return reply.redirect("/home");
       }
-      //TODO imagenID == null => home
       done();
     },
     handler: async (request, reply) => {
