@@ -40,6 +40,10 @@ handlebars.registerHelper("decodeURIComponent", function(str) {
 handlebars.registerHelper('json', function(context) {
   return JSON.stringify(context);
 });
+handlebars.registerHelper('copy', function(a, b) {
+  a = b;
+  return a; 
+});
 // handlebars.registerHelper('sortByScore', function (array) { //TODO borrar
 //   // Ordenar el array en función del campo 'score'
 //   array.sort(function (a, b) {

@@ -246,12 +246,13 @@
     </div>
 </div>
      <script>
-      const selectOrder = document.getElementByYd('selectOrder');
-      const selectedOption = selectElement.options[selectElement.selectedIndex].value;
-       
+      const selectOrder = document.getElementById('selectOrder');
+      const selectedOption = selectOrder.options[selectOrder.selectedIndex].value;
+      const imagenes = {{{json images}}};
       if(selectedOption === 'score'){
-        
+        imagenes.sort((a,b) => b.score - a.score);
       }
+    
 //       selectOrder.addEventListener('change', () => {
 //         const selectedOrder = selectOrder.value; // Obtener la opción seleccionada
 
