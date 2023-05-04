@@ -40,7 +40,23 @@ handlebars.registerHelper("decodeURIComponent", function(str) {
 handlebars.registerHelper('json', function(context) {
   return JSON.stringify(context);
 });
-
+// handlebars.registerHelper('sortByScore', function (array) { //TODO borrar
+//   // Ordenar el array en función del campo 'score'
+//   array.sort(function (a, b) {
+//     return b.score - a.score;
+//   });
+//   // Devolver el array ordenado
+//   return array;
+// });
+// handlebars.registerHelper('ordenarImages', (images, selectedOrder) => {
+//   return images.sort((a, b) => {
+//     if (selectedOrder === 'score') {
+//       return b.score - a.score;
+//     } else {
+//       return a.topic.localeCompare(b.tema);
+//     }
+//   });
+// });
 //Import routes 
 fastify.register(require('./src/routes/index.route.js'))
 fastify.register(require('./src/routes/login.route.js'))

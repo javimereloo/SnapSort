@@ -183,7 +183,7 @@
                 </button>
                 <div class="row ">
                   <div class="col-auto nav-item  bg-secundary ">
-                    <select class="form-select bg-secundary " aria-label="Default select example">
+                    <select id="select-order" class="form-select bg-secundary " aria-label="Default select example">
                       <option selected>Ordenar por</option>
                       <option value="score">Puntuación</option>
                       <option value="topic">Temática</option>
@@ -216,7 +216,8 @@
                        <p class=" text-center lead"> ¡Pulsa en el icono + en la barra lateral para importar una nueva carpeta!</p>
                       {{else}}
                       <div class="row row-cols-4 mb-3 row-cols-md-3 g-4 mx-2 mt-1">
-                        {{#each images}}
+                        {{#ordenarImages images selectedOrder}}
+                        {{#each  images}}
                             <div  class="card justify-content-end aling-items-center col-lg-3 mx-2 mt-2" >
                               <img 
                                        loading="lazy"
@@ -237,6 +238,7 @@
                                 </a>
                             </div>
                         {{/each}}
+                        {{/ordenarImages}}
                        </div>
                       {{/if}}
                 </div>
@@ -245,5 +247,17 @@
         </main>
     </div>
 </div>
+<!--     <script>
+      const selectOrder = document.querySelector('#select-order');
+      selectOrder.addEventListener('change', () => {
+        const selectedOrder = selectOrder.value; // Obtener la opción seleccionada
+
+        // Re-renderizar la vista con las imágenes ordenadas según la opción seleccionada
+        const imagesContainer = document.querySelector('#images-container');
+        imagesContainer.innerHTML = templates.images({ // Usar el helper "images"
+          images: ordenarImages(images, selectedOrder)
+        });
+      });
+    </script> -->
   </body>
 </html>
