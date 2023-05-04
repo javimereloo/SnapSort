@@ -216,7 +216,6 @@
                        <p class=" text-center lead"> ¡Pulsa en el icono + en la barra lateral para importar una nueva carpeta!</p>
                       {{else}}
                       <div class="row row-cols-4 mb-3 row-cols-md-3 g-4 mx-2 mt-1">
-                        {{#ordenarImages images selectedOrder}}
                         {{#each  images}}
                             <div  class="card justify-content-end aling-items-center col-lg-3 mx-2 mt-2" >
                               <img 
@@ -238,7 +237,6 @@
                                 </a>
                             </div>
                         {{/each}}
-                        {{/ordenarImages}}
                        </div>
                       {{/if}}
                 </div>
