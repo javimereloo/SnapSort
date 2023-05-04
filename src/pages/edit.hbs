@@ -99,18 +99,21 @@
   });
   
   
-    function postData(imagenID){
-    const newData ={
+  function postData(imagenID){
+    const newData = {
      tituloImagen : document.getElementById("tituloImagen").textContent.trim(),
      puntuacionImagen : document.getElementById("puntuacionImagen").textContent.trim(),
-     temaImagen : document.getElementById("temaImagen").textContent.trim(),
+     temaImagen : document.getElementById("temaImagen").textContent.trim().replace(/^"|"$/g, ''),
     }
-    const JSONDATA= JSON.stringify(newData)
-    console.log('new data', JSONDATA)
+    const JSONnewData= JSON.stringify(newData)
+    console.log('new data', JSONnewData)
     fetch(`/edit/${imagenID}`,
     {
       method: 'POST',
-      body: JSONDATA
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSONnewData
     })
     .catch(error => {
       console.error('Error al hacer la petición:', error);
