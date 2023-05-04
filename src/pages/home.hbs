@@ -219,7 +219,7 @@
                       {{else}}
                       <div class="row row-cols-4 mb-3 row-cols-md-3 g-4 mx-2 mt-1">
                         {{#each  images}}
-                            <div  class="card justify-content-end aling-items-center col-lg-3 mx-2 mt-2" >
+                            <div id="{{this.imagenID}}" class="card justify-content-end aling-items-center col-lg-3 mx-2 mt-2" >
                               <img 
                                        loading="lazy"
                                        class="card-img-top  "
@@ -248,18 +248,27 @@
     </div>
 </div>
      <script>
+       
+       //selectOrder contol
        const searchParams = new URLSearchParams(window.location.search);
        const orderByParam = searchParams.get('orderBy');
        const selectOrderBy = document.getElementById("selectOrder");
-       console.log(selectOrderBy)
        selectOrderBy.value = orderByParam;
-
        const importID = "{{currentPage}}"
-
         selectOrderBy.onchange = function(){
           const selectedValue = encodeURIComponent(this.value);
             window.location.href = `/home/${importID}/?orderBy=${selectedValue}`;
         }
+       
+       //GroupBy control
+       const selectGroupBy.onchange = function(){} = document.getElementById("groupBy");
+       selectGroupBy.onchange = function(){
+         const selectedGroupByValue = this.value;
+         const cards = document.querySelectorAll('.card');
+         for(let i = 0; i < cards.length; i++){
+           console.log({{{images}}})
+         }
+       }
        
     </script> 
   </body>
