@@ -186,9 +186,17 @@
                   <div class="col-auto nav-item  bg-secundary ">
                     <label for="">Ordenar por:</label>
                     <select id="selectOrder" class="form-select bg-secundary " >
-                      <option value="">Orden aleatorio</option>
+                      <option selected value="random">Orden aleatorio</option>
                       <option value="score">Ordenar por puntuación</option>
-                      <option value="topic">Agrupar por Temática</option>
+                    </select>
+                  </div>
+                  <div class="col-auto nav-item  bg-secundary ">
+                    <label for="">Agrupar por:</label>
+                    <select id="groupBy" class="form-select bg-secundary " >
+                      <option value="">ninguno</option>
+                      {{#each topics}}
+                        <option value="{{this}}">{{this}}</option>
+                      {{/each}}
                     </select>
                   </div>
 

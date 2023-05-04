@@ -10,6 +10,18 @@ function orderImagesBy(imagenes, orderBy) {
   return imagenes;
 }
 
+function getTopics(images){
+  const topics = new Set();
+
+  for (let i = 0; i < images.length; i++) {
+    if (images[i].topic) { // comprobar si el topic existe
+      topics.add(images[i].topic);
+    }
+  }
+  console.log('TOPICSSSS------------------>', topics)
+  return Array.from(topics); 
+}
+
 module.exports = async function (fastify, opts) {
   fastify.route({
     method: "GET",
@@ -41,12 +53,13 @@ module.exports = async function (fastify, opts) {
         images = JSON.parse(pics);
       }
       
+      const topics = getTopics(images);
+      
       const actualImport = importaciones.find((e) => e.importID == importID);
       const pageHeader = actualImport ? actualImport.nameFolder : "Galería";
       
       //Order images
       const orderBy = decodeURIComponent(request.query.orderBy);
-      console.log('orderBy ------------- ',orderBy)
       if(orderBy){
         images = orderImagesBy(images, orderBy);
       }
@@ -61,6 +74,7 @@ module.exports = async function (fastify, opts) {
         currentPageHeader: pageHeader,
         numImages: images.length,
         images: images,
+        topics: topics, 
       });
     },
   });
