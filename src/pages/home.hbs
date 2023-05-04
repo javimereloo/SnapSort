@@ -182,17 +182,16 @@
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="row ">
-                  <div class="col nav-item  bg-secundary ">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDate" data-bs-toggle="dropdown" aria-expanded="false">
-                      Ordenar por 
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownDate">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                    </ul>
+                  <div class="col-auto nav-item  bg-secundary ">
+                    <select class="form-select bg-secundary " aria-label="Default select example">
+                      <option selected>Ordenar por</option>
+                      <option value="score">Puntuación</option>
+                      <option value="topic">Temática</option>
+                    </select>
                   </div>
-                  <div class=" col nav-item dropdown">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>Open this select menu</option>
+                  <div class=" col-auto nav-item dropdown">
+                    <select class="form-select " aria-label="Default select example">
+                      <option selected>Orden</option>
                       <option value="1">One</option>
                       <option value="2">Two</option>
                       <option value="3">Three</option>
