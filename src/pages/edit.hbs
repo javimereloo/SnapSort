@@ -61,7 +61,7 @@
           <div class="row">
             <div class="col">
               <a href="/home/" type="button" class="btn btn-secondary">Volver a la galería </a>
-              <a type="button" class="btn btn-primary" onclick="postData()">Hacer cambios</a>
+              <a type="button" class="btn btn-primary" onclick="postData()">Guardar cambios</a>
             </div>
           </div>
     
@@ -98,11 +98,12 @@
     });
   });
   
-  function postData(){
+  
+    function postData(){
     const newData ={
      tituloImagen : document.getElementById("tituloImagen"),
      puntuacionImagen : document.getElementById("puntuacionImagen"),
-     temaImagen : document.getElementById("temaImagen")
+     temaImagen : document.getElementById("temaImagen"),
     }
     fetch('/edit/{{imagenInfo.imagenID}}', {
       method: 'POST',
@@ -113,7 +114,10 @@
     });
     
   }
+  
 </script>
+    
+
 
   </body>
 </html>

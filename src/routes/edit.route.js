@@ -10,10 +10,13 @@ module.exports = async function (fastify, opts) {
         const errorMessage = true;
         return reply.redirect(`/login?errorMessage=${errorMessage}`);
       }
-      if (!API.getImageOwner(imagenID) === request.session.user.username || !imagenID) {
+      if (
+        !API.getImageOwner(imagenID) === request.session.user.username ||
+        !imagenID
+      ) {
         return reply.redirect("/home");
       }
-  
+
       done();
     },
     handler: async (request, reply) => {
@@ -42,7 +45,10 @@ module.exports = async function (fastify, opts) {
         const errorMessage = true;
         return reply.redirect(`/login?errorMessage=${errorMessage}`);
       }
-      if (!API.getImageOwner(imagenID) === request.session.user.username || !imagenID) {
+      if (
+        !API.getImageOwner(imagenID) === request.session.user.username ||
+        !imagenID
+      ) {
         return reply.redirect("/home");
       }
       done();
@@ -50,9 +56,15 @@ module.exports = async function (fastify, opts) {
     handler: async (request, reply) => {
       const imagenID = decodeURIComponent(request.params.imagenID);
       const imagenInfo = request.body.newData;
-      imagenID, title, score, topic
-      await API.changeImagenInfo(imagenInfo.imagenID, imagenInfo.tituloImagen);
-      
+      await API.changeImagenInfo(
+        imagenID,
+        imagenInfo.tituloImagen,
+        imagenInfo.puntuacionImagen,
+        imagenInfo.temaImagen
+      ).catch((err) => {
+        console.error(err);
+      });
+      return reply.redirect(`/edit/${imagenID}`);
     },
   });
 };
