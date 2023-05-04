@@ -187,8 +187,8 @@
                     <label for="">Ordenar por:</label>
                     <select id="selectOrder" class="form-select bg-secundary " >
                       <option value="">Orden aleatorio</option>
-                      <option value="score">Ordenar por Puntuación</option>
-                      <option value="topic">Ordenar por Temática</option>
+                      <option value="score">Ordenar por puntuación</option>
+                      <option value="topic">Agrupar por Temática</option>
                     </select>
                   </div>
 
@@ -240,10 +240,10 @@
     </div>
 </div>
      <script>
-       // const searchParams = new URLSearchParams(window.location.search);
-       //  const orderByParam = searchParams.get('orderBy');
+       const searchParams = new URLSearchParams(window.location.search);
+        const orderByParam = searchParams.get('orderBy');
        const selectOrderBy = document.getElementById("selectOrder");
-       // selectOrderBy.value = orderByParam;
+       selectOrderBy.value = orderByParam;
 
        const importID = "{{currentPage}}"
 

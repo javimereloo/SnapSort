@@ -5,7 +5,7 @@ function orderImagesBy(imagenes, orderBy) {
   if (orderBy === "score") {
     return imagenes.sort((a, b) => b.score - a.score);
   } else if (orderBy === "topic") {
-    return imagenes.sort((a, b) => a.topic.localeCompare(b.topic));
+    return imagenes.sort((a, b) => (a.topic || '').localeCompare(b.topic || ''));
   } 
   return imagenes;
 }
