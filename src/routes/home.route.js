@@ -39,19 +39,19 @@ module.exports = async function (fastify, opts) {
         );
         images = JSON.parse(pics);
       }
-
+      
       const actualImport = importaciones.find((e) => e.importID == importID);
       const pageHeader = actualImport ? actualImport.nameFolder : "Galería";
-
+      
       //Order images
       const orderBy = decodeURIComponent(request.params.orderBy);
-      console.log('orderBy',orderBy)
-      if(orderBy){
-        images = orderImagesBy(images, orderBy);
-      }
+      console.log('orderBy ------------- ',orderBy)
+      // if(orderBy){
+      //   images = orderImagesBy(images, orderBy);
+      // }
       
 
-      console.log("IMAGENES------------", images);
+      // console.log("IMAGENES------------", images);
       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
         importaciones: importaciones,
