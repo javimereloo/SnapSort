@@ -183,10 +183,10 @@
                 </button>
                 <div class="row ">
                   <div class="col-auto nav-item  bg-secundary ">
-                    <select id="select-order" class="form-select bg-secundary " aria-label="Default select example">
-                      <option selected>Ordenar por</option>
-                      <option value="score">Puntuación</option>
-                      <option value="topic">Temática</option>
+                    <select id="selectOrder" class="form-select bg-secundary " aria-label="Ordenar por">
+                      <option selected value="random">Orden aleatorio</option>
+                      <option value="score">Ordenar por Puntuación</option>
+                      <option value="topic">Ordenar por Temática</option>
                     </select>
                   </div>
                   <div class=" col-auto nav-item dropdown">
@@ -245,17 +245,22 @@
         </main>
     </div>
 </div>
-<!--     <script>
-      const selectOrder = document.querySelector('#select-order');
-      selectOrder.addEventListener('change', () => {
-        const selectedOrder = selectOrder.value; // Obtener la opción seleccionada
+     <script>
+      const selectOrder = document.getElementByYd('selectOrder');
+      const selectedOption = selectElement.options[selectElement.selectedIndex].value;
+       
+      if(selectedOption === 'score'){
+        
+      }
+//       selectOrder.addEventListener('change', () => {
+//         const selectedOrder = selectOrder.value; // Obtener la opción seleccionada
 
-        // Re-renderizar la vista con las imágenes ordenadas según la opción seleccionada
-        const imagesContainer = document.querySelector('#images-container');
-        imagesContainer.innerHTML = templates.images({ // Usar el helper "images"
-          images: ordenarImages(images, selectedOrder)
-        });
-      });
-    </script> -->
+//         // Re-renderizar la vista con las imágenes ordenadas según la opción seleccionada
+//         const imagesContainer = document.querySelector('#images-container');
+//         imagesContainer.innerHTML = templates.images({ // Usar el helper "images"
+//           images: ordenarImages(images, selectedOrder)
+//         });
+//       });
+    </script> 
   </body>
 </html>
