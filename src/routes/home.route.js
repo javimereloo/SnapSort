@@ -61,7 +61,14 @@ module.exports = async function (fastify, opts) {
   
   fastify.route({
     method: "POST",
-    url: "/home/:importID/reorder",
+    url: "/home/:importID",
+    preHandler: (request, reply, done) => { //TODO COMPROBAR QUE EL IMPORTID CORRESPONDA AL USUARIO
+      if (!request.session.user) {
+        const errorMessage = true;
+        return reply.redirect(`/login?errorMessage=${errorMessage}`);
+      }
+      done();
+    },
     handler: (request, reply) => {
       return reply.redirect("/home/");
     },
