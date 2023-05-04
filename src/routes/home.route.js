@@ -7,6 +7,7 @@ function orderImagesBy(imagenes, orderBy) {
   } else if (orderBy === "topic") {
     return imagenes.sort((a, b) => a.topic.localeCompare(b.topic));
   } 
+  return imagenes;
 }
 
 module.exports = async function (fastify, opts) {
@@ -44,7 +45,7 @@ module.exports = async function (fastify, opts) {
       const pageHeader = actualImport ? actualImport.nameFolder : "Galería";
       
       //Order images
-      const orderBy = decodeURIComponent(request.params.orderBy);
+      const orderBy = decodeURIComponent(request.query.orderBy);
       console.log('orderBy ------------- ',orderBy)
       // if(orderBy){
       //   images = orderImagesBy(images, orderBy);
@@ -64,13 +65,13 @@ module.exports = async function (fastify, opts) {
     },
   });
 
-  // fastify.route({
-  //   method: "GET",
-  //   url: "/home/",
-  //   handler: (request, reply) => {
-  //     return reply.redirect("/home/");
-  //   },
-  // });
+  fastify.route({
+    method: "GET",
+    url: "/home",
+    handler: (request, reply) => {
+      return reply.redirect("/home/");
+    },
+  });
 
   fastify.route({
     method: "GET",

@@ -186,7 +186,7 @@
                   <div class="col-auto nav-item  bg-secundary ">
                     <label for="">Ordenar por:</label>
                     <select id="selectOrder" class="form-select bg-secundary " >
-                      <option value="random">Orden aleatorio</option>
+                      <option value="">Orden aleatorio</option>
                       <option value="score">Ordenar por Puntuación</option>
                       <option value="topic">Ordenar por Temática</option>
                     </select>
@@ -240,15 +240,19 @@
     </div>
 </div>
      <script>
+       // const searchParams = new URLSearchParams(window.location.search);
+       //  const orderByParam = searchParams.get('orderBy');
        const selectOrderBy = document.getElementById("selectOrder");
-       const importID = {{{currentPage}}}
-       console.log(importID);
+       // selectOrderBy.value = orderByParam;
+
+       const importID = "{{currentPage}}"
 
         selectOrderBy.onchange = function(){
-          const selectedValue = this.value;
+          const selectedValue = encodeURIComponent(this.value);
           console.log(selectedValue);
             window.location.href = `/home/${importID}/?orderBy=${selectedValue}`;
         }
+       
     </script> 
   </body>
 </html>
