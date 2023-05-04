@@ -183,20 +183,21 @@
                 </button>
                 <div class="row ">
                   <div class="col-auto nav-item  bg-secundary ">
-                    <select id="selectOrder" class="form-select bg-secundary " aria-label="Ordenar por">
-                      <option selected value="random">Orden aleatorio</option>
+                    <label for="selectOrder">Ordenar por:</label>
+                    <select id="selectOrder" class="form-select bg-secundary " onchange="ordenarImagenes()" aria-label="Ordenar por">
+                      <option  value="random">Orden aleatorio</option>
                       <option value="score">Ordenar por Puntuación</option>
                       <option value="topic">Ordenar por Temática</option>
                     </select>
                   </div>
-                  <div class=" col-auto nav-item dropdown">
+<!--                   <div class=" col-auto nav-item dropdown">
                     <select class="form-select " aria-label="Default select example">
                       <option selected>Orden</option>
                       <option value="1">One</option>
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select>
-                  </div>
+                  </div> -->
 
                 </div>
               </div>
@@ -246,22 +247,29 @@
     </div>
 </div>
      <script>
-      const selectOrder = document.getElementById('selectOrder');
-      const selectedOption = selectOrder.options[selectOrder.selectedIndex].value;
-      const imagenes = {{{json images}}};
-      if(selectedOption === 'score'){
-        imagenes.sort((a,b) => b.score - a.score);
-      }
-    
-//       selectOrder.addEventListener('change', () => {
-//         const selectedOrder = selectOrder.value; // Obtener la opción seleccionada
+      function ordenarImagenes() {
+        // Obtenemos el valor seleccionado en el menú desplegable
+        const orderBy = document.getElementById("selectOrder").value;
 
-//         // Re-renderizar la vista con las imágenes ordenadas según la opción seleccionada
-//         const imagesContainer = document.querySelector('#images-container');
-//         imagesContainer.innerHTML = templates.images({ // Usar el helper "images"
-//           images: ordenarImages(images, selectedOrder)
-//         });
-//       });
+        // Creamos una copia del objeto 'images' recibido a través de Handlebars
+        const imagenes = {{{json images}}};
+
+        // Ordenamos las imágenes según el criterio seleccionado
+        if (orderBy === "score") {
+          imagenes.sort((a, b) => b.score - a.score);
+        } else if (orderBy === "topic") {
+          imagenes.sort((a, b) => a.topic.localeCompare(b.topic));
+        } else { // orderBy === "random"
+          imagenes.sort(() => Math.random() - 0.5);
+        }
+
+        // Volvemos a renderizar la vista home con las imágenes ordenadas
+        const template = handlebars.compile(document.getElementById("home-template").innerHTML);
+        const context = { images: imagenes };
+        const html = template(context);
+        document.getElementById("content").innerHTML = html;
+      }
+
     </script> 
   </body>
 </html>

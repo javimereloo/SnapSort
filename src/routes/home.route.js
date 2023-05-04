@@ -58,6 +58,14 @@ module.exports = async function (fastify, opts) {
       return reply.redirect("/home/");
     },
   });
+  
+  fastify.route({
+    method: "POST",
+    url: "/home/:importID/reorder",
+    handler: (request, reply) => {
+      return reply.redirect("/home/");
+    },
+  });
 
   fastify.route({
     method: "GET",
