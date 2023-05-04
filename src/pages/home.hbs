@@ -262,13 +262,19 @@
        
        
        //GroupBy control
-       var images = JSON.parse({{{json images}}});
+       var images = {{{json images}}};
        const selectGroupBy = document.getElementById("groupBy");
        selectGroupBy.onchange = function(){
          const selectedGroupByValue = this.value;
+        
          const cards = document.querySelectorAll('.card');
+         console.log('card length', cards.length);
+         console.log('images.length', images.length);
+         console.log('cards', cards);
+         
          for(let i = 0; i < cards.length; i++){
-           const image = image.find(img=>img.id ===cards[i].id);
+           const card = cards[i]
+           const image = images.find(img=> img.id === card.id);
            console.log(image)
          }
        }
