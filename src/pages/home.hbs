@@ -266,16 +266,18 @@
        const selectGroupBy = document.getElementById("groupBy");
        selectGroupBy.onchange = function(){
          const selectedGroupByValue = this.value;
-        
          const cards = document.querySelectorAll('.card');
-         console.log('card length', cards.length);
-         console.log('images.length', images.length);
-         console.log('cards', cards);
-         
+         const imagesSeleccionadas = images.filter(img=> img.topic === selectedGroupByValue);
+         console.log("images selectedf" imagesSeleccionadas)
          for(let i = 0; i < cards.length; i++){
-           const card = cards[i]
-           const image = images.find(img=> img.id === card.id);
-           console.log(image)
+           const foundImage = !imagesSeleccionadas.find(img => img.id === cards[i].id);
+           console.log(foundImage);
+           if(!foundImage){
+             console.log(foundImage);
+           }else{
+             //delete
+           }
+           
          }
        }
        
