@@ -25,7 +25,6 @@ module.exports = async function (fastify, opts) {
       await API.getImageInfo(imagenID)
         .then((imageInfo) => {
           imagenInfo = imageInfo;
-          console.log(imagenInfo);
         })
         .catch((err) => {
           console.error(err);

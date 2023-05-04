@@ -53,15 +53,15 @@
           <div class="row mb-3">
             <div class="col">
               <p>
-                Temática: <span id="temaImagen" data-editable> "{{imagenInfo.topic}}" </span>
+                Temática: <span id="temaImagen" data-editable> "{{imagenInfo.topic}} " </span>
                 
               </p>
             </div>
           </div>
           <div class="row">
             <div class="col">
-              <a href="/home/" type="button" class="btn btn-secondary">Volver a la galería </a>
-              <a type="button" class="btn btn-primary" onclick="postData()">Guardar cambios</a>
+              <a href="/home/" type="button" class="btn btn-secondary">Volver a la galería  </a>
+              <a type="button" class="btn btn-primary" onclick="postData({{imagenInfo.imagenID}})">Guardar cambios</a>
             </div>
           </div>
     
@@ -99,16 +99,16 @@
   });
   
   
-    function postData(){
-      const imagenInfo = {{json imagenInfo}};
+    function postData(imagenID){
       console.log('pa allá que te va')
-      console.log(imagenInfo)
+      console.log(imagenID)
     const newData ={
-     tituloImagen : document.getElementById("tituloImagen"),
-     puntuacionImagen : document.getElementById("puntuacionImagen"),
-     temaImagen : document.getElementById("temaImagen"),
+     tituloImagen : document.getElementById("tituloImagen").innerHTML,
+     puntuacionImagen : document.getElementById("puntuacionImagen").innerHTML,
+     temaImagen : document.getElementById("temaImagen").innerHTML,
     }
-    fetch(`/edit/{{imagenInfo.imagenID}}`,
+    console.log('new data', newData)
+    fetch(`/edit/${imagenID}`,
     {
       method: 'POST',
       body: newData
