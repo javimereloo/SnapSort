@@ -159,6 +159,23 @@ async function getImageInfo(imagenID){
   
 }
 
+//Modify image info 
+async function changeImagenInfo(imagenID, title, score, topic){
+  return new Promise((resolve, reject)=>{
+    db.run(
+      `UPDATE imagen SET score = ?, title = ?, topic = ? WHERE imagenID =?`,
+      [score, title, topic, imagenID],
+      (err) => {
+        if(err){
+          reject(err);
+        }else{
+          resolve();
+        }
+      }
+    );
+  });
+}
+
 //Deletes a folder
 async function deleteFolder(username, importID) {
   return new Promise((resolve, reject) => {
@@ -353,4 +370,5 @@ module.exports = {
   deleteFolder,
   getImageOwner,
   getImageInfo,
+  changeImagenInfo,
 };

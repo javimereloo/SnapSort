@@ -49,19 +49,10 @@ module.exports = async function (fastify, opts) {
     },
     handler: async (request, reply) => {
       const imagenID = decodeURIComponent(request.params.imagenID);
-      let imagenInfo;
-      await API.getImageInfo(imagenID)
-        .then((imageInfo) => {
-          imagenInfo = imageInfo;
-          console.log(imagenInfo);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-      return reply.view("/src/pages/edit.hbs", {
-        user: request.session.user,
-        imagenInfo: imagenInfo,
-      });
+      const imagenInfo = request.body.newData;
+      imagenID, title, score, topic
+      await API.changeImagenInfo(imagenInfo.imagenID, imagenInfo.tituloImagen);
+      
     },
   });
 };
