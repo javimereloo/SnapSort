@@ -268,7 +268,7 @@ async function insertNewImage(importID, url, title) {
 async function getAllImages(username) {
   return new Promise((resolve, reject) => {
     db.all(
-      `SELECT i.imagenID, i.title, i.url
+      `SELECT i.imagenID, i.title, i.url, i.score, i.topic
        FROM imagen i 
        INNER JOIN importacion imp ON i.importID = imp.importID
        WHERE imp.username = ?`,
@@ -281,6 +281,8 @@ async function getAllImages(username) {
             imagenID: row.imagenID,
             title: row.title,
             url: row.url,
+            score: row.score,
+            topic: row.topic,
           }));
           resolve(JSON.stringify(images));
         }
@@ -292,7 +294,7 @@ async function getAllImages(username) {
 async function getImagesFromImport(username, importID) {
   return new Promise((resolve, reject) => {
     db.all(
-      `SELECT imagenID, title, url FROM imagen 
+      `SELECT imagenID, title, url, score, topic FROM imagen 
        WHERE importID = ?`,
       [importID],
       (err, rows) => {
@@ -303,6 +305,8 @@ async function getImagesFromImport(username, importID) {
             imagenID: row.imagenID,
             title: row.title,
             url: row.url,
+            score: row.score,
+            topic: row.topic,
           }));
           resolve(JSON.stringify(images));
         }

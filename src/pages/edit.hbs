@@ -70,27 +70,15 @@
     </div>
     
 <script>
-  // Obtener todos los elementos con el atributo data-editable
   const editableElements = document.querySelectorAll('[data-editable]');
-  
-  // Agregar un evento de click a cada elemento
   editableElements.forEach((element) => {
     element.addEventListener('click', () => {
-      // Obtener el contenido actual del elemento
       const content = element.textContent.trim();
-      
-      // Crear un campo de entrada
       const input = document.createElement('input');
       input.value = content;
-      
-      // Reemplazar el contenido del elemento con el campo de entrada
       element.innerHTML = ' ';
       element.appendChild(input);
-      
-      // Seleccionar el texto dentro del campo de entrada
       input.select();
-      
-      // Agregar un evento de blur al campo de entrada para guardar los cambios
       input.addEventListener('blur', () => {
         const newContent = input.value.trim();
         element.innerHTML = newContent;
