@@ -54,6 +54,7 @@ module.exports = async function (fastify, opts) {
       done();
     },
     handler: async (request, reply) => {
+      console.error('ha llegado un post', request.body.newData);
       const imagenID = decodeURIComponent(request.params.imagenID);
       const imagenInfo = request.body.newData;
       await API.changeImagenInfo(
@@ -64,7 +65,8 @@ module.exports = async function (fastify, opts) {
       ).catch((err) => {
         console.error(err);
       });
-      return reply.redirect(`/edit/${imagenID}`);
+      return reply.redirect(`/home/`);
+      // return reply.redirect(`/edit/${imagenID}`);
     },
   });
 };

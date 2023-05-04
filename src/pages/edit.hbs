@@ -100,12 +100,16 @@
   
   
     function postData(){
+      const imagenInfo = {{json imagenInfo}};
+      console.log('pa allá que te va')
+      console.log(imagenInfo)
     const newData ={
      tituloImagen : document.getElementById("tituloImagen"),
      puntuacionImagen : document.getElementById("puntuacionImagen"),
      temaImagen : document.getElementById("temaImagen"),
     }
-    fetch('/edit/{{imagenInfo.imagenID}}', {
+    fetch(`/edit/{{imagenInfo.imagenID}}`,
+    {
       method: 'POST',
       body: newData
     })

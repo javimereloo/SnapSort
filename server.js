@@ -37,7 +37,9 @@ handlebars.registerHelper("encodeURIComponent", function(str) {
 handlebars.registerHelper("decodeURIComponent", function(str) {
   return decodeURIComponent(str);
 });
-
+handlebars.registerHelper('json', function(context) {
+  return JSON.stringify(context);
+});
 
 //Import routes 
 fastify.register(require('./src/routes/index.route.js'))
