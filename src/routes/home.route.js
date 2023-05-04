@@ -1,15 +1,14 @@
 const API = require("../database/API.js");
 const googleAPI = require("../GoogleDrive/googleAPI.js");
 
-//Returns is the recieved route is the actual route
-function isActive(route) {
-  return this.request.url === route;
+function orderImagesBy(){
+  
 }
 
 module.exports = async function (fastify, opts) {
   fastify.route({
     method: "GET",
-    url: "/home/:importID",
+    url: "/home/:importID/:orderBy",
     preHandler: (request, reply, done) => { //TODO COMPROBAR QUE EL IMPORTID CORRESPONDA AL USUARIO
       if (!request.session.user) {
         const errorMessage = true;
@@ -38,6 +37,10 @@ module.exports = async function (fastify, opts) {
 
       const actualImport = importaciones.find((e) => e.importID == importID);
       const pageHeader = actualImport ? actualImport.nameFolder : "Galería";
+      
+      //Order images
+      if()
+      
       console.log('IMAGENES------------',images)
       return reply.view("/src/pages/home.hbs", {
         user: request.session.user,
