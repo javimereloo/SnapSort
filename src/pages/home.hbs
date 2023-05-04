@@ -249,15 +249,15 @@
 </div>
      <script>
        const searchParams = new URLSearchParams(window.location.search);
-        const orderByParam = searchParams.get('orderBy');
+       const orderByParam = searchParams.get('orderBy');
        const selectOrderBy = document.getElementById("selectOrder");
+       console.log(selectOrderBy)
        selectOrderBy.value = orderByParam;
 
        const importID = "{{currentPage}}"
 
         selectOrderBy.onchange = function(){
           const selectedValue = encodeURIComponent(this.value);
-          console.log(selectedValue);
             window.location.href = `/home/${importID}/?orderBy=${selectedValue}`;
         }
        
