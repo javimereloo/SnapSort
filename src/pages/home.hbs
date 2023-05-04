@@ -260,13 +260,16 @@
             window.location.href = `/home/${importID}/?orderBy=${selectedValue}`;
         }
        
+       
        //GroupBy control
-       const selectGroupBy.onchange = function(){} = document.getElementById("groupBy");
+       var images = JSON.parse({{{json images}}});
+       const selectGroupBy = document.getElementById("groupBy");
        selectGroupBy.onchange = function(){
          const selectedGroupByValue = this.value;
          const cards = document.querySelectorAll('.card');
          for(let i = 0; i < cards.length; i++){
-           console.log({{{images}}})
+           const image = image.find(img=>img.id ===cards[i].id);
+           console.log(image)
          }
        }
        
