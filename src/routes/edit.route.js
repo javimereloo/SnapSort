@@ -44,26 +44,23 @@ module.exports = async function (fastify, opts) {
         const errorMessage = true;
         return reply.redirect(`/login?errorMessage=${errorMessage}`);
       }
-      if (
-        !API.getImageOwner(imagenID) === request.session.user.username ||
-        !imagenID
-      ) {
-        return reply.redirect("/home");
-      }
+
       done();
     },
     handler: async (request, reply) => {
       const imagenID = decodeURIComponent(request.params.imagenID);
-      const imagenInfo = request.body;
-      await API.changeImagenInfo(
-        imagenID,
-        imagenInfo.tituloImagen,
-        imagenInfo.puntuacionImagen,
-        imagenInfo.temaImagen
-      ).catch((err) => {
-        console.error(err);
-      });
-      return reply.redirect(`/edit/${imagenID}`);
+      if (API.getImageOwner(imagenID) === request.session.user.username && imagenID) {
+        const imagenInfo = request.body;
+        await API.changeImagenInfo(
+          imagenID,
+          imagenInfo.tituloImagen,
+          imagenInfo.puntuacionImagen,
+          imagenInfo.temaImagen
+        ).catch((err) => {
+          console.error(err);
+        });
+        return reply.redirect(`/edit/${imagenID}`);
+      }
       // reply.redirect(request.raw.url);
     },
   });
