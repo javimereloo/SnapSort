@@ -14,8 +14,6 @@ const credentials = {
   auth_provider_x509_cert_url: process.env.auth_provider_x509_cert_url,
   client_x509_cert_url: process.env.client_x509_cert_url
 }
-
-console.log(credentials);
       
 const auth = new google.auth.GoogleAuth({
   credentials: (credentials),
