@@ -2,12 +2,11 @@ const fs = require("fs");
 const { google } = require("googleapis");
 const API = require("../database/API.js");
 
-// const credentials = require(process.env.GOOGLE_DRIVE_CREDENTIALS);
 const credentials = {
   type: process.env.type,
   project_id: process.env.project_id,
   private_key_id: process.env.private_key_id,
-  private_key: process.env.private_key,
+  private_key: process.env.private_key.replace(/\\n/g, '\n'),
   client_email: process.env.client_email,
   client_id: process.env.client_id,
   auth_uri: process.env.auth_uri,
