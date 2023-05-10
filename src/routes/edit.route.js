@@ -47,7 +47,7 @@ module.exports = async function (fastify, opts) {
 
       done();
     },
-    handler: async (request, reply) => {
+    handler: async (request, reply) => { //TODO PASEAR TOPIC PARA QUE SEA SIEMPRE EN MAYUSCULA
       const imagenID = decodeURIComponent(request.params.imagenID);
       if (API.getImageOwner(imagenID) === request.session.user.username && imagenID) {
         const imagenInfo = request.body;

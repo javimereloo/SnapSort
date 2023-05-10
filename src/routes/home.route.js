@@ -2,11 +2,11 @@ const API = require("../database/API.js");
 const googleAPI = require("../GoogleDrive/googleAPI.js");
 
 function orderImagesBy(imagenes, orderBy) {
-  if (orderBy === "score") {
+  if (orderBy === "downScore") {
     return imagenes.sort((a, b) => b.score - a.score);
-  } else if (orderBy === "topic") {
-    return imagenes.sort((a, b) => (a.topic || '').localeCompare(b.topic || ''));
-  } 
+  } else if (orderBy === 'upScore'){
+    return imagenes.sort((a, b) => a.score - b.score);
+  }
   return imagenes;
 }
 

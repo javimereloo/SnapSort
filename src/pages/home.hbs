@@ -186,7 +186,8 @@
                     <label for="">Ordenar por:</label>
                     <select id="selectOrder" class="form-select bg-secundary " >
                       <option selected value="random">Orden aleatorio</option>
-                      <option value="score">Ordenar por puntuación</option>
+                      <option value="downScore">Ordenar por puntuación descendente</option>
+                      <option value="upScore">Ordenar por puntuación ascendente</option>
                     </select>
                   </div>
                   <div class="col-auto nav-item  bg-secundary ">
@@ -249,7 +250,7 @@
      <script>
        //selectOrder contol
        const searchParams = new URLSearchParams(window.location.search);
-       const orderByParam = searchParams.get('orderBy');
+       const orderByParam = searchParams.get('orderBy') || 'random';
        const selectOrderBy = document.getElementById("selectOrder");
        selectOrderBy.value = orderByParam;
        const importID = "{{currentPage}}"
