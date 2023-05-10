@@ -28,7 +28,7 @@
     <div
       class="container h-100 d-flex flex-column align-items-center justify-content-center"
     >
-      <div class="rounded col-lg-6 col-md-10 col-12 bg-light card p-4" style="--bs-bg-opacity: .9;">
+      <div class="rounded col-lg-6 col-md-11 col-12 bg-light card p-4" style="--bs-bg-opacity: .9;">
         <div class="card-body">
           <a href="/">
             <img
@@ -39,7 +39,7 @@
           </a>
           <h1 class=" py-2"> Regístrate </h1>
           <form method="POST" action="/signup">
-            <div class="row form-outline mb-2">
+            <div class=" form-outline mb-2">
               <input
                 type="text"
                 id="usernameInput"
@@ -55,29 +55,33 @@
               </div>
             {{/if}}
             </div>
-            <div class="row mb-2">
-              <div class=" form-outline  col-md-6 ">
-                <input
-                  type="text"
-                  id="nameInput"
-                  name="name"
-                  class="form-control "
-                  placeholder="{{#if name}}{{name}}{{else}}Nombre{{/if}} "
-                  value= "{{#if name}}{{name}}{{/if}}"
-                />
+            <div class="row ">
+              <div class="col-md-6 mb-2 ">
+                <div class=" form-outline  ">
+                  <input
+                    type="text"
+                    id="nameInput"
+                    name="name"
+                    class="form-control "
+                    placeholder="{{#if name}}{{name}}{{else}}Nombre{{/if}} "
+                    value= "{{#if name}}{{name}}{{/if}}"
+                  />
+                </div>
               </div>
-              <div class=" form-outline  col-md-6   ">
-                <input
-                  type="text"
-                  id="lastnameInput"
-                  name="lastname"
-                  class="form-control"
-                  placeholder="Apellidos "
-                  value= "{{#if lastname}}{{lastname}}{{/if}}"
-                />
+              <div class="col-md-6 mb-2 ">
+                <div class=" form-outline  ">
+                  <input
+                    type="text"
+                    id="lastnameInput"
+                    name="lastname"
+                    class="form-control"
+                    placeholder="Apellidos "
+                    value= "{{#if lastname}}{{lastname}}{{/if}}"
+                  />
+                </div>
               </div>
             </div>
-            <div class="row form-outline mb-2">
+            <div class="form-outline mb-2">
               <input
                 type="text"
                 id="emailInput"
@@ -87,39 +91,44 @@
                 value= "{{#if email}}{{email}}{{/if}}"
               />
             </div>
-            <div class="row  mb-2">
-              <div class=" form-outline col">
-                <input
-                  type="password"
-                  id="passwordInput"
-                  name="password"
-                  class="form-control {{#if errorPassword}}is-invalid{{/if}}"
-                  required
-                  placeholder="Contraseña*"
-                />
-                {{#if errorPassword}}
-                  <div class="invalid-feedback">
-                    {{errorPassword}}
-                  </div>
-                {{/if}}
+            <div class="row">
+              <div class="col-md-6 mb-2">              
+                <div class=" form-outline ">
+                  <input
+                    type="password"
+                    id="passwordInput"
+                    name="password"
+                    class="form-control {{#if errorPassword}}is-invalid{{/if}}"
+                    required
+                    placeholder="Contraseña*"
+                  />
+                  {{#if errorPassword}}
+                    <div class="invalid-feedback">
+                      {{errorPassword}}
+                    </div>
+                  {{/if}}
+                </div>
               </div>
-
-              <div class="form-outline col ">
-                <input
-                  type="password"
-                  id="repeatPasswordInput"
-                  name="repeatPassword"
-                  class="form-control {{#if errorPassword}}is-invalid{{/if}}"
-                  required
-                  placeholder="Repite la contraseña*"
-                />
+              
+              <div class="col-md-6 mb-4">
+                <div class="form-outline  ">
+                  <input
+                    type="password"
+                    id="repeatPasswordInput"
+                    name="repeatPassword"
+                    class="form-control {{#if errorPassword}}is-invalid{{/if}}"
+                    required
+                    placeholder="Repite la contraseña*"
+                  />
+                </div>
               </div>
               {{#if errorPassword}}
                   <div class="invalid-feedback">
                     {{errorPassword}}
                   </div>
                 {{/if}}
-              </div>
+            </div>
+            
               <div class="row justify-content-between">
                 <button
                   type="submit"
