@@ -39,7 +39,7 @@
           </a>
           <h1 class=" py-2"> Regístrate </h1>
           <form method="POST" action="/signup">
-            <div class="form-outline mb-4">
+            <div class="row form-outline mb-2">
               <input
                 type="text"
                 id="usernameInput"
@@ -55,18 +55,18 @@
               </div>
             {{/if}}
             </div>
-            <div class="row">
-              <div class="form-outline col mb-4">
+            <div class="row mb-2">
+              <div class=" form-outline  col-md-6 ">
                 <input
                   type="text"
                   id="nameInput"
                   name="name"
-                  class="form-control"
+                  class="form-control "
                   placeholder="{{#if name}}{{name}}{{else}}Nombre{{/if}} "
                   value= "{{#if name}}{{name}}{{/if}}"
                 />
               </div>
-              <div class="form-outline col mb-4">
+              <div class=" form-outline  col-md-6   ">
                 <input
                   type="text"
                   id="lastnameInput"
@@ -77,7 +77,7 @@
                 />
               </div>
             </div>
-            <div class="form-outline mb-4">
+            <div class="row form-outline mb-2">
               <input
                 type="text"
                 id="emailInput"
@@ -87,8 +87,8 @@
                 value= "{{#if email}}{{email}}{{/if}}"
               />
             </div>
-            <div class="row">
-              <div class="form-outline col mb-4">
+            <div class="row  mb-2">
+              <div class=" form-outline col">
                 <input
                   type="password"
                   id="passwordInput"
@@ -104,7 +104,7 @@
                 {{/if}}
               </div>
 
-              <div class="form-outline col mb-4">
+              <div class="form-outline col ">
                 <input
                   type="password"
                   id="repeatPasswordInput"
@@ -125,7 +125,7 @@
                   type="submit"
                   class="btn btn-dark col-sm-5 col-md-4 btn-block "
                 >Registrarse</button>
-                <a href="/login" id="redirect" class="col text-end link-primary col-sm-7" style="font-size: 0.6rem;">¿Ya tienes cuenta? Inicia sesión</a>
+                <a href="/login" id="redirect" class="col text-end link-primary col-sm-7" style="font-size: 0.7rem;">¿Ya tienes cuenta? Inicia sesión</a>
               </div>
           </form>
         </div>
