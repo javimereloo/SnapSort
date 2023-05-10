@@ -18,7 +18,6 @@ function getTopics(images){
       topics.add(images[i].topic);
     }
   }
-  console.log('TOPICSSSS------------------>', topics)
   return Array.from(topics); 
 }
 
@@ -65,16 +64,16 @@ module.exports = async function (fastify, opts) {
       }
       
 
-      // console.log("IMAGENES------------", images);
       return reply.view("/src/pages/home.hbs", {
-        user: request.session.user,
+        username: request.session.user.username,
         importaciones: importaciones,
         importacionesSize: importaciones.size,
         currentPage: importID,
         currentPageHeader: pageHeader,
         numImages: images.length,
         images: images,
-        topics: topics, 
+        topics: topics,
+        defaultOrder:'random',
       });
     },
   });

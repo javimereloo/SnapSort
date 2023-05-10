@@ -76,7 +76,7 @@
       const content = element.textContent.trim();
       const input = document.createElement('input');
       input.value = content;
-      element.innerHTML = ' ';
+      // element.innerHTML = ' ';
       element.appendChild(input);
       input.select();
       input.addEventListener('blur', () => {
