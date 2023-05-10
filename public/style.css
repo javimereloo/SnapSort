@@ -21,7 +21,11 @@ body {
   overflow-y: hidden;
   overflow-x: hidden;
 }
-
+@media (max-width: 576px) {
+  #login {
+    width: 50% !important;
+  }
+}
 /*Text of the main page for unidentificated users  */
 .titles{
 /*   color: #fec39eff; */
