@@ -8,13 +8,13 @@ html {
 }
 
 .card {
-  width: 18rem; /* ancho fijo del card */
-  height: 20rem; /* altura fija del card */
+  width: 18rem; 
+  height: 20rem;
 }
 
 .card-img-top {
   object-fit:  cover; /* ajustar la imagen al card */
-  max-height: 85%; /* altura del 100% del card */
+  max-height: 85%; /* altura del 85% del card */
   object-position: center;
 }
 
