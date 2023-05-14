@@ -4,8 +4,7 @@
   "description": "A simple Node app built on fastify, instantly up and running.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "jasmine"
+    "start": "node server.js"
   },
   "dependencies": {
     "@fastify/cookie": "^8.3.0",
@@ -32,9 +31,5 @@
   "keywords": [
     "node",
     "glitch"
-  ],
-  "devDependencies": {
-    "jasmine": "^4.6.0",
-    "supertest": "^6.3.3"
-  }
+  ]
 }
