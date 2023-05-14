@@ -218,15 +218,17 @@
                       {{#if (eq importacionesSize 0)}}
                        <p class=" text-center lead"> ¡Pulsa en el icono + en la barra lateral para importar una nueva carpeta!</p>
                       {{else}}
-                      <div class="row row-cols-4 row-cols-sm-2  mx-2 mt-1 mb-3">
+                      <div class="row row-cols-3 row-cols-md-4 row-cols-sm-1 mx-2 mt-1 mb-3">
                         {{#each  images}}
                             <div id="{{this.imagenID}}" class="card col justify-content-between aling-items-center mx-2 mt-2" >
                               <img 
                                        loading="lazy"
-                                       class="card-img-top  "
+                                       class="card-img-top"
                                        src="{{this.url}}"
                                        onerror="this.onerror=null; this.src='https://cdn.glitch.global/9a5417db-bb1a-4800-b72a-a85bd7bcfce3/error%20image.png?v=1683141508331';"
                                        alt="{{this.title}}"
+                                       onload="this.parentElement.style.width=''; this.parentElement.style.height='auto'"
+
                                   >
                                 <a href="/edit/{{this.imagenID}}" class="row  link-dark" style="text-decoration:none" >
                                   <h6 class="col  card-title mx-0">{{this.title}}</h6> 
