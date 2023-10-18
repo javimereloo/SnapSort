@@ -1,28 +1,24 @@
-# Hello Node (blank)
+# [SnapSort](snapsort.glitch.me)
+SnapSort is [Node.js](https://nodejs.org/en/about) webapp developed for my Final Degree Project. In a nutshell is a virtual gallery that allows you to sort images that you import from cloud services, such as Google Drive.
 
-[Node.js](https://nodejs.org/en/about/) is a popular runtime that lets you run JavaScript on the server. This project uses the [Fastify](https://www.fastify.io/) framework and basic templating with [Handlebars](https://handlebarsjs.com/).
-
-_Last updated: 4 Jan 2023_
 
 ## What's in this project?
+- `public/`: You will find the styling rules for the pages.
 
-← `README.md`: That’s this file, where you can tell people what your cool website does and how you built it.
+- `server.js`: Is the main server script for the web site. Raise the server and define the routes
 
-← `public/style.css`: The styling rules for your pages and posts.
-
-← `server.js`: The main server script for your new site.
-
-← `src/`: This folder holds page templates, additional scripts.
+- `src/`: This folder contains page templates, additional scripts and files necessary for the correct working of the server.
 
 ### Working in the `src/` folder 📁
 
-← `src/pages/index.hbs`: This is the main page template for your site.
+- `src/GoogleDrive/googleAPI.js`: In this file you will find all the necessary functions for communication with the Google API.
+- `src/database`: This folder contains the configuration, the basic communication methods and the sqlite3 database itself.
+- `src/pages`: Collects the HandleBars templates that define the structure of the different views.
+- `src/routes`: In this folder are defined the Fastify's routes for the basic interaction with the server.
 
-![Glitch](https://cdn.glitch.com/a9975ea6-8949-4bab-addb-8a95021dc2da%2FLogo_Color.svg?v=1602781328576)
 
-## You built this with Glitch!
 
-[Glitch](https://glitch.com) is a friendly community where millions of people come together to build web apps and websites.
 
-- Need more help? [Check out our Help Center](https://help.glitch.com/) for answers to any common questions.
-- Ready to make it official? [Become a paid Glitch member](https://glitch.com/pricing) to boost your app with private sharing, more storage and memory, domains and more.
+## I built this with Glitch! ![Glitch](https://cdn.glitch.com/a9975ea6-8949-4bab-addb-8a95021dc2da%2FLogo_Color.svg?v=1602781328576)
+[Glitch](https://glitch.com/) is an online webapp development platform, offering a collaborative and accessible development environment that allows applications to be developed quickly and easily.
+
